@@ -7,7 +7,6 @@
         public int LinkId { get; set; }
         public Link? Link { get; set; }
         public string Url { get; set; }
-        public int ContactInformationId { get; set; }
-        public ContactInformation? ContactInformation { get; set; }
+    
     }
 }

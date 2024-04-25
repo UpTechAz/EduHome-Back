@@ -1,0 +1,97 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family:'Catamaran', serif;
+    text-decoration: none;
+  }
+  .cart-icon {
+      position: relative;
+      display: inline-block;
+    }
+    
+    .item-count {
+      position: absolute;
+      top: -15px;
+      right: -15px;
+      background-color: white;
+      color: white;
+      border-radius: 50%;
+      padding: 4px 8px;
+      font-size: 12px;
+      width: 100%;
+      height: 100%;
+    }
+    
+    .header{
+      display: flex;
+      justify-content: space-between;
+    }
+    .header-right{
+      padding: 60px;
+      font-size:16px;
+    }
+  .header-left{
+    padding: 40px;
+    font-size: 30px;
+  }
+  
+  .footer{
+    display: flex;
+    justify-content: space-around;
+    padding: 100px 700px;
+    margin-top: 20px;
+  }
+  footer{
+    background-color: #000000;
+  }
+  .wp-form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+  }
+  .login-form {
+    max-width: 400px; /* Optional: Adjust as needed */
+    margin: 0 auto; /* Optional: Center the form horizontally */
+  }
+  
+  /* Form elements */
+  .form-outline {
+    width: 100%;
+  }
+  
+  .form-label {
+    margin-bottom: 0.5rem;
+  }
+  
+  .form-control {
+    width: 100%;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  }
+  
+  /* Checkbox */
+  .form-check {
+    display: flex;
+    align-items: center;
+  }
+  
+  /* Submit button */
+  .btn-primary {
+    color: #fff;
+    background-color: #5c9735;
+    border-color: #5c9735;
+  }
+  
+  .btn-primary:hover {
+    background-color: #4e7c2b;
+    border-color: #4e7c2b;
+  }

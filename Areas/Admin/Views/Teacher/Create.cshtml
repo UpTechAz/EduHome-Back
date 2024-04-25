@@ -1,0 +1,66 @@
+﻿@model WebApplication2.Models.Teacher
+
+<div class="col-lg-6">
+    <div class="card">
+        <div class="card-body">
+            <div class="card-title">Add Teacher</div>
+            <hr>
+            <form method="post" enctype="multipart/form-data" asp-action="create" asp-controller="teacher" asp-area="admin">
+                <div class="form-group">
+                    <label asp-for="FullName">Full Name</label>
+                    <input asp-for="FullName" class="form-control">
+                    <span class="text-danger" asp-validation-for="FullName"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Photo">Photo</label>
+                    <input asp-for="Photo" class="form-control">
+                    <span class="text-danger" asp-validation-for="Photo"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="TeacherAbout">About Teacher</label>
+                    <input asp-for="TeacherAbout" class="form-control">
+                    <span class="text-danger" asp-validation-for="TeacherAbout"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Experience">Experience</label>
+                    <input asp-for="Experience" class="form-control">
+                    <span class="text-danger" asp-validation-for="Experience"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Hobbies">Hobbies</label>
+                    <input asp-for="Hobbies" class="form-control">
+                    <span class="text-danger" asp-validation-for="Hobbies"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Faculty">Faculty</label>
+                    <input asp-for="Faculty" class="form-control">
+                    <span class="text-danger" asp-validation-for="Faculty"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ScientificDegree">Degree</label>
+                    <input asp-for="ScientificDegree" class="form-control">
+                    <span class="text-danger" asp-validation-for="ScientificDegree"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ContactInformation.Skype">Skype</label>
+                    <input asp-for="ContactInformation.Skype" class="form-control">
+                    <span class="text-danger" asp-validation-for="ContactInformation.Skype"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ContactInformation.Email">Email</label>
+                    <input asp-for="ContactInformation.Email" class="form-control">
+                    <span class="text-danger" asp-validation-for="ContactInformation.Email"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ContactInformation.Number">Phone Number</label>
+                    <input asp-for="ContactInformation.Number" class="form-control">
+                    <span class="text-danger" asp-validation-for="ContactInformation.Number"></span>
+                </div>
+
+                <div class="form-group">
+                    <button class="btn btn-light px-4">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

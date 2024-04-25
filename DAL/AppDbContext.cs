@@ -25,7 +25,7 @@ namespace WebApplication2.DAL
         public DbSet <Skill> Skills { get; set; }
         public DbSet <Speaker> Speakers { get; set; }
         public DbSet <Slider> Sliders { get; set; }
-        public DbSet <StudentComment> StudentComments { get; set; }
+        public DbSet <StudentQuote> StudentComments { get; set; }
         public DbSet <Teacher> Teachers { get; set; }
         public DbSet <TeacherLink> TeachersLink { get; set;}
         protected override void OnModelCreating(ModelBuilder modelBuilder)

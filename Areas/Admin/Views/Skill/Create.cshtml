@@ -1,0 +1,46 @@
+﻿@using WebApplication2.Models;
+@model Skill
+
+<div class="col-lg-6">
+    <div class="card">
+        <div class="card-body">
+            <div class="card-title">Add Information</div>
+            <hr>
+            <form method="post" enctype="multipart/form-data" asp-action="create" asp-controller="Skill" asp-area="admin">
+                <div class="form-group">
+                    <label asp-for="Language">Language</label>
+                    <input asp-for="Language" class="form-control">
+                    <span class="text-danger" asp-validation-for="Language"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="TeamLeader">Teamleader</label>
+                    <input asp-for="TeamLeader" class="form-control">
+                    <span class="text-danger" asp-validation-for="TeamLeader"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Development">Innovation</label>
+                    <input asp-for="Development" class="form-control">
+                    <span class="text-danger" asp-validation-for="Development"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Innovation">Innovation</label>
+                    <input asp-for="Innovation" class="form-control">
+                    <span class="text-danger" asp-validation-for="Innovation"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Communication">Communication</label>
+                    <input asp-for="Communication" class="form-control">
+                    <span class="text-danger" asp-validation-for="Communication"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="TeachersId">Teacher</label>
+                    <input asp-for="TeachersId" class="form-control">
+                    <span class="text-danger" asp-validation-for="TeachersId"></span>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-light px-4">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

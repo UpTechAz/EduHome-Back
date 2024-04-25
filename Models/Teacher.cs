@@ -13,8 +13,7 @@ namespace WebApplication2.Models
         public string Hobbies { get; set; }
         public string Faculty { get; set; }
         public string ScientificDegree { get; set; }
-        public int LinkId { get; set; }
         public IEnumerable<TeacherLink>? TeacherLinks { get; set; }
-
+        public ContactInformation? ContactInformation { get; set; }
     }
 }

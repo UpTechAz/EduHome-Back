@@ -1,0 +1,36 @@
+﻿@using WebApplication2.Models;
+@model TeacherLink
+@{
+    IEnumerable<Link> links = ViewBag.Links;
+}
+<div class="col-lg-6">
+    <div class="card">
+        <div class="card-body">
+            <div class="card-title">Information</div>
+            <hr>
+            <form method="post" enctype="multipart/form-data" asp-action="update" asp-controller="TeacherLink" asp-area="admin">
+                <div class="form-group">
+                    <label asp-for="@Model.Teacher.FullName">Teacher</label>
+                    
+                </div>
+                <div class="form-group">
+                    <label asp-for="LinkId">Icon</label>
+                    <select asp-for="LinkId" class="form-control">
+                    @foreach(var link in links)
+                    {
+                        <option value="@link.Id">@link.Name</option>
+                    }
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Url">Url</label>
+                    <input asp-for="Url" class="form-control">
+                    <span class="text-danger" asp-validation-for="Url"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Update" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

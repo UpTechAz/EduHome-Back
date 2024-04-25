@@ -1,0 +1,53 @@
+﻿@using WebApplication2.Models;
+@model List<ContactInformation>
+@{
+    int? count = ViewBag.ContactInfo;
+}
+<div class="card">
+    <div class="card-body">
+        <div class="d-flex; justify-content-lg-between">
+            <h5 class="card-title">Teacher`s Contact Information</h5>
+            <a asp-action="create" asp-controller="ContactInfo" asp-area="admin" class="col-2 d-sm-inline-block btn btn-outline-success"> Add Information</a>
+
+        </div>
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">İd</th>
+                        <th scope="col">Teacher Name</th>
+                        <th scope="col">Email Adresse</th>
+                        <th scope="col">Phone Number</th>
+                        <th scope="col">Skype</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item?.Id</td>
+                            <td>@item?.Teacher?.FullName</td>
+                            <td>@item?.Email</td>
+                            <td>@item?.Number</td>
+                            <td>@item?.Skype</td>
+                            <th>
+                                @{
+                                    if (count > 0)
+                                    {
+                                        <a asp-controller="contactInfo" asp-action="update" asp-area="admin" asp-route-id="@item?.Id" class="btn btn-secondary">Update</a>
+                                        <form class="d-inline" method="post" asp-controller="ContactInfo" asp-action="delete" asp-area="admin" asp-route-id="@item?.Id">
+                                            <button class="btn btn-secondary" type="submit">Delete</button>
+                                        </form>
+
+                                    }
+                                }
+                            </th>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+

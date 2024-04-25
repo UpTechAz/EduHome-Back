@@ -1,0 +1,53 @@
+﻿@using WebApplication2.Models;
+@model List<Link>
+@{
+    int? count = ViewBag.LinkInfo;
+}
+<div class="card">
+    <div class="card-body">
+        <div class="d-flex; justify-content-lg-between">
+            <h5 class="card-title">Link</h5>
+            <a asp-action="create" asp-controller="Link" asp-area="admin" class="col-2 d-sm-inline-block btn btn-outline-success"> Add SocialMedia</a>
+
+        </div>
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">İd</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Icon</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  @*  @if (Model != null && Model.Count() > 0)
+                    {
+                        
+                    }*@
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item?.Id</td>
+                            <td>@item?.Name</td>
+                            <td><img style="width:50px" src="~/assets/img/@item?.Icon" /></td>
+                            <th>
+                                @{
+                                    if (count > 0)
+                                    {
+                                        <a asp-controller="link" asp-action="update" asp-area="admin" asp-route-id="@item?.Id" class="btn btn-secondary">Update</a>
+                                        <form class="d-inline" method="post" asp-controller="link" asp-action="delete" asp-area="admin" asp-route-id="@item?.Id">
+                                            <button class="btn btn-secondary" type="submit">Delete</button>
+                                        </form>
+
+                                    }
+                                }
+                            </th>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+

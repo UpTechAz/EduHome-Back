@@ -1,0 +1,25 @@
+﻿@using WebApplication2.Models;
+@model Link
+<div class="col-lg-6">
+    <div class="card">
+        <div class="card-body">
+            <div class="card-title">Add Information</div>
+            <hr>
+            <form method="post"  enctype="multipart/form-data" asp-action="update" asp-controller="Link" asp-area="admin">
+                <div class="form-group">
+                    <label asp-for="Name">Name</label>
+                    <input asp-for="Name" class="form-control">
+                    <span class="text-danger" asp-validation-for="Name"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Photo">Icon</label>
+                    <input asp-for="Photo" class="form-control">
+                    <span class="text-danger" asp-validation-for="Photo"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Update" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

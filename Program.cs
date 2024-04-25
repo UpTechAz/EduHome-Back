@@ -38,6 +38,6 @@ using (var scope = scopeFactory.CreateScope())
 {
     var roleManager = scope.ServiceProvider.GetService<RoleManager<IdentityRole>>();
     var userManager = scope.ServiceProvider.GetService<UserManager<User>>();
-    //await DbInitializer.SeedAsync(userManager, roleManager);
+    await DbInitializer.SeedAsync(userManager, roleManager);
 }
 app.Run();

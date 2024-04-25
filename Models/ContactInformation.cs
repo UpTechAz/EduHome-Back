@@ -8,7 +8,8 @@ namespace WebApplication2.Models
         public  string Email { get; set; }
         public string Number { get; set; }
         public string Skype { get; set; }
-        public IEnumerable<TeacherLink>? TeacherLinks { get; set; }
+        public Teacher? Teacher { get; set; }
+        public int TeacherId { get; set; }
 
     }
 }
