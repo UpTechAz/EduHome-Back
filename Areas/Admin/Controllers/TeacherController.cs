@@ -5,6 +5,7 @@ using System.Data;
 using WebApplication2.DAL;
 using WebApplication2.Helpers;
 using WebApplication2.Models;
+using WebApplication2.ViewModels;
 
 namespace WebApplication2.Areas.Admin.Controllers
 {
@@ -24,18 +25,22 @@ namespace WebApplication2.Areas.Admin.Controllers
             _webHostEnvironment = webHostEnvironment;
             _fileService = fileService;
         }
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int pageIndex = 1)
         {
-            List<Teacher> Teachers = await _dbContext.Teachers.ToListAsync();
+            IQueryable<Teacher> queries = _dbContext.Teachers
+                .Include(p => p.ContactInformation);
+            //.Where(p => p.IsDeleted == false);
 
-            return View(Teachers);
+            return View(PageNatedList<Teacher>.Create(queries, pageIndex, 3, 5));
+
+
         }
         #region Create
         [HttpGet]
         public async Task<IActionResult> Create()
         {
             ViewBag.Links = await _dbContext.Links.ToListAsync();
-            
+
             return View();
         }
         [HttpPost]

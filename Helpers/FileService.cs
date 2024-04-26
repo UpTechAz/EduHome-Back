@@ -9,7 +9,7 @@
         }
         public async Task<string> UploadAsync(IFormFile file)
         {
-            var filename = $"{DateTime.UtcNow:yyyyMMddHHmmssfff}_{Guid.NewGuid()}{file.FileName}"; // DateTime.UtcNow
+            var filename = $"{DateTime.UtcNow:yyyyMMddHHmmssfff}_{Guid.NewGuid()}{file.FileName}"; 
             var path = Path.Combine(_webHostEnvironment.WebRootPath, "assets/img", filename);
 
             using (FileStream fileStream = new FileStream(path, FileMode.Create, FileAccess.ReadWrite))
