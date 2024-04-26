@@ -8,7 +8,7 @@ using WebApplication2.Models;
 namespace WebApplication2.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "SuperAdmin")]
+    //[Authorize(Roles = "SuperAdmin")]
     public class ContactInfoController : Controller
     {
         private readonly AppDbContext _dbContext;

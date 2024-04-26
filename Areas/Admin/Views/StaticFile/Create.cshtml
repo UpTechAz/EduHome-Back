@@ -1,0 +1,22 @@
+﻿@using WebApplication2.Models
+@model StaticFile
+
+<div class="col-lg-6">
+    <div class="card">
+        <div class="card-body">
+            <div class="card-title">Add Image</div>
+            <hr>
+            <form enctype="multipart/form-data" method="post" asp-action="create" asp-controller="staticfile" asp-area="admin">
+                <input type="hidden" asp-for="HeaderLogo" />
+                <div class="form-group">
+                    <label asp-for="HeaderLogoFile">HeaderLogoFile</label>
+                    <input asp-for="HeaderLogoFile" class="form-control">
+                    <span class="text-danger" asp-validation-for="HeaderLogoFile"></span>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-light px-4">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

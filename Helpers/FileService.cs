@@ -39,5 +39,19 @@
             }
         }
 
+        public bool IsImage(string headerLogo)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool CheckSize(string headerLogo, int maxSize)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<string> UploadAsync(string headerLogo)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -1,0 +1,60 @@
+﻿@using WebApplication2.Models;
+@model List<CourseFeature>
+@{
+    int? count = ViewBag.ContactInfo;
+}
+<div class="card">
+    <div class="card-body">
+        <div class="d-flex; justify-content-lg-between">
+            <h5 class="card-title">Teacher`s Contact Information</h5>
+            <a asp-action="create" asp-controller="coursefeature" asp-area="admin" class="col-2 d-sm-inline-block btn btn-outline-success"> Add Information</a>
+
+        </div>
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">İd</th>
+                        <th scope="col">Starts</th>
+                        <th scope="col">Duration</th>
+                        <th scope="col">ClassDuration</th>
+                        <th scope="col">SkillLevel</th>
+                        <th scope="col">StudentsCount</th>
+                        <th scope="col">Assesments</th>
+                        <th scope="col">CourseFee</th>
+                        <th scope="col">CoursesId</th>
+                        <th scope="col">CreateAt</th>
+                        <th scope="col">ModifiedAt</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var courseFeature in Model)
+                    {
+                        <tr>
+                            <td>@courseFeature?.Id</td>
+                            <td>@courseFeature?.c?.FullName</td>
+                            <td>@item?.Email</td>
+                            <td>@item?.Number</td>
+                            <td>@item?.Skype</td>
+                            <th>
+                                @{
+                                    if (count > 0)
+                                    {
+                                        <a asp-controller="contactInfo" asp-action="update" asp-area="admin" asp-route-id="@item?.Id" class="btn btn-secondary">Update</a>
+                                        <form class="d-inline" method="post" asp-controller="ContactInfo" asp-action="delete" asp-area="admin" asp-route-id="@item?.Id">
+                                            <button class="btn btn-secondary" type="submit">Delete</button>
+                                        </form>
+
+                                    }
+                                }
+                            </th>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+

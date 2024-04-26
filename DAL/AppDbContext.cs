@@ -28,6 +28,8 @@ namespace WebApplication2.DAL
         public DbSet <StudentQuote> StudentComments { get; set; }
         public DbSet <Teacher> Teachers { get; set; }
         public DbSet <TeacherLink> TeachersLink { get; set;}
+        public DbSet <StaticFile> StaticFiles { get; set;}
+        public DbSet <Tag> Tags { get; set;}
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Event>()

@@ -1,0 +1,37 @@
+﻿@using WebApplication2.Models
+@model List<StaticFile>
+<div class="card">
+    <div class="card-body">
+        <div class="d-flex; justify-content-lg-between">
+            <h5 class="card-title">Images</h5>
+            <a asp-action="create" asp-controller="staticfile" asp-area="admin" class="col-2 d-sm-inline-block btn btn-outline-success">Add new image</a>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">HeaderLogo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        foreach (var image in Model)
+                        {
+                            <tr>
+                                <th>@image.Id</th>
+                                <td><img style="width:100px;height:100px;" src="~/assets/img/@image.HeaderLogo"></td>                                
+                                <th>
+                                    <a asp-controller="staticfile" asp-action="update" asp-area="admin" asp-route-id="@image.Id" class="btn btn-secondary">Update</a>
+                                    <form class="d-inline" method="post" asp-controller="staticfile" asp-action="delete" asp-area="admin" asp-route-id="@image.Id">
+                                        <button class="btn btn-secondary" type="submit">Delete</button>
+                                    </form>
+                                </th>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

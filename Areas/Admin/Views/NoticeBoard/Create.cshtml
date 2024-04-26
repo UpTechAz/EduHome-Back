@@ -1,0 +1,27 @@
+﻿@using WebApplication2.Models;
+@model NoticeBoard
+<div class="col-lg-6">
+    <div class="card">
+        <div class="card-body">
+            <div class="card-title">Add NoticeBoard</div>
+            <hr>
+            <form method="post" asp-action="create" asp-controller="noticeboard" asp-area="admin">
+
+                <div class="form-group">
+                    <label asp-for="DateTime">DateTime</label>
+                    <input asp-for="DateTime" class="form-control">
+                    <span class="text-danger" asp-validation-for="DateTime"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Description">Description</label>
+                    <input asp-for="Description" class="form-control">
+                    <span class="text-danger" asp-validation-for="Description"></span>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Submit" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
