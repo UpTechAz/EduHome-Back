@@ -15,6 +15,8 @@ namespace WebApplication2.Models
         public CourseFeature? CoursFeature { get; set; }
         public int CategoryId { get; set; }
         public Category? Category { get; set; }
-        
+
+        public List<CourseComment>? CourseComment { get; set; }
+
     }
 }

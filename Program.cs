@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using WebApplication2.DAL;
 using WebApplication2.Helpers;
+using WebApplication2.Interfaces;
 using WebApplication2.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,6 +24,8 @@ builder.Services.AddIdentity<User, IdentityRole>(
     }).AddEntityFrameworkStores<AppDbContext>();
 builder.Services.AddSingleton<IFileService, FileService>();
 
+builder.Services.AddScoped<ISettingService, SettingService>();
+
 var app = builder.Build();
 app.UseStaticFiles();
 app.UseAuthentication();
@@ -38,6 +41,6 @@ using (var scope = scopeFactory.CreateScope())
 {
     var roleManager = scope.ServiceProvider.GetService<RoleManager<IdentityRole>>();
     var userManager = scope.ServiceProvider.GetService<UserManager<User>>();
-    //await DbInitializer.SeedAsync(userManager, roleManager);
+    await DbInitializer.SeedAsync(userManager, roleManager);
 }
 app.Run();

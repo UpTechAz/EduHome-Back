@@ -1,4 +1,6 @@
-﻿namespace WebApplication2.Helpers
+﻿using WebApplication2.Interfaces;
+
+namespace WebApplication2.Helpers
 {
     public class FileService : IFileService
     {
@@ -9,7 +11,7 @@
         }
         public async Task<string> UploadAsync(IFormFile file)
         {
-            var filename = $"{Guid.NewGuid()}_{file.FileName}"; // DateTime.UtcNow
+            var filename = $"{DateTime.UtcNow:yyyyMMddHHmmssfff}_{Guid.NewGuid()}_{file.FileName}"; 
             var path = Path.Combine(_webHostEnvironment.WebRootPath, "assets/img", filename);
 
             using (FileStream fileStream = new FileStream(path, FileMode.Create, FileAccess.ReadWrite))

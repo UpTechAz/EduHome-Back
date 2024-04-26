@@ -1,4 +1,4 @@
-﻿namespace WebApplication2.Helpers
+﻿namespace WebApplication2.Interfaces
 {
     public interface IFileService
     {

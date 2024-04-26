@@ -2,7 +2,7 @@
 
 namespace WebApplication2.Models
 {
-    public class StudentComment : BaseEntity
+    public class StudentQuote : BaseEntity
     {
         public string? FilePath { get; set; }
         [NotMapped]

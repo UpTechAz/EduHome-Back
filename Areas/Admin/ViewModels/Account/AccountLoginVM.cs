@@ -1,10 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Xml.Linq;
 
-namespace WebApplication2.Areas.Admin.ViewModels
+namespace WebApplication2.Areas.Admin.ViewModels.Account
 {
     public class AccountLoginVM
     {
+
         [Required, Display(Name = "User Name")]
         public string Username { get; set; }
         [Required, DataType(DataType.Password)]
