@@ -15,12 +15,13 @@
                 <thead>
                     <tr>
                         <th scope="col">İd</th>
+                        <th scope="col">Teacher</th>
                         <th scope="col">Language</th>
                         <th scope="col">TeamLeader</th>
                         <th scope="col">Development</th>
+                        <th scope="col">Design</th>
                         <th scope="col">Innovation</th>
                         <th scope="col">Communication</th>
-                        <th scope="col">Teacher</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -28,12 +29,13 @@
                     {
                         <tr>
                             <td>@item?.Id</td>
+                            <td>@item?.Teacher?.FullName</td>
                             <td>@item?.Language</td>
                             <td>@item?.TeamLeader</td>
                             <td>@item?.Development</td>
+                            <td>@item?.Design</td>
                             <td>@item?.Innovation</td>
                             <td>@item?.Communication</td>
-                            <td>@item?.TeachersId</td>
                             <th>
                                 @{
                                     if (count > 0)

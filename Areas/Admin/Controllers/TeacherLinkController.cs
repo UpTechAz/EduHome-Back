@@ -8,7 +8,7 @@ using WebApplication2.Models;
 
 namespace WebApplication2.Areas.Admin.Controllers
 {
-    [Area( "Admin")]
+    [Area("Admin")]
     [Authorize(Roles = "SuperAdmin")]
     public class TeacherLinkController : Controller
     {
@@ -19,15 +19,18 @@ namespace WebApplication2.Areas.Admin.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            List<TeacherLink>? teacherLink = await _dbContext.TeachersLink.ToListAsync();
+            List<TeacherLink>? teacherLink = await _dbContext.TeachersLink
+                .Include(x => x.Teacher)
+                .Include(x => x.Link) // include elemesek elaqeli modele gedib cixmir
+                .ToListAsync();
             ViewBag.TeacherLink = teacherLink.Count;
             return View(teacherLink);
         }
         [HttpGet]
         public async Task<IActionResult> Create()
         {
-            ViewBag.Links = _dbContext.Links.ToList();
-            ViewBag.Teacher = _dbContext.Teachers.ToList();
+            ViewBag.Links = await _dbContext.Links.ToListAsync();
+            ViewBag.Teacher = await _dbContext.Teachers.ToListAsync();
             return View();
         }
         [HttpPost]
@@ -45,7 +48,9 @@ namespace WebApplication2.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Update(int id)
         {
-            TeacherLink? existTeacherLink = await _dbContext.TeachersLink.FindAsync(id);
+            TeacherLink? existTeacherLink = await _dbContext.TeachersLink
+                .Include(x => x.Teacher) // include findAsyncle ishlemir
+                .FirstOrDefaultAsync(x => x.Id == id);
             if (existTeacherLink is null) return NotFound();
             ViewBag.Links = await _dbContext.Links.ToListAsync();
             return View(existTeacherLink);
@@ -53,17 +58,18 @@ namespace WebApplication2.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Update(int id, TeacherLink teacherLink)
         {
-            if(id != teacherLink.Id) return BadRequest();
+            if (id != teacherLink.Id) return BadRequest();
 
-            if(!ModelState.IsValid) return View(teacherLink);
+            if (!ModelState.IsValid) return View(teacherLink);
 
-            TeacherLink? dbteacherLink = await _dbContext.TeachersLink.FindAsync(id);
+            TeacherLink? dbteacherLink = await _dbContext.TeachersLink
+                .Include(x => x.Teacher)
+                .FirstOrDefaultAsync(x => x.Id == id);
             if (dbteacherLink is null) return NotFound();
-            dbteacherLink.TeacherId = teacherLink.TeacherId;
+            //dbteacherLink.TeacherId = teacherLink.TeacherId; // id vermemeliyik
             dbteacherLink.LinkId = teacherLink.LinkId;
             dbteacherLink.Url = teacherLink.Url.Trim();
             ViewBag.Links = await _dbContext.TeachersLink.ToListAsync();
-            //await _dbContext.TeachersLink.AddAsync(dbteacherLink);
             await _dbContext.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

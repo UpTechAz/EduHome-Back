@@ -50,16 +50,10 @@ namespace WebApplication2.Areas.Admin.Controllers
             var ContactInfo = await _dbContext.ContactInformation.
                 FirstOrDefaultAsync(c => c.Id == id);
             if (ContactInfo == null) return NotFound();
-            var model = new ContactInformation
-            {
-                Id = id,
-                Email = ContactInfo.Email,
-                Number = ContactInfo.Number,
-                Skype = ContactInfo.Skype,
-                TeacherId = ContactInfo.TeacherId,
-            };
-            return View(model);
+            
+            return View(ContactInfo);
         }
+
         [HttpPost]
         public async Task<IActionResult> Update(ContactInformation contactInfo, int id)
         {

@@ -21,57 +21,68 @@ namespace WebApplication2.Areas.Admin.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var skill = await _dbContext.Skills.ToListAsync();
-            List<Skill> skills =await _dbContext.Skills.ToListAsync();
-            ViewBag.Skillcount = skills.Count;
+            List<Skill>? skill = await _dbContext.Skills
+                .Include(x => x.Teacher)
+                .ToListAsync();
+            ViewBag.Skillcount = skill.Count;
             return View(skill);
         }
         [HttpGet]
         public async Task<IActionResult> Create()
         {
-            Skill? skill = await _dbContext.Skills.FirstOrDefaultAsync();
-            return View(skill);
+            ViewBag.Teacher = await _dbContext.Teachers.ToListAsync();
+            return View();
         }
         [HttpPost]
         public async Task<IActionResult> Create(Skill skill)
         {
             if (!ModelState.IsValid) return NotFound();
+
+            ViewBag.Teacher = await _dbContext.Teachers.ToListAsync();
+
             await _dbContext.Skills.AddAsync(skill);
             await _dbContext.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
         [HttpGet]
-        public async Task<IActionResult> Update(int id)
+        public async Task<IActionResult> Update(int? id)
         {
-            Skill? skill = await _dbContext.Skills.FirstOrDefaultAsync(x => x.Id == id);
+            if(id == null) return BadRequest();
+
+            Skill? skill = await _dbContext.Skills
+                .Include(x => x.Teacher)
+                .FirstOrDefaultAsync(x => x.Id == id);
+
             if (skill == null) return NotFound();
+            
             var model = new Skill
             {
-                Id = id,
                 Language = skill.Language,
                 TeamLeader = skill.TeamLeader,
                 Development = skill.Development,
                 Design = skill.Design,
                 Innovation = skill.Innovation,
                 Communication = skill.Communication,
-                TeachersId = skill.TeachersId,
+                Teacher = await _dbContext.Teachers.FirstOrDefaultAsync(a => skill.TeacherId == a.Id),
+                //TeachersId = skill.TeachersId,
             };
             return View(model);
         }
         [HttpPost]
-        public async Task<IActionResult> Update(Skill skill,int id)
+        public async Task<IActionResult> Update(Skill skill, int id)
         {
-            if(skill.Id != id) return BadRequest();
+            if (skill.Id != id) return BadRequest();
             if (!ModelState.IsValid) return View(skill);
-            Skill? dbskill = await _dbContext.Skills.FirstOrDefaultAsync(s=>s.Id == id);
+            Skill? dbskill = await _dbContext.Skills
+                .Include(x => x.Teacher)
+                .FirstOrDefaultAsync(s => s.Id == id);
             //if (dbskill == null) return NotFound();
             dbskill.Language = skill.Language;
             dbskill.TeamLeader = skill.TeamLeader;
             dbskill.Development = skill.Development;
             dbskill.Design = skill.Design;
-            dbskill.Innovation = skill.Innovation; 
+            dbskill.Innovation = skill.Innovation;
             dbskill.Communication = skill.Communication;
-            dbskill.TeachersId = skill.TeachersId;
             //await _dbContext.Skills.AddAsync(skill);
             await _dbContext.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

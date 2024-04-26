@@ -1,12 +1,24 @@
 ﻿@using WebApplication2.Models;
 @model Skill
-
+@{
+    List<Teacher> teachers = ViewBag.Teacher;
+}
 <div class="col-lg-6">
     <div class="card">
         <div class="card-body">
             <div class="card-title">Add Information</div>
             <hr>
             <form method="post" enctype="multipart/form-data" asp-action="create" asp-controller="Skill" asp-area="admin">
+                <div class="form-group">
+                    <label asp-for="@Model.Teacher.FullName">Teacher</label>
+                    <select asp-for="TeacherId" class="form-control">
+                        @foreach (var teacher in teachers)
+                        {
+                            <option value="@teacher?.Id">@teacher.FullName</option>
+
+                        }
+                    </select>
+                </div>
                 <div class="form-group">
                     <label asp-for="Language">Language</label>
                     <input asp-for="Language" class="form-control">
@@ -28,14 +40,14 @@
                     <span class="text-danger" asp-validation-for="Innovation"></span>
                 </div>
                 <div class="form-group">
+                    <label asp-for="Design">Design</label>
+                    <input asp-for="Design" class="form-control">
+                    <span class="text-danger" asp-validation-for="Design"></span>
+                </div>
+                <div class="form-group">
                     <label asp-for="Communication">Communication</label>
                     <input asp-for="Communication" class="form-control">
                     <span class="text-danger" asp-validation-for="Communication"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="TeachersId">Teacher</label>
-                    <input asp-for="TeachersId" class="form-control">
-                    <span class="text-danger" asp-validation-for="TeachersId"></span>
                 </div>
                 <div class="form-group">
                     <button class="btn btn-light px-4">Submit</button>

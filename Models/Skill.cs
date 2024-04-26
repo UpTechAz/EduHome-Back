@@ -8,7 +8,7 @@
         public byte Design { get; set; }
         public byte Innovation { get; set; }
         public byte Communication { get; set; }
-        public int TeachersId { get; set; }
+        public int TeacherId { get; set; }
         public Teacher? Teacher { get; set; }
 
     }
