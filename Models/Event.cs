@@ -1,10 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebApplication2.Models
 {
     public class Event : BaseEntity
     {
+        [Required(ErrorMessage = "Title is required")]
         public string Title { get; set; }
+        [Required(ErrorMessage = "Description is required")]
         public string Description { get; set; }
         public DateTime Date { get; set; }
         public DateTime StartTime { get; set; }
@@ -13,7 +16,11 @@ namespace WebApplication2.Models
         public string? FilePath { get; set; }
         [NotMapped]
         public IFormFile? Photo { get; set; }
-        public int SpeakerId { get; set; }
-        public Speaker? Speaker { get; set; }
+
+
+
+        public List<EventComment>? EventComment { get; set; }
+
+        public List<EventSpeaker>? EventSpeakers { get; set; }
     }
 }

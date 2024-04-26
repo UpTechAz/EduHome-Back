@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using WebApplication2.DAL;
 using WebApplication2.Helpers;
+using WebApplication2.Interfaces;
 using WebApplication2.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,6 +23,8 @@ builder.Services.AddIdentity<User, IdentityRole>(
         options.User.RequireUniqueEmail = true;
     }).AddEntityFrameworkStores<AppDbContext>();
 builder.Services.AddSingleton<IFileService, FileService>();
+
+builder.Services.AddScoped<ISettingService, SettingService>();
 
 var app = builder.Build();
 app.UseStaticFiles();

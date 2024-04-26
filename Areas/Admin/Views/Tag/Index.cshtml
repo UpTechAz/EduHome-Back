@@ -27,7 +27,7 @@
                             <td>@item.Id</td>
                             <td>@item.Name</td>
                             <td>@item.CreatedAt</td>
-                            <td>@item.ModifiedAt</td>
+                            <td>@item.UpdatedAt</td>
                             <th>
                                 <a asp-controller="tag" asp-action="update" asp-area="admin" asp-route-id="@item.Id" class="btn btn-secondary">Update</a>
                                 <form class="d-inline" method="post" asp-controller="tag" asp-action="delete" asp-area="admin" asp-route-id="@item.Id">

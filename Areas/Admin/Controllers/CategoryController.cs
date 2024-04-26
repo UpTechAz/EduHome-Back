@@ -90,7 +90,7 @@ namespace WebApplication2.Areas.Admin.Controllers
 
             dbCategory.Title = category.Title;
 
-            dbCategory.ModifiedAt = DateTime.Now;
+            dbCategory.UpdatedAt = DateTime.Now;
             await _appDbContext.SaveChangesAsync();
 
             return RedirectToAction("index");

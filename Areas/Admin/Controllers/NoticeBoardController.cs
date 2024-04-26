@@ -76,7 +76,7 @@ namespace WebApplication2.Areas.Admin.Controllers
             dbModel.DateTime = noticeBoard.DateTime;
             dbModel.Description = noticeBoard.Description;
 
-            dbModel.ModifiedAt = DateTime.Now;
+            dbModel.UpdatedAt = DateTime.Now;
             await _appDbContext.SaveChangesAsync();
 
             return RedirectToAction("index");

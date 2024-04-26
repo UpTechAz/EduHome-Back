@@ -32,17 +32,17 @@
                     @foreach (var courseFeature in Model)
                     {
                         <tr>
-                            <td>@courseFeature?.Id</td>
+                          @*   <td>@courseFeature?.Id</td>
                             <td>@courseFeature?.c?.FullName</td>
-                            <td>@item?.Email</td>
-                            <td>@item?.Number</td>
-                            <td>@item?.Skype</td>
+                            <td>@courseFeature?.Email</td>
+                            <td>@courseFeature?.Number</td>
+                            <td>@courseFeature?.</td> *@
                             <th>
                                 @{
                                     if (count > 0)
                                     {
-                                        <a asp-controller="contactInfo" asp-action="update" asp-area="admin" asp-route-id="@item?.Id" class="btn btn-secondary">Update</a>
-                                        <form class="d-inline" method="post" asp-controller="ContactInfo" asp-action="delete" asp-area="admin" asp-route-id="@item?.Id">
+                                        <a asp-controller="contactInfo" asp-action="update" asp-area="admin" asp-route-id="@courseFeature?.Id" class="btn btn-secondary">Update</a>
+                                        <form class="d-inline" method="post" asp-controller="ContactInfo" asp-action="delete" asp-area="admin" asp-route-id="@courseFeature?.Id">
                                             <button class="btn btn-secondary" type="submit">Delete</button>
                                         </form>
 

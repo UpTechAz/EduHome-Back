@@ -91,7 +91,7 @@ namespace WebApplication2.Areas.Admin.Controllers
 
             dbTag.Name = tag.Name;
 
-            dbTag.ModifiedAt = DateTime.Now;
+            dbTag.UpdatedAt = DateTime.Now;
             await _appDbContext.SaveChangesAsync();
 
             return RedirectToAction("index");

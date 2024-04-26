@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using WebApplication2.Areas.Admin.ViewModels;
+using WebApplication2.Areas.Admin.ViewModels.Account;
 using WebApplication2.Constants;
 using WebApplication2.Models;
 
@@ -33,7 +33,7 @@ namespace WebApplication2.Areas.Admin.Controllers
                 ModelState.AddModelError(string.Empty, "Username or Password was incorrect");
                 return View(model);
             }
-            bool isSuperAdmin = await _userManager.IsInRoleAsync(user, UserRoles.SuperAdmin.ToString());
+            bool isSuperAdmin = await _userManager.IsInRoleAsync(user, UserRoles.Admin.ToString());
             if (!isSuperAdmin)
             {
                 ModelState.AddModelError(string.Empty, "Username or password was incorrect");

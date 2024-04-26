@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using WebApplication2.DAL;
 using WebApplication2.Helpers;
+using WebApplication2.Interfaces;
 using WebApplication2.Models;
 
 namespace WebApplication2.Areas.Admin.Controllers

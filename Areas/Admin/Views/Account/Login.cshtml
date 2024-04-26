@@ -1,8 +1,10 @@
-﻿@using WebApplication2.Areas.Admin.ViewModels;
-@model AccountLoginVM 
+﻿@using WebApplication2.Areas.Admin.ViewModels.Account;
+@model AccountLoginVM
+
 @{
 	Layout = null;
 }
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -62,7 +64,9 @@
 									<i class="icon-lock"></i>
 								</div>
 							</div>
-						</div>		
+						</div>
+						<div asp-validation-summary="ModelOnly">
+						</div>
 						<button class="btn btn-light btn-block">Sign In</button>
 					</form>
 				</div>

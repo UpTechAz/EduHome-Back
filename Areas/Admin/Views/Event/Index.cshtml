@@ -1,0 +1,48 @@
+﻿@using WebApplication2.Models
+@model List<Event>
+<div class="card">
+    <div class="card-body">
+        <div class="d-flex justify-content-between">
+            <h5 class="card-title">Events</h5>
+            <a asp-action="Create" asp-controller="Event" asp-area="admin" class="col-2 d-sm-inline-block btn btn-outline-success">Add New Event</a>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Photo</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Venue</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">StartTime</th>
+                        <th scope="col">EndTime</th>
+                  
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var eventData in Model)
+                    {
+                        <tr>
+                            <td><img style="width:100px" src="~/assets/img/@eventData.FilePath"></td>
+                            <td>@eventData.Title</td>
+                            <td>@eventData.Description</td>
+                            <td>@eventData.Venue</td>
+                            <td>@eventData.Date.ToShortDateString()</td>
+                            <td>@eventData.StartTime.ToShortTimeString()</td>
+                            <td>@eventData.EndTime.ToShortTimeString()</td>
+                            <td>>
+                           
+                                <a asp-controller="Event" asp-action="update" asp-area="admin" asp-route-id="@eventData.Id" class="btn btn-secondary">Update</a>
+                                <form class="d-inline" method="post" asp-controller="Event" asp-action="delete" asp-area="admin" asp-route-id="@eventData.Id">
+                                    <button class="btn btn-secondary" type="submit">Delete</button>
+                                </form>
+                           
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

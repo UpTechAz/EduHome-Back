@@ -1,0 +1,36 @@
+﻿@model WebApplication2.Models.EventSpeaker
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+
+<form asp-action="Create" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="SpeakerId" class="control-label"></label>
+        <select asp-for="SpeakerId" class="form-control">
+            <option value="">-- Select Speaker --</option>
+            @foreach (var speaker in ViewBag.Speakers)
+            {
+                <option value="@speaker.Id">@speaker.FullName</option>
+            }
+        </select>
+        <span asp-validation-for="SpeakerId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="EventId" class="control-label"></label>
+        <select asp-for="EventId" class="form-control">
+            <option value="">-- Select Event --</option>
+            @foreach (var evnt in ViewBag.Events)
+            {
+                <option value="@evnt.Id">@evnt.Title</option>
+            }
+        </select>
+        <span asp-validation-for="EventId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-primary" />
+    </div>
+</form>

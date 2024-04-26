@@ -25,19 +25,23 @@ namespace WebApplication2.DAL
         public DbSet <Skill> Skills { get; set; }
         public DbSet <Speaker> Speakers { get; set; }
         public DbSet <Slider> Sliders { get; set; }
-        public DbSet <StudentQuote> StudentComments { get; set; }
+        public DbSet <StudentQuote> StudentQuote { get; set; }
         public DbSet <Teacher> Teachers { get; set; }
         public DbSet <TeacherLink> TeachersLink { get; set;}
+
+        public DbSet<EventSpeaker> EventSpeakers { get; set; }
+        public DbSet<Setting> Settings { get; set; }
+
+        public DbSet<EventComment> EventComments{ get; set; }
+
+        public DbSet<CourseComment> CourseComments { get; set; }
+        public DbSet<Blog> Blogs { get; set; }
+
+        public DbSet<BlogComment> BlogComments { get; set; }
+
+
         public DbSet <StaticFile> StaticFiles { get; set;}
         public DbSet <Tag> Tags { get; set;}
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Event>()
-                .HasOne(e => e.Speaker)
-                .WithMany()
-                .HasForeignKey(e => e.SpeakerId);
-            base.OnModelCreating(modelBuilder);
-        }
     }
 
 }

@@ -1,0 +1,46 @@
+﻿@using WebApplication2.Models
+
+@model List<Message>
+<div class="card">
+    <div class="card-body">
+        <div class="d-flex; justify-content-lg-between">
+            <h5 class="card-title">Message</h5>
+            <a asp-action="create" asp-controller="Message" asp-area="admin" class="col-2 d-sm-inline-block btn btn-outline-success">Add new Message</a>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Subject</th>
+                        <th scope="col">MessageInfo</th>
+
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        foreach (var message in Model)
+                        {
+                            <tr>
+
+                                <th>@message.Id</th>
+                                <td>@message.Name</td>
+                                <td>@message.Email</td>
+                                <td>@message.Subject</td>
+                                <td>@message.MessageInfo</td>
+                                <th>
+                                    <a asp-controller="Message" asp-action="update" asp-area="admin" asp-route-id="@message.Id" class="btn btn-secondary">Update</a>
+                                    <form class="d-inline" method="post" asp-controller="Message" asp-action="delete" asp-area="admin" asp-route-id="@message.Id">
+                                        <button class="btn btn-secondary" type="submit">Delete</button>
+                                    </form>
+                                </th>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
