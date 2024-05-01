@@ -1,13 +1,378 @@
 ﻿<!DOCTYPE html>
-
-<html>
+<html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>@ViewBag.Title</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edu Home</title>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
+          integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g=="
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"
+          integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw=="
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+          integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wdth,wght@0,75..100,300..800;1,75..100,300..800&display=swap"
+          rel="stylesheet" />
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          crossorigin="anonymous" />
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+    <link rel="stylesheet" href="~/assets/css/style.css" />
 </head>
 <body>
+    <header id="header" class="main-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-5 col-6 logo-div">
+                    <div class="logo">
+                        <a href="/index.html">
+                            <img src="~/assets/images/logo2.webp" alt="edu-home" />
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-9 col-sm-7 col-6 menu-div">
+                    <div class="main-navbar">
+                        <div class="main-menu">
+                            <div class="main-nav">
+                                <ul class="main-nav-ul">
+                                    <li class="main-nav-li">
+                                        <a asp-action="index" asp-controller="home" class="main-nav-a">Home</a>
+                                        <ul class="dropdown-ul">
+                                            <li class="dropdown-ul-li">
+                                                <a asp-action="index" asp-controller="home">Home One</a>
+                                            </li>
+                                            <li class="dropdown-ul-li">
+                                                <a asp-action="index" asp-controller="home">Home Two</a>
+                                            </li>
+                                            <li class="dropdown-ul-li">
+                                                <a asp-action="index" asp-controller="home">Home Three</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="main-nav-li">
+                                        <a asp-action="index" asp-controller="about" class="main-nav-a">About</a>
+                                    </li>
+                                    <li class="main-nav-li">
+                                        <a asp-action="index" asp-controller="course" class="main-nav-a">Courses</a>
+                                        <ul class="dropdown-ul">
+                                            <li class="dropdown-ul-li">
+                                                <a asp-action="index" asp-controller="course">Courses</a>
+                                            </li>
+                                            <li class="dropdown-ul-li">
+                                                <a asp-action="index" asp-controller="courseDetails">Course Details</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="main-nav-li">
+                                        <a asp-action="index" asp-controller="event" class="main-nav-a">Event</a>
+                                        <ul class="dropdown-ul">
+                                            <li class="dropdown-ul-li">
+                                                <a asp-action="index" asp-controller="event">Event</a>
+                                            </li>
+                                            <li class="dropdown-ul-li">
+                                                <a asp-action="index" asp-controller="eventDetails" >Event Details</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="main-nav-li">
+                                        <a asp-action="index" asp-controller="teacher" class="main-nav-a">Teacher</a>
+                                        <ul class="dropdown-ul">
+                                            <li class="dropdown-ul-li">
+                                                <a asp-action="index" asp-controller="teacher">Teacher</a>
+                                            </li>
+                                            <li class="dropdown-ul-li">
+                                                <a asp-action="details" asp-controller="teacher">Teacher Details</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="main-nav-li">
+                                        <a asp-action="index" asp-controller="blog" class="main-nav-a">Blog</a>
+                                        <ul class="dropdown-ul">
+                                            <li class="dropdown-ul-li">
+                                                <a asp-action="index" asp-controller="blog">Blog</a>
+                                            </li>
+                                            <li class="dropdown-ul-li">
+                                                <a asp-action="index" asp-controller="blogDetails">Blog Details</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="main-nav-li">
+                                        <a asp-action="index" asp-controller="contact" class="main-nav-a">Contact</a>
+                                    </li>
+                                    <li class="main-nav-li">
+                                        <a asp-action="index" asp-controller="contact" class="main-nav-a">Buy Now</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="search-button">
+                            <a href="" class="header-search-button">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </a>
+                            <div class="search-input-div">
+                                <div class="search-form">
+                                    <form action="">
+                                        <input type="text" placeholder="Search here..." />
+                                        <button type="submit">
+                                            <i class="fa-solid fa-magnifying-glass"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <a href="" class="burger-btn">
+                            <i class="fa-solid fa-bars"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-12 mobile-header">
+                    <div class="mobile-menu">
+                        <div class="main-bar">
+                            <nav class="main-mob-nav">
+                                <ul class="main-mob-nav-ul">
+                                    <li class="main-mob-nav-li">
+                                        <a asp-action="index" asp-controller="home" class="main-mob-nav-a">Home</a>
+                                        <a href="" class="plus-minus-btn" data-index="1">+</a>
+                                        <ul class="mob-nav-toggle" data-index="1">
+                                            <li class="mob-nav-toggle-li">
+                                                <a asp-action="index" asp-controller="home" class="mob-nav-toggle-a">Home One</a>
+                                            </li>
+                                            <li class="mob-nav-toggle-li">
+                                                <a asp-action="index" asp-controller="home" class="mob-nav-toggle-a">Home Two</a>
+                                            </li>
+                                            <li class="mob-nav-toggle-li">
+                                                <a asp-action="index" asp-controller="home" class="mob-nav-toggle-a">Home Three</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="main-mob-nav-li">
+                                        <a asp-action="index" asp-controller="about" class="main-mob-nav-a">About</a>
+                                    </li>
+                                    <li class="main-mob-nav-li">
+                                        <a asp-action="index" asp-controller="course" class="main-mob-nav-a">Courses</a>
+                                        <a href="" class="plus-minus-btn" data-index="2">+</a>
+                                        <ul class="mob-nav-toggle" data-index="2">
+                                            <li class="mob-nav-toggle-li">
+                                                <a asp-action="index" asp-controller="course" class="mob-nav-toggle-a">Courses</a>
+                                            </li>
+                                            <li class="mob-nav-toggle-li">
+                                                <a asp-action="index" asp-controller="courseDetails"
+                                                   class="mob-nav-toggle-a">Course Details</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="main-mob-nav-li">
+                                        <a asp-action="index" asp-controller="event" class="main-mob-nav-a">Event</a>
+                                        <a href="" class="plus-minus-btn" data-index="3">+</a>
+                                        <ul class="mob-nav-toggle" data-index="3">
+                                            <li class="mob-nav-toggle-li">
+                                                <a asp-action="index" asp-controller="event" class="mob-nav-toggle-a">Event</a>
+                                            </li>
+                                            <li class="mob-nav-toggle-li">
+                                                <a asp-action="index" asp-controller="eventDetails" class="mob-nav-toggle-a">Event Details</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="main-mob-nav-li">
+                                        <a asp-action="index" asp-controller="teacher" class="main-mob-nav-a">Teachers</a>
+                                        <a href="" class="plus-minus-btn" data-index="4">+</a>
+                                        <ul class="mob-nav-toggle" data-index="4">
+                                            <li class="mob-nav-toggle-li">
+                                                <a asp-action="index" asp-controller="teacher" class="mob-nav-toggle-a">Teachers</a>
+                                            </li>
+                                            <li class="mob-nav-toggle-li">
+                                                <a asp-action="index" asp-controller="teacher"
+                                                   class="mob-nav-toggle-a">Teacher Details</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="main-mob-nav-li">
+                                        <a asp-action="index" asp-controller="blog" class="main-mob-nav-a">Blog</a>
+                                        <a href="" class="plus-minus-btn" data-index="5">+</a>
+                                        <ul class="mob-nav-toggle" data-index="5">
+                                            <li class="mob-nav-toggle-li">
+                                                <a asp-action="index" asp-controller="blog" class="mob-nav-toggle-a">Blog</a>
+                                            </li>
+                                            <li class="mob-nav-toggle-li">
+                                                <a asp-action="index" asp-controller="blogDetails" class="mob-nav-toggle-a">Blog Details</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="main-mob-nav-li">
+                                        <a asp-action="index" asp-controller="contact" class="main-mob-nav-a">Contact</a>
+                                    </li>
+                                    <li class="main-mob-nav-li">
+                                        <a asp-action="index" asp-controller="about" class="main-mob-nav-a">Buy Now</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
     <div>
         @RenderBody()
     </div>
+
+    <section class="subscribe">
+        <div class="subscribe_area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="subscribe_content">
+                            <h2>subscribe our newsletter</h2>
+                            <p>I must explain to you how all this mistaken idea</p>
+                        </div>
+                        <div class="newsletter_form">
+                            <form action="">
+                                <input type="email"
+                                       class="email"
+                                       placeholder="Enter your e-mail adress"
+                                       required />
+                                <button type="submit" class="default-btn">subscribe</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="footer">
+        <div class="footer_top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="captions pr-60">
+                            <div class="footer-logo">
+                                <a asp-action="index" asp-controller="home">
+                                    <img src="~/assets/images/logo2.webp" alt="eduhome" />
+                                </a>
+                            </div>
+                            <p>
+                                I must explain to you how all this mistaken idea of denoung
+                                pleure and praising pain was born and give you a coete account
+                                of the system.
+                            </p>
+                            <div class="footer-social">
+                                <ul>
+                                    <li>
+                                        <a href=""><i class="fa-brands fa-facebook-f"></i></a>
+                                    </li>
+                                    <li>
+                                        <a href=""><i class="fa-brands fa-pinterest-p"></i></a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><i class="fa-brands fa-vimeo-v"></i></a>
+                                    </li>
+                                    <li>
+                                        <a href=""><i class="fa-brands fa-twitter"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="captions">
+                            <h3>information</h3>
+                            <ul>
+                                <li><a href="#">addmission</a></li>
+                                <li><a href="#">Academic Calender</a></li>
+                                <li><a asp-action="index" asp-controller="event">Event List</a></li>
+                                <li><a href="#">Hostel & Dinning</a></li>
+                                <li><a href="#">TimeTable</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-6 pt-4 pt-lg-0">
+                        <div class="captions">
+                            <h3>useful links</h3>
+                            <ul>
+                                <li><a asp-action="index" asp-controller="course">our courses</a></li>
+                                <li><a asp-action="index" asp-controller="about">about us</a></li>
+                                <li><a asp-action="index" asp-controller="teacher">teachers &amp; faculty</a></li>
+                                <li><a href="#">teams & conditions</a></li>
+                                <li><a asp-action="index" asp-controller="event">our events</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 pt-4 pt-lg-0">
+                        <div class="captions">
+                            <h3>get in touch</h3>
+                            <p>
+                                Your address goes here, Street<br />City, Roadno 785 New York
+                            </p>
+                            <p>+880 548 986 898 87<br />+880 659 785 658 98</p>
+                            <p>info@eduhome.com<br />www.eduhome.com</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer_bottom text-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <p> Copyright © <a href="">Eduhome</a> 2022. All Right Reserved By
+                            <a href="" target="_blank">Hastech.</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="popup-video-background"></div>
+
+    <div class="popup-video-main-holder">
+        <div class="popup-video-main">
+            <div class="popup-video-content">
+                <div class="iframe-holder">
+                    <button type="button" class="popup-close-btn">x</button>
+                    <iframe src="https://www.youtube.com/embed/fkoEj95puX0?si=qwdnA9Su6n19FoFy"
+                            title="YouTube video player"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin"
+                            allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
+        integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"></script>
+
+<script src="/src/js/main.js"></script>
 </html>
+

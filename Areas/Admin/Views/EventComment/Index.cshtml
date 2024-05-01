@@ -12,6 +12,7 @@
                 <th>Email</th>
                 <th>Subject</th>
                 <th>Message</th>
+                <th>Status</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -23,6 +24,15 @@
                     <td>@comment.Email</td>
                     <td>@comment.Subject</td>
                     <td>@comment.MessageInfo</td>
+                    <td>@if (comment.IsApproved)
+                        {
+                            <img width="30px" src="~/admin/assets/images/png-transparent-check-mark-afacere-others-miscellaneous-text-logo.png"/>
+                        }
+                        else
+                        {
+                            <img width="30px" src="~/admin/assets/images/png-transparent-cross-delete-remove-3d-icon-thumbnail.png"/>
+                        }
+                    </td>
                     <td>
                         <form asp-controller="EventComment" asp-action="Approve" method="post">
                             <input type="hidden" name="id" value="@comment.Id" />

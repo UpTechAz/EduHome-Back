@@ -1,12 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
-using System.Threading.Tasks;
 using WebApplication2.DAL;
-using WebApplication2.Models;
 
-namespace WebApplication2.Controllers
+namespace WebApplication2.Areas.Admin.Controllers
 {
+    [Area("Admin")]
+    //[Authorize(Roles = "SuperAdmin")]
     public class BlogCommentController : Controller
     {
         private readonly AppDbContext _context;
@@ -15,36 +15,37 @@ namespace WebApplication2.Controllers
         {
             _context = context;
         }
-
- 
         public async Task<IActionResult> Index()
         {
-            var blogComments = await _context.BlogComments.ToListAsync();
+            var blogComments = await _context.BlogComments
+                //.Where(ec => ec.IsApproved)
+                .ToListAsync();
             return View(blogComments);
         }
         [HttpPost]
         public async Task<IActionResult> Approve(int? id)
         {
             if (id == null) return BadRequest();
-            var blogComment = await _context.BlogComments.FirstOrDefaultAsync(a => a.Id == id);
-            if (blogComment == null) return NotFound();
+            var Blog = await _context.BlogComments.FirstOrDefaultAsync(a => a.Id == id);
+            if (Blog == null) return NotFound();
 
-            blogComment.IsApproved = true;
+            Blog.IsApproved = Blog.IsApproved ? false : true;
             await _context.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));
         }
+        [HttpPost]
 
-
-
-        [HttpPost, ActionName("Delete")]
-    
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            var blogComment = await _context.BlogComments.FindAsync(id);
-            _context.BlogComments.Remove(blogComment);
+            var Blog = await _context.BlogComments.FindAsync(id);
+            if (Blog == null) return NotFound();
+
+            _context.BlogComments.Remove(Blog);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+
     }
+
 }

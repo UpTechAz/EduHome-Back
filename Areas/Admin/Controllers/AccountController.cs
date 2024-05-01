@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication2.Areas.Admin.ViewModels.Account;
 using WebApplication2.Constants;
@@ -7,6 +8,7 @@ using WebApplication2.Models;
 namespace WebApplication2.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    //[Authorize(Roles = "SuperAdmin")]
     public class AccountController : Controller
     {
         private readonly UserManager<User> _userManager;

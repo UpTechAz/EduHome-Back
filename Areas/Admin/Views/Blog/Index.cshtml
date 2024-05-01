@@ -2,7 +2,7 @@
 @model List<Blog>
 <div class="card">
     <div class="card-body">
-        <div class="d-flex justify-content-between">
+        <div class="d-flex; justify-content-lg-between">
             <h5 class="card-title">Blogs</h5>
             <a asp-action="Create" asp-controller="Blog" asp-area="admin" class="col-2 d-sm-inline-block btn btn-outline-success">Add New Blog</a>
         </div>
@@ -25,9 +25,9 @@
                             <td><img style="width:100px" src="~/assets/img/@blog.FilePath"></td>
                             <td>@blog.Title</td>
                             <td>@blog.Description</td>
+                            <td>@blog.Date.ToShortDateString()</td>                      
                             <td>@blog.Author</td>
                             <td>@blog.BlogComment?.Count()</td>
-                            <td>@blog.Date.ToShortDateString()</td>                      
                             <td>
                                 
 

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebApplication2.DAL;
 using WebApplication2.Models;
@@ -6,6 +7,7 @@ using WebApplication2.Models;
 namespace WebApplication2.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    //[Authorize(Roles = "SuperAdmin")]
     public class TagController : Controller
     {
         private readonly AppDbContext _appDbContext;
@@ -90,10 +92,8 @@ namespace WebApplication2.Areas.Admin.Controllers
             }
 
             dbTag.Name = tag.Name;
-
             dbTag.UpdatedAt = DateTime.Now;
             await _appDbContext.SaveChangesAsync();
-
             return RedirectToAction("index");
         }
 
@@ -107,7 +107,6 @@ namespace WebApplication2.Areas.Admin.Controllers
             }
             _appDbContext.Tags.Remove(dbTag);
             await _appDbContext.SaveChangesAsync();
-
             return RedirectToAction(nameof(Index));
         }
     }

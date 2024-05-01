@@ -23,8 +23,6 @@
                         <th scope="col">Assesments</th>
                         <th scope="col">CourseFee</th>
                         <th scope="col">CoursesId</th>
-                        <th scope="col">CreateAt</th>
-                        <th scope="col">ModifiedAt</th>
                         <th scope="col">Actions</th>
                     </tr>
                 </thead>
@@ -32,16 +30,20 @@
                     @foreach (var courseFeature in Model)
                     {
                         <tr>
-                          @*   <td>@courseFeature?.Id</td>
-                            <td>@courseFeature?.c?.FullName</td>
-                            <td>@courseFeature?.Email</td>
-                            <td>@courseFeature?.Number</td>
-                            <td>@courseFeature?.</td> *@
+                            <td>@courseFeature?.Id</td>
+                            <td>@courseFeature?.Starts</td>
+                            <td>@courseFeature?.Duration</td>
+                            <td>@courseFeature?.ClassDuration</td>
+                            <td>@courseFeature?.SkillLevel</td>
+                            <td>@courseFeature?.StudentsCount</td> 
+                            <td>@courseFeature?.Assesments</td> 
+                            <td>@courseFeature?.CourseFee</td> 
+                            <td>@courseFeature?.CoursesId</td> 
                             <th>
                                 @{
                                     if (count > 0)
                                     {
-                                        <a asp-controller="contactInfo" asp-action="update" asp-area="admin" asp-route-id="@courseFeature?.Id" class="btn btn-secondary">Update</a>
+                                        <a asp-controller="coursefeature" asp-action="update" asp-area="admin" asp-route-id="@courseFeature?.Id" class="btn btn-secondary">Update</a>
                                         <form class="d-inline" method="post" asp-controller="ContactInfo" asp-action="delete" asp-area="admin" asp-route-id="@courseFeature?.Id">
                                             <button class="btn btn-secondary" type="submit">Delete</button>
                                         </form>

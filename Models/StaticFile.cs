@@ -7,6 +7,6 @@ namespace WebApplication2.Models
         public int Id { get; set; }
         public string? HeaderLogo { get; set; }
         [NotMapped]
-        public IFormFile HeaderLogoFile { get; set; }
+        public IFormFile? HeaderLogoFile { get; set; }
     }
 }

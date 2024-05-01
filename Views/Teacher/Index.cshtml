@@ -1,0 +1,90 @@
+﻿@using WebApplication2.ViewModels.Teachers;
+@model TeacherVM
+<section class="banner">
+    <div class="banner-area">
+        <div class="banner-area-wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="banner-content-wrapper">
+                            <div class="banner-content">
+                                <h2>Our Teachers</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="teacher">
+    <div class="pt-150 pb-105">
+        <div class="container">
+            <div class="row">
+                @foreach(var item in Model.teachers)
+                {
+                     <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="single_teacher mb-45">
+                        <div class="single_teacher_image">
+                            <a href="">
+                                <img src="~/assets/images/@item.FilePath" alt="teacher" />
+                            </a>
+                        </div>
+                        <div class="teacher_content">
+                            <h2><a href="teacher-details.html">@item.FullName</a></h2>
+                            <h4>@item.ScientificDegree</h4>
+                            <ul>
+                                <li>
+                                    <a href="https://www.facebook.com/devitems/?ref=bookmarks">
+                                        <i class="fa-brands fa-facebook-f"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.pinterest.com/devitemsllc/">
+                                        <i class="fa-brands fa-pinterest-p"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fa-brands fa-vimeo-v"></i></a>
+                                </li>
+                                <li>
+                                    <a href="https://twitter.com/devitemsllc">
+                                        <i class="fa-brands fa-twitter"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="subscribe">
+    <div class="subscribe_area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="form_container">
+                        <div class="subscribe_content">
+                            <h2>subscribe our newsletter</h2>
+                            <p>I must explain to you how all this mistaken idea</p>
+                        </div>
+                        <div class="newsletter_form">
+                            <form action="">
+                                <input type="email"
+                                       class="email"
+                                       placeholder="Enter your e-mail adress"
+                                       required />
+                                <button type="submit" class="default-btn">subscribe</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

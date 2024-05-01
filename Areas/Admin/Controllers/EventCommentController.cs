@@ -9,7 +9,7 @@ using WebApplication2.Models;
 namespace WebApplication2.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "SuperAdmin")]
     public class EventCommentController : Controller
     {
         private readonly AppDbContext _context;
@@ -21,19 +21,19 @@ namespace WebApplication2.Areas.Admin.Controllers
         public async Task<IActionResult> Index()
         {
             var eventComments = await _context.EventComments
-                .Where(ec => ec.IsApproved)
+                //.Where(ec => ec.IsApproved)
                 .ToListAsync();
             return View(eventComments);
         }
         [HttpPost]
-             public async Task<IActionResult> Approve(int? id)
+        public async Task<IActionResult> Approve(int? id)
         {
             if (id == null) return BadRequest();
             var eventComment = await _context.EventComments.FirstOrDefaultAsync(a => a.Id == id);
             if (eventComment == null) return NotFound();
 
-            eventComment.IsApproved = true; 
-            await _context.SaveChangesAsync(); 
+            eventComment.IsApproved = eventComment.IsApproved ? false : true;
+            await _context.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));
         }

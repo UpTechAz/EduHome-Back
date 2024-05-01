@@ -1,5 +1,4 @@
 ﻿
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,7 +39,7 @@
         <div id="sidebar-wrapper" data-simplebar="" data-simplebar-auto-hide="true">
             <div class="brand-logo">
                 <a href="index.html">
-                    <img src="~/admin/assets/images/logo-icon.png" class="logo-icon" alt="logo icon">
+                    <img asp-append-version="true" src="~/admin/assets/images/logo-icon.png" class="logo-icon" alt="logo icon">
                     <h5 class="logo-text">Dashtreme Admin</h5>
                 </a>
             </div>
@@ -52,87 +51,68 @@
                     </a>
                 </li>
                 <li>
-<<<<<<< HEAD
+                    <a asp-controller="blog" asp-action="index" asp-area="admin">
+                        <i class="zmdi zmdi-invert-colors"></i> <span>Blog</span>
+                    </a>
+                </li>
+                <li>
                     <a asp-controller="category" asp-action="index" asp-area="admin">
                         <i class="zmdi zmdi-invert-colors"></i> <span>Category</span>
                     </a>
                 </li>
                 <li>
-                    <a asp-controller="staticfile" asp-action="index" asp-area="admin">
-                        <i class="zmdi zmdi-invert-colors"></i> <span>Static File</span>
-                    </a>
-=======
-                    @* <a asp-controller="Customer" asp-action="index" asp-area="admin">
-                        <i class="zmdi zmdi-invert-colors"></i> <span>Customer`s Reviews</span>
-                    </a> *@
-                </li>
-
-                <li>
-                   @*  <a asp-controller="Image" asp-action="index" asp-area="admin">
-                        <i class="zmdi zmdi-invert-colors"></i> <span>About Page Images</span>
-                    </a> *@
-                </li>
-                <li>
-                   @*  <a asp-controller="Product" asp-action="index" asp-area="admin">
-                        <i class="zmdi zmdi-invert-colors"></i> <span>Products</span>
-                    </a> *@
->>>>>>> 1e820beaffc5583d4a73dff4ebbcdd42db7aaf18
-                </li>
-                <li>
-<<<<<<< HEAD
                     <a asp-controller="course" asp-action="index" asp-area="admin">
-                        <i class="zmdi zmdi-invert-colors"></i> <span>courses</span>
+                        <i class="zmdi zmdi-invert-colors"></i> <span>Courses</span>
                     </a>
                 </li>
                 <li>
-                    <a asp-controller="ContactInfo" asp-action="index" asp-area="admin">
-                        <i class="zmdi zmdi-invert-colors"></i> <span>Teacher`s Contacts</span>
+                    <a asp-controller="CourseFeature" asp-action="index" asp-area="admin">
+                        <i class="zmdi zmdi-invert-colors"></i> <span>CourseFeature</span>
                     </a>
-=======
-                    @* <a asp-controller="Ourstory" asp-action="index" asp-area="admin">
-                        <i class="zmdi zmdi-invert-colors"></i> <span>Ourstory</span>
-                    </a> *@
                 </li>
-                <li>
-                   @*  <a asp-controller="ContactInfo" asp-action="index" asp-area="admin">
-                        <i class="zmdi zmdi-invert-colors"></i> <span>Contactinfo</span>
-                    </a> *@
->>>>>>> 1e820beaffc5583d4a73dff4ebbcdd42db7aaf18
-                </li>
-                 <li>
+                @*  <li>
                 <a asp-controller="EducationTheme" asp-action="index" asp-area="admin">
                 <i class="zmdi zmdi-invert-colors"></i> <span>Education Theme</span>
                 </a>
+                </li>*@
+                <li>
+                    <a asp-controller="Event" asp-action="index" asp-area="admin">
+                        <i class="zmdi zmdi-invert-colors"></i> <span>Events</span>
+                    </a>
                 </li>
                 <li>
-                <a asp-controller="Event" asp-action="index" asp-area="admin">
-                <i class="zmdi zmdi-invert-colors"></i> <span>Events</span>
-                </a>
+                    <a asp-controller="EventComment" asp-action="index" asp-area="admin">
+                        <i class="zmdi zmdi-invert-colors"></i> <span>EventComment</span>
+                    </a>
                 </li>
                 <li>
-                <a asp-controller="Link" asp-action="index" asp-area="admin">
-                <i class="zmdi zmdi-invert-colors"></i> <span>Link</span>
-                </a>
+                    <a asp-controller="Link" asp-action="index" asp-area="admin">
+                        <i class="zmdi zmdi-invert-colors"></i> <span>Link</span>
+                    </a>
                 </li>
                 <li>
-<<<<<<< HEAD
                     <a asp-controller="Message" asp-action="index" asp-area="admin">
-                <i class="zmdi zmdi-invert-colors"></i> <span>Messages</span>
-                </a>
+                        <i class="zmdi zmdi-invert-colors"></i> <span>Messages</span>
+                    </a>
                 </li>
                 <li>
                     <a asp-controller="NoticeBoard" asp-action="index" asp-area="admin">
                         <i class="zmdi zmdi-invert-colors"></i> <span>Notice Board</span>
                     </a>
-=======
-                  @*   <a asp-controller="Message" asp-action="index" asp-area="admin">
-                        <i class="zmdi zmdi-invert-colors"></i> <span>Visitor`s Messages</span>
-                    </a> *@
->>>>>>> 1e820beaffc5583d4a73dff4ebbcdd42db7aaf18
                 </li>
                 <li>
                     <a asp-controller="Skill" asp-action="index" asp-area="admin">
                         <i class="zmdi zmdi-invert-colors"></i> <span>Skill</span>
+                    </a>
+                </li>
+                <li>
+                    <a asp-controller="Setting" asp-action="index" asp-area="admin">
+                        <i class="zmdi zmdi-invert-colors"></i> <span>Setting</span>
+                    </a>
+                </li>
+                <li>
+                    <a asp-controller="staticfile" asp-action="index" asp-area="admin">
+                        <i class="zmdi zmdi-invert-colors"></i> <span>Static File</span>
                     </a>
                 </li>
                 <li>
@@ -151,8 +131,18 @@
                     </a>
                 </li>
                 <li>
+                    <a asp-controller="Tag" asp-action="index" asp-area="admin">
+                        <i class="zmdi zmdi-invert-colors"></i> <span>Static File</span>
+                    </a>
+                </li>
+                <li>
                     <a asp-controller="Teacher" asp-action="index" asp-area="admin">
                         <i class="zmdi zmdi-invert-colors"></i> <span>Teachers</span>
+                    </a>
+                </li>
+                <li>
+                    <a asp-controller="ContactInfo" asp-action="index" asp-area="admin">
+                        <i class="zmdi zmdi-invert-colors"></i> <span>Teacher`s Contacts</span>
                     </a>
                 </li>
                 <li>
@@ -160,10 +150,10 @@
                         <i class="zmdi zmdi-invert-colors"></i> <span>Teacher Link</span>
                     </a>
                 </li>
-               @* <li>
-                    <a asp-controller="Users" asp-action="index" asp-area="admin">
-                        <i class="zmdi zmdi-invert-colors"></i> <span>Message</span>
-                    </a>
+                @* <li>
+                <a asp-controller="Users" asp-action="index" asp-area="admin">
+                <i class="zmdi zmdi-invert-colors"></i> <span>Message</span>
+                </a>
                 </li>*@
 
 
@@ -219,7 +209,7 @@
                                     <div class="media">
                                         <div class="avatar"><img class="align-self-start mr-3" src="https://via.placeholder.com/110x110" alt="user avatar"></div>
                                         <div class="media-body">
-                                            <h6 class="mt-2 user-title">@User.Identity.Name</h6>
+                                            <h6 class="mt-2 user-title">@User.Identity?.Name</h6>
                                         </div>
                                     </div>
                                 </a>

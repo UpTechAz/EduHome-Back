@@ -5,13 +5,15 @@ using System.Data;
 using WebApplication2.DAL;
 using WebApplication2.Helpers;
 using WebApplication2.Interfaces;
+using WebApplication2.Migrations;
 using WebApplication2.Models;
 using WebApplication2.ViewModels;
+using WebApplication2.ViewModels.Teachers;
 
 namespace WebApplication2.Areas.Admin.Controllers
 {
     [Area("Admin")]
-   // [Authorize(Roles = "SuperAdmin")]
+    //[Authorize(Roles = "SuperAdmin")]
     public class TeacherController : Controller
     {
         private readonly AppDbContext _dbContext;
@@ -32,15 +34,13 @@ namespace WebApplication2.Areas.Admin.Controllers
                 .Include(p => p.ContactInformation);
             //.Where(p => p.IsDeleted == false);
 
-            return View(PageNatedList<Teacher>.Create(queries, pageIndex, 3, 5));
-
-
+            return View(PageNatedList<Teacher>.Create(queries, pageIndex, 5, 5));
         }
         #region Create
         [HttpGet]
         public async Task<IActionResult> Create()
         {
-            ViewBag.Links = await _dbContext.Links.ToListAsync();
+            ViewBag.Links = await _dbContext.Teachers.ToListAsync();
 
             return View();
         }
@@ -67,6 +67,7 @@ namespace WebApplication2.Areas.Admin.Controllers
             }
 
             teachers.ContactInformation.TeacherId = teachers.Id;
+            teachers.CreatedAt = DateTime.UtcNow.AddHours(4);
             teachers.TeacherLinks = new List<TeacherLink>();
             if (teachers.TeacherLinks is not null && teachers.TeacherLinks.Count() > 0)
             {
@@ -86,12 +87,11 @@ namespace WebApplication2.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Update(int id)
         {
-            var Teacher = await _dbContext.Teachers
+            var Teacher = await _dbContext.Teachers.Include(x=>x.ContactInformation)
                 .FirstOrDefaultAsync(c => c.Id == id);
             if (Teacher == null) return NotFound();
             var model = new Teacher
             {
-                Id = id,
                 FullName = Teacher.FullName,
                 FilePath = Teacher.FilePath,
                 Experience = Teacher.Experience,
@@ -99,48 +99,55 @@ namespace WebApplication2.Areas.Admin.Controllers
                 Hobbies = Teacher.Hobbies,
                 Faculty = Teacher.Faculty,
                 ScientificDegree = Teacher.ScientificDegree,
-
-
+                ContactInformation = Teacher.ContactInformation,
             };
             return View(model);
         }
         [HttpPost]
-        public async Task<IActionResult> Update(Teacher Teachers, int id)
+        public async Task<IActionResult> Update(Teacher Teacher, int id)
         {
 
-            if (id != Teachers.Id) return BadRequest();
+            if (id != Teacher.Id) return BadRequest();
 
-            if (!ModelState.IsValid) return View(Teachers);
+            if (!ModelState.IsValid) return View(Teacher);
             Teacher? dbTeacher = await _dbContext.Teachers.FindAsync(id);
-            dbTeacher.FullName = Teachers.FullName;
-            dbTeacher.FilePath = Teachers.FilePath;
-            dbTeacher.Experience = Teachers.Experience;
-            dbTeacher.TeacherAbout = Teachers.TeacherAbout;
-            dbTeacher.Hobbies = Teachers.Hobbies;
-            dbTeacher.Faculty = Teachers.Faculty;
-            dbTeacher.ScientificDegree = Teachers.ScientificDegree;
-
-            if (Teachers.Photo != null)
+            dbTeacher!.FullName = Teacher!.FullName;
+            dbTeacher.FilePath = Teacher.FilePath;
+            dbTeacher.Experience = Teacher.Experience;
+            dbTeacher.TeacherAbout = Teacher.TeacherAbout;
+            dbTeacher.Hobbies = Teacher.Hobbies;
+            dbTeacher.Faculty = Teacher.Faculty;
+            dbTeacher.ScientificDegree = Teacher.ScientificDegree;
+            var contactInfo = await _dbContext.ContactInformation.FirstOrDefaultAsync(c=>c.TeacherId==id);
+            contactInfo!.Email = Teacher.ContactInformation!.Email;
+            contactInfo.Number= Teacher.ContactInformation.Number;
+            contactInfo.Skype = Teacher.ContactInformation.Skype;
+            //dbTeacher.ContactInformation = Teacher.ContactInformation;
+            if (Teacher.Photo != null)
             {
-                if (!_fileService.IsImage(Teachers.Photo))
+                if (!_fileService.IsImage(Teacher.Photo))
                 {
                     ModelState.AddModelError("Photo", "The file must be in Image format.");
-                    return View(Teachers);
+                    return View(Teacher);
                 }
                 int maxSize = 30;
-                if (!_fileService.CheckSize(Teachers.Photo, maxSize))
+                if (!_fileService.CheckSize(Teacher.Photo, maxSize))
                 {
                     ModelState.AddModelError("Photo", $"The size of the image should not exceed {maxSize} MB");
                     //Teacher.FilePath = dbCustomer.FilePath; submit eleyende shekil silinmesin deye 
-                    return View(Teachers);
+                    return View(Teacher);
                 }
-                string path = Path.Combine(_webHostEnvironment.WebRootPath, "assets/img", dbTeacher.FilePath);
-                _fileService.Delete(path);
-                var filename = await _fileService.UploadAsync(Teachers.Photo);
+                if(Teacher.FilePath != null)
+                {
+                    string path = Path.Combine(_webHostEnvironment.WebRootPath, "assets/images", dbTeacher.FilePath);
+                    _fileService.Delete(path);
+                }
+                var filename = await _fileService.UploadAsync(Teacher.Photo);
                 dbTeacher.FilePath = filename;
             }
+            Teacher.ContactInformation.TeacherId = Teacher.Id;
+            Teacher.CreatedAt = DateTime.UtcNow.AddHours(4);
             await _dbContext.SaveChangesAsync();
-
             return RedirectToAction(nameof(Index));
         }
         #endregion
@@ -151,7 +158,7 @@ namespace WebApplication2.Areas.Admin.Controllers
         {
             var dbTeacher = await _dbContext.Teachers.FindAsync(id);
             if (dbTeacher == null) return NotFound();
-            var path = Path.Combine(_webHostEnvironment.WebRootPath, "assets/img", dbTeacher.FilePath);
+            var path = Path.Combine(_webHostEnvironment.WebRootPath, "assets/images", dbTeacher.FilePath);
             _fileService.Delete(path);
             _dbContext.Teachers.Remove(dbTeacher);
             await _dbContext.SaveChangesAsync();

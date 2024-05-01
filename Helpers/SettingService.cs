@@ -16,7 +16,7 @@ namespace WebApplication2.Helpers
 
         public async Task<IEnumerable<Setting>> GetSettingsAsync()
         {
-            return await _dbContext.Settings.ToListAsync();
+            return await _dbContext.Settings.AsNoTracking().ToListAsync();
         }
     }
 }

@@ -14,7 +14,7 @@
                     <span class="text-danger" asp-validation-for="FullName"></span>
                 </div>
                 <div>
-                    <img style="width:100px;height:100px" src="~/assets/img/@Model.FilePath"/>
+                    <img style="width:100px;height:100px" src="~/assets/images/@Model.FilePath"/>
                 </div>
                  <div class="form-group">
                 <label asp-for="Photo">Photo</label>
@@ -47,9 +47,19 @@
                     <span class="text-danger" asp-validation-for="TeacherAbout"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="TeacherLinks">Teacher Link</label>
-                    <input asp-for="TeacherLinks" class="form-control">
-                    <span class="text-danger" asp-validation-for="TeacherLinks"></span>
+                    <label asp-for="ContactInformation.Skype">Skype</label>
+                    <input asp-for="ContactInformation.Skype" class="form-control">
+                    <span class="text-danger" asp-validation-for="ContactInformation.Skype"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ContactInformation.Email">Email</label>
+                    <input asp-for="ContactInformation.Email" class="form-control">
+                    <span class="text-danger" asp-validation-for="ContactInformation.Email"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ContactInformation.Number">Phone Number</label>
+                    <input asp-for="ContactInformation.Number" class="form-control">
+                    <span class="text-danger" asp-validation-for="ContactInformation.Number"></span>
                 </div>
                 <div class="form-group">
                     <input type="submit" value="Update" class="btn btn-primary"/>

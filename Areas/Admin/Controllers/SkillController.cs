@@ -9,7 +9,7 @@ using WebApplication2.Models;
 namespace WebApplication2.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "SuperAdmin")]
+    //[Authorize(Roles = "SuperAdmin")]
     public class SkillController : Controller
     {
         private readonly AppDbContext _dbContext;
@@ -88,6 +88,10 @@ namespace WebApplication2.Areas.Admin.Controllers
             await _dbContext.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
 
+        }
+        public async Task<IActionResult> Delete(int id)
+        {
+            return null;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel;
 using WebApplication2.DAL;
@@ -9,6 +10,7 @@ using WebApplication2.Models;
 namespace WebApplication2.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    //[Authorize(Roles ="SuperAdmin")]
     public class StaticFileController : Controller
     {
         private readonly AppDbContext _appDbContext;
@@ -83,7 +85,6 @@ namespace WebApplication2.Areas.Admin.Controllers
 
             var dbImage = await _appDbContext.StaticFiles.FindAsync(id);
             dbImage.HeaderLogo = model.HeaderLogo;
-
 
             if (model.HeaderLogoFile != null)
             {

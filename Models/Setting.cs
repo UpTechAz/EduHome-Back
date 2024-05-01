@@ -10,6 +10,5 @@ namespace WebApplication2.Models
         [StringLength(1000)]
         public string Value { get; set; }
 
-
     }
 }

@@ -1,0 +1,53 @@
+@mixin section-title($h2-font-size) {
+    .section-title {
+        img {
+            src: "../images/section.webp";
+            alt: "section-title";
+            margin-bottom: 2px;
+
+        }
+
+        h2 {
+            font-size: $h2-font-size;
+            color: #2c2b5e;
+            font-weight: 700;
+            font-family: 'Open Sans', sans-serif;
+            margin-bottom: 62px;
+            text-transform: uppercase;
+            margin-top: 1rem;
+        }
+    }
+}
+
+@mixin title($h2-font-size) {
+    h2 {
+        font-size: $h2-font-size;
+        color: #2c2b5e;
+        font-weight: 700;
+        font-family: 'Open Sans', sans-serif;
+        margin-bottom: 3.8rem;
+        text-transform: uppercase;
+    }
+}
+
+@mixin default_btn($font_size) {
+    .default-btn {
+        font-size: $font_size;
+        height: 100%;
+        transition: all 0.5s ease;
+        color: #fff;
+        display: inline-block;
+        font-weight: 700;
+        overflow: hidden;
+        text-transform: uppercase;
+        border: none;
+        outline: none;
+        background: #EC1C23;
+        text-decoration: none;
+
+        &:hover {
+            background: #2C2B5E;
+            color: #fff;
+        }
+    }
+}

@@ -1,0 +1,52 @@
+﻿@using WebApplication2.Models;
+@model List<Setting>
+@{
+    int? count = ViewBag.SettingInfo;
+}
+<div class="card">
+    <div class="card-body">
+        <div class="d-flex; justify-content-lg-between">
+            <h5 class="card-title">Settings</h5>
+            <a asp-action="create" asp-controller="setting" asp-area="admin" class="col-2 d-sm-inline-block btn btn-outline-success">Add Setting</a>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">İd</th>
+                        <th scope="col">Key</th>
+                        <th scope="col">Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @*  @if (Model != null && Model.Count() > 0)
+                    {
+
+                    }*@
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item?.id</td>
+                            <td>@item?.Key</td>
+                            <td>@item?.Value</td>
+                            <th>
+                                @{
+                                    if (count > 0)
+                                    {
+                                        <a asp-controller="Setting" asp-action="update" asp-area="admin" asp-route-id="@item?.id" class="btn btn-secondary">Update</a>
+                                        <form class="d-inline" method="post" asp-controller="setting" asp-action="delete" asp-area="admin" asp-route-id="@item?.id">
+                                            <button class="btn btn-secondary" type="submit">Delete</button>
+                                        </form>
+
+                                    }
+                                }
+                            </th>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+

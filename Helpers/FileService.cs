@@ -12,7 +12,7 @@ namespace WebApplication2.Helpers
         public async Task<string> UploadAsync(IFormFile file)
         {
             var filename = $"{DateTime.UtcNow:yyyyMMddHHmmssfff}_{Guid.NewGuid()}_{file.FileName}"; 
-            var path = Path.Combine(_webHostEnvironment.WebRootPath, "assets/img", filename);
+            var path = Path.Combine(_webHostEnvironment.WebRootPath, "assets/images", filename);
 
             using (FileStream fileStream = new FileStream(path, FileMode.Create, FileAccess.ReadWrite))
             {

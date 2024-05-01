@@ -8,7 +8,7 @@ using WebApplication2.Models;
 namespace WebApplication2.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "SuperAdmin")]
     public class StudentQuoteController : Controller
 	{
 		private readonly AppDbContext _context;
