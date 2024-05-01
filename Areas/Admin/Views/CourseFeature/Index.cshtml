@@ -6,7 +6,7 @@
 <div class="card">
     <div class="card-body">
         <div class="d-flex; justify-content-lg-between">
-            <h5 class="card-title">Teacher`s Contact Information</h5>
+            <h5 class="card-title">Course features</h5>
             <a asp-action="create" asp-controller="coursefeature" asp-area="admin" class="col-2 d-sm-inline-block btn btn-outline-success"> Add Information</a>
 
         </div>
@@ -23,8 +23,8 @@
                         <th scope="col">Assesments</th>
                         <th scope="col">CourseFee</th>
                         <th scope="col">CoursesId</th>
-                        <th scope="col">CreateAt</th>
-                        <th scope="col">ModifiedAt</th>
+                        <th scope="col">CreateBy</th>
+                        <th scope="col">UpdateBy</th>
                         <th scope="col">Actions</th>
                     </tr>
                 </thead>
@@ -32,17 +32,23 @@
                     @foreach (var courseFeature in Model)
                     {
                         <tr>
-                          @*   <td>@courseFeature?.Id</td>
-                            <td>@courseFeature?.c?.FullName</td>
-                            <td>@courseFeature?.Email</td>
-                            <td>@courseFeature?.Number</td>
-                            <td>@courseFeature?.</td> *@
+                            <td>@courseFeature?.Id</td>
+                            <td>@courseFeature?.Starts</td>
+                            <td>@courseFeature?.Duration</td>
+                            <td>@courseFeature?.ClassDuration</td>
+                            <td>@courseFeature?.SkillLevel</td>
+                            <td>@courseFeature?.StudentsCount</td>
+                            <td>@courseFeature?.Assesments</td>
+                            <td>@courseFeature?.CourseFee</td>
+                            <td>@courseFeature?.CoursesId</td>
+                            <td>@courseFeature?.CreatedBy</td>
+                            <td>@courseFeature?.UpdatedBy</td>
                             <th>
                                 @{
                                     if (count > 0)
                                     {
-                                        <a asp-controller="contactInfo" asp-action="update" asp-area="admin" asp-route-id="@courseFeature?.Id" class="btn btn-secondary">Update</a>
-                                        <form class="d-inline" method="post" asp-controller="ContactInfo" asp-action="delete" asp-area="admin" asp-route-id="@courseFeature?.Id">
+                                        <a asp-controller="coursefeature" asp-action="update" asp-area="admin" asp-route-id="@courseFeature?.Id" class="btn btn-secondary">Update</a>
+                                        <form class="d-inline" method="post" asp-controller="coursefeature" asp-action="delete" asp-area="admin" asp-route-id="@courseFeature?.Id">
                                             <button class="btn btn-secondary" type="submit">Delete</button>
                                         </form>
 

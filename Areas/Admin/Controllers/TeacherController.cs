@@ -11,7 +11,7 @@ using WebApplication2.ViewModels;
 namespace WebApplication2.Areas.Admin.Controllers
 {
     [Area("Admin")]
-   // [Authorize(Roles = "SuperAdmin")]
+    [Authorize(Roles = "SuperAdmin")]
     public class TeacherController : Controller
     {
         private readonly AppDbContext _dbContext;

@@ -1,0 +1,96 @@
+﻿@using WebApplication2.Models;
+@model Course
+<div class="col-lg-6">
+    <div class="card">
+        <div class="card-body">
+            <div class="card-title">Add Course</div>
+            <hr>
+            <form method="post" enctype="multipart/form-data" asp-action="create" asp-controller="course" asp-area="admin">
+                <input type="hidden" asp-for="FilePath" />
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="CoursName">Course Name</label>
+                    <input asp-for="CoursName" class="form-control" placeholder="Enter Your Name">
+                    <span class="text-danger" asp-validation-for="CoursName"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CoursApply">Course Apply</label>
+                    <input asp-for="CoursApply" class="form-control">
+                    <span class="text-danger" asp-validation-for="CoursApply"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Certification">Certification</label>
+                    <input asp-for="Certification" class="form-control">
+                    <span class="text-danger" asp-validation-for="Certification"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CoursAbout">CoursAbout</label>
+                    <input asp-for="CoursAbout" class="form-control">
+                    <span class="text-danger" asp-validation-for="CoursAbout"></span>
+                </div>
+                <div>
+                    <img style="width:100px;height:100px" src="~/assets/img/@Model?.FilePath" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Photo">Photo</label>
+                    <input asp-for="Photo" class="form-control">
+                    <span class="text-danger" asp-validation-for="Photo"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CategoryId">CategoryId</label>
+                    <input asp-for="CategoryId" class="form-control">
+                    <span class="text-danger" asp-validation-for="CategoryId"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CoursFeature.Starts">Course Feature Start</label>
+                    <input asp-for="CoursFeature.Starts" class="form-control">
+                    <span class="text-danger" asp-validation-for="CoursFeature.Starts"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CoursFeature.Duration">Course Feature Duration </label>
+                    <input asp-for="CoursFeature.Duration" class="form-control">
+                    <span class="text-danger" asp-validation-for="CoursFeature.Duration"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CoursFeature.Duration">Course Feature Duration </label>
+                    <input asp-for="CoursFeature.Duration" class="form-control">
+                    <span class="text-danger" asp-validation-for="CoursFeature.Duration"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CoursFeature.ClassDuration">Course Feature ClassDuration </label>
+                    <input asp-for="CoursFeature.ClassDuration" class="form-control">
+                    <span class="text-danger" asp-validation-for="CoursFeature.ClassDuration"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CoursFeature.SkillLevel">Course Feature SkillLevel </label>
+                    <input asp-for="CoursFeature.SkillLevel" class="form-control">
+                    <span class="text-danger" asp-validation-for="CoursFeature.SkillLevel"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CoursFeature.Language">Course Feature Language </label>
+                    <input asp-for="CoursFeature.Language" class="form-control">
+                    <span class="text-danger" asp-validation-for="CoursFeature.Language"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CoursFeature.StudentsCount">Course Feature Students Count </label>
+                    <input asp-for="CoursFeature.StudentsCount" class="form-control">
+                    <span class="text-danger" asp-validation-for="CoursFeature.StudentsCount"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CoursFeature.Assesments">Course Feature Assesments </label>
+                    <input asp-for="CoursFeature.Assesments" class="form-control">
+                    <span class="text-danger" asp-validation-for="CoursFeature.Assesments"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CoursFeature.CourseFee">Course Feature Course Fee </label>
+                    <input asp-for="CoursFeature.CourseFee" class="form-control">
+                    <span class="text-danger" asp-validation-for="CoursFeature.CourseFee"></span>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Submit" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

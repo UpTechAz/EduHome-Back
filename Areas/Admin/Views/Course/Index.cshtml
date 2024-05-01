@@ -1,5 +1,6 @@
 ﻿@using WebApplication2.Models;
-@model List<Course>
+@using WebApplication2.ViewModels;
+@model PageNatedList<Course>
 <div class="card">
     <div class="card-body">
         <div class="d-flex; justify-content-lg-between">
@@ -29,16 +30,16 @@
                         foreach (var course in Model)
                         {
                             <tr>
-                                <th>@course.Id</th>
-                                <td>@course.CoursName</td>
-                                <td>@course.CoursApply</td>
-                                <td>@course.Certification</td>
-                                <td>@course.CoursAbout</td>
+                                <th>@course?.Id</th>
+                                <td>@course?.CoursName</td>
+                                <td>@course?.CoursApply</td>
+                                <td>@course?.Certification</td>
+                                <td>@course?.CoursAbout</td>
                                 <td><img style="width:100px;" src="~/assets/img/@course.FilePath"></td>
-                                <td>@course.CourseFeaturedId</td>
-                                <td>@course.CategoryId</td>
-                                <td>@course.CreatedAt</td>
-                                <td>@course.UpdatedAt</td>
+                                <td>@course?.CourseFeaturedId</td>
+                                <td>@course?.CategoryId</td>
+                                <td>@course?.CreatedAt</td>
+                                <td>@course?.UpdatedAt</td>
 
                                 <th>
                                     <a asp-controller="course" asp-action="update" asp-area="admin" asp-route-id="@course.Id" class="btn btn-secondary">Update</a>

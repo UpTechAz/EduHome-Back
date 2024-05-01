@@ -1,0 +1,55 @@
+﻿@using WebApplication2.Models
+@model List<CourseComment>
+
+<h2>Approved Course Comments</h2>
+
+@if (Model.Count > 0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Subject</th>
+                <th>Message</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var comment in Model)
+            {
+                <tr>
+                    <td>@comment.Name</td>
+                    <td>@comment.Email</td>
+                    <td>@comment.Subject</td>
+                    <td>@comment.MessageInfo</td>
+                    <td>
+                        @if (comment.IsApproved)
+                        {
+                            <img width="30px" src="~/admin/assets/images/png-transparent-check-mark-afacere-others-miscellaneous-text-logo.png" />
+                        }
+                        else
+                        {
+                            <img width="30px" src="~/admin/assets/images/png-transparent-cross-delete-remove-3d-icon-thumbnail.png" />
+                        }
+                    </td>
+                    <td>
+                        <form asp-controller="CourseComment" asp-action="Approve" method="post">
+                            <input type="hidden" name="id" value="@comment.Id" />
+                            <button type="submit" class="btn btn-success">Approve</button>
+                        </form>
+                        <form asp-controller="CourseComment" asp-action="Delete" method="post">
+                            <input type="hidden" name="id" value="@comment.Id" />
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No approved event comments found.</p>
+}

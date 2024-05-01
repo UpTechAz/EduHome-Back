@@ -1,0 +1,61 @@
+﻿@using WebApplication2.Models
+@model CourseFeature 
+div class="col-lg-6">
+<div class="card">
+    <div class="card-body">
+        <div class="card-title">Add Course Feature</div>
+        <hr>
+        <form method="post" asp-action="create" asp-controller="coursefeature" asp-area="admin">
+            <div class="form-group">
+                <label asp-for="Starts">Start Time</label>
+                <input asp-for="Starts" class="form-control">
+                <span class="text-danger" asp-validation-for="Starts"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Duration">Duration</label>
+                <input asp-for="Duration" class="form-control">
+                <span class="text-danger" asp-validation-for="Duration"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ClassDuration">ClassDuration</label>
+                <input asp-for="ClassDuration" class="form-control">
+                <span class="text-danger" asp-validation-for="ClassDuration"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SkillLevel">SkillLevel</label>
+                <input asp-for="SkillLevel" class="form-control">
+                <span class="text-danger" asp-validation-for="SkillLevel"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Language">Language</label>
+                <input asp-for="Language" class="form-control">
+                <span class="text-danger" asp-validation-for="Language"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StudentsCount">StudentsCount</label>
+                <input asp-for="StudentsCount" class="form-control">
+                <span class="text-danger" asp-validation-for="StudentsCount"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Assesments">Assesments</label>
+                <input asp-for="Assesments" class="form-control">
+                <span class="text-danger" asp-validation-for="Assesments"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Assesments">Assesments</label>
+                <input asp-for="Assesments" class="form-control">
+                <span class="text-danger" asp-validation-for="Assesments"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CourseFee">CourseFee</label>
+                <input asp-for="CourseFee" class="form-control">
+                <span class="text-danger" asp-validation-for="CourseFee"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Submit" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+</div>
