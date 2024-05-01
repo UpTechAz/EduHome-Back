@@ -1,13 +1,12 @@
 ﻿@using WebApplication2.Models;
 @model Course
-
 <div class="col-lg-6">
     <div class="card">
         <div class="card-body">
-            <div class="card-title">Add Course</div>
+            <div class="card-title">Update Course</div>
             <hr>
-            <form method="post" enctype="multipart/form-data" asp-action="create" asp-controller="course" asp-area="admin">
-                <input type="hidden" asp-for="FilePath" />
+            <form method="post" enctype="multipart/form-data" asp-action="update" asp-controller="course" asp-area="admin">
+                <input type="hidden" asp-for="FilePath" /> 
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
                     <label asp-for="CoursName">Course Name</label>
@@ -30,7 +29,7 @@
                     <span class="text-danger" asp-validation-for="CoursAbout"></span>
                 </div>
                 <div>
-                    <img style="width:100px;height:100px" src="~/assets/img/@Model?.FilePath" />
+                    <img style="width:100px;height:100px" src="~/assets/img/@Model.FilePath" />
                 </div>
                 <div class="form-group">
                     <label asp-for="Photo">Photo</label>
@@ -87,9 +86,9 @@
                     <input asp-for="CoursFeature.CourseFee" class="form-control">
                     <span class="text-danger" asp-validation-for="CoursFeature.CourseFee"></span>
                 </div>
-
+                
                 <div class="form-group">
-                    <input type="submit" value="Submit" class="btn btn-primary" />
+                    <input type="submit" value="Update" class="btn btn-primary" />
                 </div>
             </form>
         </div>

@@ -6,6 +6,7 @@ using WebApplication2.Helpers;
 using WebApplication2.Interfaces;
 using WebApplication2.Migrations;
 using WebApplication2.Models;
+using WebApplication2.ViewModels;
 
 namespace WebApplication2.Areas.Admin.Controllers
 {
@@ -23,22 +24,27 @@ namespace WebApplication2.Areas.Admin.Controllers
             _webHostEnvironment = webHostEnvironment;
             _fileService = fileService;
         }
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int pageIndex = 1)
         {
-            List<Course>? courses = await _appDbContext.Courses.ToListAsync();
-                //.Include(x => x.CourseFeature);
+            IQueryable<Course> queries = _appDbContext.Courses
+                .Include(p => p.CoursFeature);
 
-            return View(courses);
+            return View(PageNatedList<Course>.Create(queries, pageIndex, 3, 5));
+
+
         }
-        #region Create
+
         [HttpGet]
         public async Task<IActionResult> Create()
         {
+            ViewBag.Categories = await _appDbContext.Categories.ToListAsync();
+
             return View();
         }
         [HttpPost]
         public async Task<IActionResult> Create(Course course)
         {
+            ViewBag.Categories = await _appDbContext.Categories.ToListAsync();
             if (!ModelState.IsValid) return View(course);
             if (course.Photo != null)
             {
@@ -47,7 +53,7 @@ namespace WebApplication2.Areas.Admin.Controllers
                     ModelState.AddModelError("Photo", "The file must be in Image format.");
                     return View(course);
                 }
-                int maxSize = 30;
+                int maxSize = 1024;
                 if (!_fileService.CheckSize(course.Photo, maxSize))
                 {
                     ModelState.AddModelError("Photo", $"The size of the image should not exceed {maxSize} KB.");
@@ -57,47 +63,58 @@ namespace WebApplication2.Areas.Admin.Controllers
                 var filename = await _fileService.UploadAsync(course.Photo);
                 course.FilePath = filename;
             }
+
             course.CoursFeature.CoursesId = course.Id;
-            course.CreatedAt = DateTime.UtcNow.AddHours(4);
+            
+
             await _appDbContext.Courses.AddAsync(course);
             await _appDbContext.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-        #endregion
-        #region Update 
         [HttpGet]
         public async Task<IActionResult> Update(int id)
         {
-            Course? course = await _appDbContext.Courses
-                .Include(c => c.CoursFeature)
+            var Course = await _appDbContext.Courses
+                .Include(c=>c.CoursFeature)
                 .FirstOrDefaultAsync(c => c.Id == id);
-            if (course == null) return BadRequest();
+            if (Course == null) return NotFound();
             var model = new Course
             {
                 Id = id,
-                CoursName = course.CoursName,
-                CoursAbout = course.CoursAbout,
-                CoursApply = course.CoursApply,
-                CourseFeaturedId = course.CourseFeaturedId,
-                Certification = course.Certification,
-                FilePath = course.FilePath,
-                CategoryId = course.CategoryId,
+                CoursName = Course.CoursName,
+                CoursApply = Course.CoursApply,
+                Certification = Course.Certification,
+                CoursAbout = Course.CoursAbout,
+                CategoryId = Course.CategoryId,
+                CoursFeature = Course.CoursFeature,
+
             };
             return View(model);
         }
         [HttpPost]
-        public async Task<IActionResult> Update(int id, Course course)
+        public async Task<IActionResult> Update(Course course, int id)
         {
+
             if (id != course.Id) return BadRequest();
+
             if (!ModelState.IsValid) return View(course);
             Course? dbCourse = await _appDbContext.Courses.FindAsync(id);
             dbCourse.CoursName = course.CoursName;
-            dbCourse.CategoryId = course.CategoryId;
-            dbCourse.CoursAbout = course.CoursAbout;
             dbCourse.CoursApply = course.CoursApply;
-            dbCourse.FilePath = course.FilePath;
             dbCourse.Certification = course.Certification;
-            dbCourse.CourseFeaturedId = course.CourseFeaturedId;
+            dbCourse.CoursAbout = course.CoursAbout;
+            dbCourse.CategoryId = course.CategoryId;
+
+            var dbCourseFeature = await _appDbContext.CourseFeature.FirstOrDefaultAsync(cf=>cf.CoursesId == id);
+            dbCourseFeature.Starts = course.CoursFeature.Starts;
+            dbCourseFeature.Duration = course.CoursFeature.Duration;
+            dbCourseFeature.ClassDuration = course.CoursFeature.ClassDuration;
+            dbCourseFeature.SkillLevel = course.CoursFeature.SkillLevel;
+            dbCourseFeature.Language = course.CoursFeature.Language;
+            dbCourseFeature.StudentsCount = course.CoursFeature.StudentsCount;
+            dbCourseFeature.Assesments = course.CoursFeature.Assesments;
+            dbCourseFeature.CourseFee = course.CoursFeature.CourseFee;
+
             if (course.Photo != null)
             {
                 if (!_fileService.IsImage(course.Photo))
@@ -108,8 +125,8 @@ namespace WebApplication2.Areas.Admin.Controllers
                 int maxSize = 30;
                 if (!_fileService.CheckSize(course.Photo, maxSize))
                 {
-                    ModelState.AddModelError("Photo", $"The size of the image should not exceed {maxSize} MB");
-                    //Teacher.FilePath = dbCustomer.FilePath; submit eleyende shekil silinmesin deye 
+                    ModelState.AddModelError("Photo", $"The size of the image should not exceed {maxSize} KB");
+                     
                     return View(course);
                 }
                 string path = Path.Combine(_webHostEnvironment.WebRootPath, "assets/img", dbCourse.FilePath);
@@ -117,24 +134,20 @@ namespace WebApplication2.Areas.Admin.Controllers
                 var filename = await _fileService.UploadAsync(course.Photo);
                 dbCourse.FilePath = filename;
             }
-            course.CoursFeature.CoursesId = course.Id;
-            course.CreatedAt = DateTime.UtcNow.AddHours(4);
             await _appDbContext.SaveChangesAsync();
+
             return RedirectToAction(nameof(Index));
         }
-        #endregion
-        #region Delete
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
-            var course = await _appDbContext.Teachers.FindAsync(id);
-            if (course == null) return NotFound();
-            var path = Path.Combine(_webHostEnvironment.WebRootPath, "assets/img", course.FilePath);
+            var dbCourse = await _appDbContext.Courses.FindAsync(id);
+            if (dbCourse == null) return NotFound();
+            var path = Path.Combine(_webHostEnvironment.WebRootPath, "assets/img", dbCourse.FilePath);
             _fileService.Delete(path);
-            _appDbContext.Teachers.Remove(course);
+            _appDbContext.Courses.Remove(dbCourse);
             await _appDbContext.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-        #endregion
     }
 }
