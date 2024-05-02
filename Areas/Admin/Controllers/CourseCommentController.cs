@@ -1,9 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebApplication2.DAL;
 
 namespace WebApplication2.Areas.Admin.Controllers
 {
+    [Area("Admin")]
+    //[Authorize(Roles = "Superadmin")]
     public class CourseCommentController : Controller
     {
         private readonly AppDbContext _appDbContext;

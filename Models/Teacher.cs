@@ -15,5 +15,6 @@ namespace WebApplication2.Models
         public string ScientificDegree { get; set; }
         public IEnumerable<TeacherLink>? TeacherLinks { get; set; }
         public ContactInformation? ContactInformation { get; set; }
+        public Skill? Skills { get; set; }
     }
 }

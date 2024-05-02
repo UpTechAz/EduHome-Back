@@ -17,21 +17,27 @@ namespace WebApplication2.Controllers
         {
             TeacherVM teacherVM = new TeacherVM
             {
-                teachers = await _dbContext.Teachers.ToListAsync()
+                Teachers = await _dbContext.Teachers.ToListAsync()
             };
             return View(teacherVM);
         }
         public async Task<IActionResult> Details(Teacher teacher)
         {
+            teacher = await _dbContext.Teachers
+                .Include(x=>x.TeacherLinks)
+                .Include(x=>x.Skills)
+                .Include(x=>x.ContactInformation).FirstOrDefaultAsync();
             teacher = new Teacher
             {
-                FullName = teacher.FullName,
+                FullName = teacher!.FullName,
                 ScientificDegree = teacher.ScientificDegree,
                 FilePath = teacher.FilePath,
                 Photo = teacher.Photo,
                 TeacherAbout = teacher.TeacherAbout,
                 TeacherLinks = teacher.TeacherLinks,
                 ContactInformation = teacher.ContactInformation,
+                //TeacherLinks = teacher.TeacherLinks,
+                Skills = teacher.Skills,
                 Faculty = teacher.Faculty,
                 Experience = teacher.Experience,
                 Hobbies = teacher.Hobbies,
