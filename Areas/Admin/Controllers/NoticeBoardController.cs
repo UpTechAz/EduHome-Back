@@ -19,7 +19,6 @@ namespace WebApplication2.Areas.Admin.Controllers
         public async Task<IActionResult> Index()
         {
             var model = await _appDbContext.NoticesBoards.ToListAsync();
-
             return View(model);
         }
         [HttpGet]
@@ -32,16 +31,12 @@ namespace WebApplication2.Areas.Admin.Controllers
 
         public async Task<IActionResult> Create(NoticeBoard noticeBoard)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(noticeBoard);
-            }
-
+            if (!ModelState.IsValid) return View(noticeBoard);
             noticeBoard.CreatedAt = DateTime.Now;
             await _appDbContext.NoticesBoards.AddAsync(noticeBoard);
             await _appDbContext.SaveChangesAsync();
 
-            return RedirectToAction("Index");
+            return RedirectToAction(nameof(Index));
         }
 
         [HttpGet]
@@ -81,7 +76,7 @@ namespace WebApplication2.Areas.Admin.Controllers
             dbModel.UpdatedAt = DateTime.Now;
             await _appDbContext.SaveChangesAsync();
 
-            return RedirectToAction("index");
+            return RedirectToAction(nameof(Index));
         }
 
         [HttpPost]

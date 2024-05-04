@@ -23,6 +23,11 @@
                     <span asp-validation-for="Photo" class="text-danger"></span>
                 </div>
                 <div class="form-group">
+                    <label asp-for="BackgroundPhoto">Background Photo</label>
+                    <input type="file" asp-for="BackgroundPhoto" class="form-control" />
+                    <span asp-validation-for="BackgroundPhoto" class="text-danger"></span>
+                </div>
+                <div class="form-group">
                     <button type="submit" class="btn btn-primary">Create</button>
                     <a asp-action="Index" asp-controller="Slider" asp-area="admin" class="btn btn-secondary">Cancel</a>
                 </div>

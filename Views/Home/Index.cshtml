@@ -1,100 +1,43 @@
-﻿
+﻿@using WebApplication2.ViewModels.Home;
+@model HomeIndexVM
+
 <section id="slider-container" class="slider-area three">
     <div class="slider-owl owl-theme owl-carousel owl-loaded owl-drag">
         <div class="owl-stage-outer">
             <div class="owl-stage">
-                <div class="owl-item">
-                    <div class="single-slide item" style="background-image: url(../assets/images/slider1.webp)">
-                        <div class="slider-content-area">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-lg-7">
-                                        <div class="slide-content-wrapper">
-                                            <div class="slide-content">
-                                                <h3>EDUCATION MAKES</h3>
-                                                <h2>PROPER HUMANITY</h2>
-                                                <p>
-                                                    I must explain to you how all this mistaken idea
-                                                    of denouncing pleasure and prsing pain was born
-                                                    and I will give you a complete account of the
-                                                    system
-                                                </p>
-                                                <a class="default-btn" href="about.html">Learn more</a>
+                @if(Model.Sliders is not null)
+                {
+                    @foreach (var slider in Model.Sliders)
+                    {
+                        <div class="owl-item">
+                            <div class="single-slide item"
+                                 style="background-image: url(../assets/images/@slider.FilePath)">
+                                <div class="slider-content-area">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-lg-7">
+                                                <div class="slide-content-wrapper">
+                                                    <div class="slide-content">
+                                                        @Html.Raw(slider.Title)
+                                                        <p>
+                                                           @slider.Description
+                                                        </p>
+                                                        <a class="default-btn" asp-action="Index" asp-controller="About">Learn more</a>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-5">
-                                        <div class="slider-img">
-                                            <img src="~/assets/images/home.webp" alt="slider" />
+                                            <div class="col-lg-5">
+                                                <div class="slider-img">
+                                                    <img src="~/assets/images/@slider.BackgroundImage" alt="slider" />
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="owl-item">
-                    <div class="single-slide item"
-                         style="background-image: url(../assets/images/slider2.webp)">
-                        <div class="slider-content-area">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-lg-7">
-                                        <div class="slide-content-wrapper">
-                                            <div class="slide-content">
-                                                <h3>EDUCATION MAKES</h3>
-                                                <h2>PROPER HUMANITY</h2>
-                                                <p>
-                                                    I must explain to you how all this mistaken idea
-                                                    of denouncing pleasure and prsing pain was born
-                                                    and I will give you a complete account of the
-                                                    system
-                                                </p>
-                                                <a class="default-btn" href="about.html">Learn more</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-5">
-                                        <div class="slider-img">
-                                            <img src="~/assets/images/home.webp" alt="slider" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="owl-item">
-                    <div class="single-slide item"
-                         style="background-image: url(../assets/images/slider3.webp)">
-                        <div class="slider-content-area">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-md-7">
-                                        <div class="slide-content-wrapper">
-                                            <div class="slide-content">
-                                                <h3>EDUCATION MAKES</h3>
-                                                <h2>PROPER HUMANITY</h2>
-                                                <p>
-                                                    I must explain to you how all this mistaken idea
-                                                    of denouncing pleasure and prsing pain was born
-                                                    and I will give you a complete account of the
-                                                    system
-                                                </p>
-                                                <a class="default-btn" href="about.html">Learn more</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-5">
-                                        <div class="slider-img">
-                                            <img src="~/assets/images/home.webp" alt="slider" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    }
+                }
             </div>
         </div>
     </div>
@@ -112,75 +55,32 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-4 col-md-6">
-                    <div class="single-course">
-                        <div class="course-img">
-                            <a asp-action="index" asp-controller="courseDetails">
-                                <img src="~/assets/images/course1.webp" alt="course" />
-                                <div class="course-hover">
-                                    <i class="fa fa-link"></i>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="course-content">
-                            <h3><a asp-action="index" asp-controller="courseDetails">CSE ENGINEERING</a></h3>
-                            <p>
-                                I must explain to you how all this a mistaken idea of
-                                denouncing great explorer of the rut the is lder of human
-                                happiness
-                            </p>
-                            <a class="default-btn" asp-action="index" asp-controller="courseDetails">read more</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="single-course">
-                        <div class="course-img">
-                            <a asp-action="index" asp-controller="courseDetails">
-                                <img src="~/assets/images/course2.webp" alt="course" />
-                                <div class="course-hover">
-                                    <i class="fa fa-link"></i>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="course-content">
-                            <h3><a asp-action="index" asp-controller="courseDetails">CSE ENGINEERING</a></h3>
-                            <p>
-                                I must explain to you how all this a mistaken idea of
-                                denouncing great explorer of the rut the is lder of human
-                                happiness
-                            </p>
-                            <a class="default-btn" asp-action="index" asp-controller="courseDetails">read more</a>
+                @foreach(var item in Model.Courses)
+                {
+                    <div class="col-lg-4 col-md-6">
+                        <div class="single-course">
+                            <div class="course-img">
+                                <a asp-action="index" asp-controller="courseDetails">
+                                    <img src="~/assets/images/@item.FilePath" alt="course" />
+                                    <div class="course-hover">
+                                        <i class="fa fa-link"></i>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="course-content">
+                                <h3><a asp-action="index" asp-controller="courseDetails">@item.CoursName</a></h3>
+                                <p>@item.CoursApply</p>
+                                <a class="default-btn" asp-action="index" asp-controller="courseDetails">read more</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="single-course mb-0">
-                        <div class="course-img">
-                            <a asp-action="index" asp-controller="courseDetails">
-                                <img src="~/assets/images/course3.webp" alt="course" />
-                                <div class="course-hover">
-                                    <i class="fa fa-link"></i>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="course-content">
-                            <h3><a asp-action="index" asp-controller="courseDetails">CSE ENGINEERING</a></h3>
-                            <p>
-                                I must explain to you how all this a mistaken idea of
-                                denouncing great explorer of the rut the is lder of human
-                                happiness
-                            </p>
-                            <a class="default-btn" asp-action="index" asp-controller="courseDetails">read more</a>
-                        </div>
-                    </div>
-                </div>
+                }
             </div>
         </div>
     </div>
 </section>
 
-<section class="notice">
+@*<section class="notice">
     <section class="pt-140 pb-100">
         <div class="container">
             <div class="row">
@@ -200,55 +100,22 @@
                     <div class="notice_right">
                         <h3>notice board</h3>
                         <div class="notice_down" tabindex="1">
-                            <div class="single_notice_right mb-23 pb-20">
-                                <h4>5, June 2022</h4>
-                                <p>
-                                    I must explain to you how all this mistaken idea of
-                                    denouncing plasure and praising pain was born and I will
-                                    give you a complete
-                                </p>
-                            </div>
-                            <div class="single_notice_right hidden-sm mb-23 pb-20">
-                                <h4>4, June 2022</h4>
-                                <p>
-                                    I must explain to you how all this mistaken idea of
-                                    denouncing plasure and praising pain was born and I will
-                                    give you a complete
-                                </p>
-                            </div>
-                            <div class="single_notice_right pb-70">
-                                <h4>3, June 2022</h4>
-                                <p>
-                                    I must explain to you how all this mistaken idea of
-                                    denouncing plasure and praising pain was born and I will
-                                    give you a complete
-                                </p>
-                            </div>
-                            <div class="single_notice_right mb-23 pb-20">
-                                <h4>5, June 2022</h4>
-                                <p>
-                                    I must explain to you how all this mistaken idea of
-                                    denouncing plasure and praising pain was born and I will
-                                    give you a complete
-                                </p>
-                            </div>
-                            <div class="single_notice_right hidden-sm mb-23 pb-20">
-                                <h4>4, June 2022</h4>
-                                <p>
-                                    I must explain to you how all this mistaken idea of
-                                    denouncing plasure and praising pain was born and I will
-                                    give you a complete
-                                </p>
-                            </div>
+                            @foreach(var item in Model.NoticeBoards)
+                            {
+                                <div class="single_notice_right mb-23 pb-20">
+                                    <h4>@item.DateTime.ToString("d MMM yyyy")</h4>
+                                    <p>@item.Description </p>
+                                </div>
+                            }
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-</section>
-
-<section class="best_education">
+</section>*@
+@await Component.InvokeAsync("NoticeBoard")
+@*<section class="best_education">
     <div class="pb-135 pt-130 bg-light">
         <div class="container">
             <div class="row">
@@ -277,8 +144,27 @@
             </div>
         </div>
     </div>
+</section>*@
+<section class="best_education">
+    <div class="pb-135 pt-130 bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="about-content">
+                        @Html.Raw(Model.EducationTheme.Title).
+                        @Html.Raw(Model.EducationTheme.Description)
+                        <a class="default-btn" href="/about.html">buy now</a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="about-img">
+                        <img src="~/assets/images/@Model.EducationTheme.FilePath" alt="about" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
-
 <section class="events">
     <div class="text-center pt-100 pb-115">
         <div class="container">
@@ -291,32 +177,35 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-4 col-md-6">
-                    <div class="single_event mb-35">
-                        <div class="event_img">
-                            <a asp-action="index" asp-controller="eventDetails">
-                                <img src="~/assets/images/event5.webp" alt="event" />
-                                <div class="course_hover">
-                                    <i class="fa fa-link"></i>
+                @foreach(var item in Model.Events)
+                {
+                    <div class="col-lg-4 col-md-6">
+                        <div class="single_event mb-35">
+                            <div class="event_img">
+                                <a asp-action="index" asp-controller="eventDetails">
+                                    <img src="~/assets/images/@item.FilePath" alt="event" />
+                                    <div class="course_hover">
+                                        <i class="fa fa-link"></i>
+                                    </div>
+                                </a>
+                                <div class="event_date">
+                                    <h3>@item.Date.ToString("dd") <span>@item.Date.ToString("MMM")</span></h3>
                                 </div>
-                            </a>
-                            <div class="event_date">
-                                <h3>20 <span>jun</span></h3>
                             </div>
-                        </div>
-                        <div class="event_content text-start">
-                            <h4><a asp-action="index" asp-controller="eventDetails">ADVANCE PHP WORKSHOP</a></h4>
-                            <ul>
-                                <li><span>time:</span> 9.00 AM - 4.45 PM</li>
-                                <li><span>venue</span> New Yourk City</li>
-                            </ul>
-                            <div class="event_content_right">
-                                <a class="default-btn" asp-action="index" asp-controller="eventDetails">join now</a>
+                            <div class="event_content text-start">
+                                <h4><a asp-action="index" asp-controller="eventDetails">@item.Title</a></h4>
+                                <ul>
+                                    <li><span>time: </span> @item.StartTime.ToString("H:mm tt") - @item.EndTime.ToString("H:mm tt") </li>
+                                    <li><span>venue </span>@item.Venue</li>
+                                </ul>
+                                <div class="event_content_right">
+                                    <a class="default-btn" asp-action="index" asp-controller="eventDetails">join now</a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
+                }
+                @* <div class="col-lg-4 col-md-6">
                     <div class="single_event mb-35">
                         <div class="event_img">
                             <a asp-action="index" asp-controller="eventDetails">
@@ -369,39 +258,13 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>*@
             </div>
         </div>
     </div>
 </section>
 
-<section class="testimonial">
-    <div class="text-center">
-        <div class="container">
-            <div class="row">
-                <div class="testimonial-owl owl-theme owl-carousel owl-loaded owl-drag">
-                    <div class="single_testimonial">
-                        <div class="testimonial_info">
-                            <div class="testimonial_img">
-                                <img src="~/assets/images/testimonial.webp"
-                                     alt="testimonial" />
-                            </div>
-                            <div class="testimonial_content">
-                                <p>
-                                    I must explain to you how all this mistaken idea of
-                                    denoung pleure and praising pain was born and I will give
-                                    you a coete account of the system, and expound the actual
-                                </p>
-                                <h4>David Morgan</h4>
-                                <h5>Student, CSE</h5>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+@await Component.InvokeAsync("StudentQuote")
 
 <section class="blog">
     <div class="pt-150 pb-150 mt-3">

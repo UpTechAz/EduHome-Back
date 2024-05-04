@@ -93,7 +93,7 @@ namespace WebApplication2.Areas.Admin.Controllers
         {
             var dblink = await _dbContext.Links.FindAsync(id);
             if(dblink == null) return BadRequest();
-            var path = Path.Combine(_webHostEnvironment.WebRootPath, "assets/img", dblink.Icon);
+            var path = Path.Combine(_webHostEnvironment.WebRootPath, "assets/images", dblink.Icon);
             if (System.IO.File.Exists(path))
             {
                 System.IO.File.Delete(path);

@@ -29,7 +29,7 @@ namespace WebApplication2.Areas.Admin.Controllers
             IQueryable<Course> queries = _appDbContext.Courses
                 .Include(p => p.CoursFeature);
 
-            return View(PageNatedList<Course>.Create(queries, pageIndex, 3, 5));
+            return View(PageNatedList<Course>.Create(queries, pageIndex, 6, 5));
 
 
         }
@@ -122,14 +122,14 @@ namespace WebApplication2.Areas.Admin.Controllers
                     ModelState.AddModelError("Photo", "The file must be in Image format.");
                     return View(course);
                 }
-                int maxSize = 30;
+                int maxSize = 1024;
                 if (!_fileService.CheckSize(course.Photo, maxSize))
                 {
                     ModelState.AddModelError("Photo", $"The size of the image should not exceed {maxSize} KB");
                      
                     return View(course);
                 }
-                string path = Path.Combine(_webHostEnvironment.WebRootPath, "assets/img", dbCourse.FilePath);
+                string path = Path.Combine(_webHostEnvironment.WebRootPath, "assets/images", dbCourse.FilePath);
                 _fileService.Delete(path);
                 var filename = await _fileService.UploadAsync(course.Photo);
                 dbCourse.FilePath = filename;
@@ -143,7 +143,7 @@ namespace WebApplication2.Areas.Admin.Controllers
         {
             var dbCourse = await _appDbContext.Courses.FindAsync(id);
             if (dbCourse == null) return NotFound();
-            var path = Path.Combine(_webHostEnvironment.WebRootPath, "assets/img", dbCourse.FilePath);
+            var path = Path.Combine(_webHostEnvironment.WebRootPath, "assets/images", dbCourse.FilePath);
             _fileService.Delete(path);
             _appDbContext.Courses.Remove(dbCourse);
             await _appDbContext.SaveChangesAsync();

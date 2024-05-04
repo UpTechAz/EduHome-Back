@@ -21,12 +21,14 @@ namespace WebApplication2.Controllers
             };
             return View(teacherVM);
         }
-        public async Task<IActionResult> Details(Teacher teacher)
+        public async Task<IActionResult> Details(Teacher? teacher)
         {
+            
             teacher = await _dbContext.Teachers
-                .Include(x=>x.TeacherLinks)
-                .Include(x=>x.Skills)
-                .Include(x=>x.ContactInformation).FirstOrDefaultAsync();
+                 .Include(x => x.TeacherLinks)
+                 .Include(x => x.Skills)
+                 .Include(x => x.ContactInformation).FirstOrDefaultAsync();
+
             teacher = new Teacher
             {
                 FullName = teacher!.FullName,
@@ -36,13 +38,32 @@ namespace WebApplication2.Controllers
                 TeacherAbout = teacher.TeacherAbout,
                 TeacherLinks = teacher.TeacherLinks,
                 ContactInformation = teacher.ContactInformation,
-                //TeacherLinks = teacher.TeacherLinks,
                 Skills = teacher.Skills,
                 Faculty = teacher.Faculty,
                 Experience = teacher.Experience,
                 Hobbies = teacher.Hobbies,
             };
             return View(teacher);
+            //if (id == null) { return NotFound(); }
+            //var Teacher = await _dbContext.Teachers
+            //    .Include(x => x.ContactInformation)
+            //    .Include(x => x.Skills)
+            //    .Include(x => x.TeacherLinks)
+            //   .FirstOrDefaultAsync(c => c.Id == id);
+            //if (Teacher == null) return NotFound();
+            //var model = new Teacher
+            //{
+            //    FullName = Teacher.FullName,
+            //    FilePath = Teacher.FilePath,
+            //    Experience = Teacher.Experience,
+            //    TeacherAbout = Teacher.TeacherAbout,
+            //    Hobbies = Teacher.Hobbies,
+            //    Faculty = Teacher.Faculty,
+            //    ScientificDegree = Teacher.ScientificDegree,
+            //    ContactInformation = Teacher.ContactInformation,
+            //};
+            //return View(model);
+
         }
     }
 }

@@ -1,0 +1,34 @@
+﻿@using WebApplication2.Models;
+@model List<StudentQuote>
+<div class="testimonial-area text-center">
+    <div class="container">
+        <div class="row">
+            <div class="testimonial-owl owl-theme owl-carousel owl-loaded owl-drag">
+                <div class="owl-stage-outer">
+                    <div class="owl-stage">
+                        <div class="owl-item">
+                            <div class="col-lg-8 offset-lg-2">
+                                <div class="single-testimonial">
+                                    @foreach( var item in Model)
+                                    {
+                                        <div class="testimonial-info">
+                                            <div class="testimonial-img">
+                                                <img src="~/assets/images/@item.FilePath"
+                                                     alt="testimonial" />
+                                            </div>
+                                            <div class="testimonial-content">
+                                                @item.Description
+                                                <h4>@item.FullName</h4>
+                                                <h5>@item.Position</h5>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

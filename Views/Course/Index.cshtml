@@ -1,0 +1,86 @@
+﻿@using WebApplication2.Models;
+@model List<Course>
+<section class="banner">
+    <div class="banner-area">
+        <div class="banner-area-wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="banner-content-wrapper">
+                            <div class="banner-content">
+                                <h2>COurses</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="courses-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="courses-title">
+                    <h3>Search courses</h3>
+                </div>
+                <div class="course-form">
+                    <form action="" id="course-search">
+                        <div class="input-div">
+                            <input type="text"
+                                   placeholder="Search..."
+                                   class="course-search-input" />
+                            <a href="" id="clear-btn" class="course-clear-btn">
+                                <i class="fa-solid fa-xmark"></i>
+                            </a>
+                        </div>
+                        <button type="submit">Search</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            @foreach(var item in Model)
+            {
+                <div class="col-lg-4 col-md-6">
+                    <div class="single-course">
+                        <div class="course-img">
+                            <a asp-action="details" asp-controller="course" class="image-a">
+                                <img src="~/assets/images/@item.FilePath" alt="" />
+                                <div class="course-hover">
+                                    <i class="fa-solid fa-link"></i>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="course-content">
+                            <h3><a asp-action="details" asp-controller="course">@item.CoursName</a></h3>
+                            <p>
+                                @item.CoursApply
+                            </p>
+                            <a asp-action="details" asp-controller="course" class="read-more-btn">read more</a>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+        <div class="row">
+            <div class="col-12 pagination-col">
+                <div class="pagination-div">
+                    <ul>
+                        <li>
+                            <a href=""><i class="fa-solid fa-chevron-left"></i></a>
+                        </li>
+                        <li class="selected-pagination"><a href="">1</a></li>
+                        <li><a href="">2</a></li>
+                        <li><a href="">3</a></li>
+                        <li>
+                            <a href=""><i class="fa-solid fa-chevron-right"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
