@@ -51,8 +51,12 @@ namespace WebApplication2.Controllers
                 Certification = Course.Certification,
                 Category = Course.Category,
                 CourseComment = Course.CourseComment,
+
             };
             return View(model);
         }
+
+   
+
     }
 }

@@ -1,0 +1,78 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family:'Catamaran', serif;
+    text-decoration: none;
+  }
+  .cart-icon {
+      position: relative;
+      display: inline-block;
+    }
+    
+    .item-count {
+      position: absolute;
+      top: -15px;
+      right: -15px;
+      background-color: white;
+      color: white;
+      border-radius: 50%;
+      padding: 4px 8px;
+      font-size: 12px;
+      width: 100%;
+      height: 100%;
+    }
+    
+    .header{
+      display: flex;
+      justify-content: space-between;
+    }
+    .header-right{
+      padding: 60px;
+      font-size:16px;
+    }
+  .header-left{
+    padding: 40px;
+    font-size: 30px;
+  }
+  .shopping-container{
+    display: flex;
+    justify-content: space-around;
+    padding-bottom: 30px;
+    
+  }
+  .add-to-cart {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    background-color: black;
+    padding: 5px;
+    border-radius: 10%;
+    top: 89%;
+    left: 50%; 
+  }
+.home-shop{
+  display: flex;
+  justify-content: space-between;
+}
+.product {
+  position: relative;
+}
+.product:hover .add-to-cart {
+  opacity: 1;
+}
+.footer{
+    display: flex;
+    justify-content: space-around;
+    padding: 100px 700px;
+  }
+  footer{
+    background-color: #000000;
+  }
+  .wp-form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+  }

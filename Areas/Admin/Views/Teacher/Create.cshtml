@@ -8,7 +8,7 @@
             <form method="post" enctype="multipart/form-data" asp-action="create" asp-controller="teacher" asp-area="admin">
                 <div class="form-group">
                     <label asp-for="FullName">Full Name</label>
-                    <input asp-for="FullName" class="form-control">
+                    <textarea asp-for="FullName" class="form-control">  </textarea>
                     <span class="text-danger" asp-validation-for="FullName"></span>
                 </div>
                 <div class="form-group">
@@ -64,3 +64,25 @@
         </div>
     </div>
 </div>
+
+@section Scripts {
+
+    @* <partial name ="_ValidationFormPartial" /> *@
+    
+    @Html.PartialAsync("_ValidationFormPartial") 
+
+    <script src="https://cdn.ckeditor.com/ckeditor5/41.3.1/classic/ckeditor.js"></script>
+
+
+
+<script>
+    ClassicEditor
+        .create(document.querySelector('#FullName'))
+        .then(editor => {
+            console.log(editor);
+        })
+        .catch(error => {
+            console.error(error);
+        });
+</script>
+}
