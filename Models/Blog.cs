@@ -12,6 +12,7 @@ namespace WebApplication2.Models
         public IFormFile? Photo { get; set; }
 
         public DateTime Date { get; set; }
+        //TODO:Bura duzelecek
         public int CommentCount { get; set; }
 
 
