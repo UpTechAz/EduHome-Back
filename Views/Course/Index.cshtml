@@ -8,7 +8,7 @@
                     <div class="col-12">
                         <div class="banner-content-wrapper">
                             <div class="banner-content">
-                                <h2>COurses</h2>
+                                <h2>Courses</h2>
                             </div>
                         </div>
                     </div>
@@ -40,13 +40,13 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div id="courses" class="row">
             @foreach(var item in Model)
             {
                 <div class="col-lg-4 col-md-6">
                     <div class="single-course">
                         <div class="course-img">
-                            <a asp-action="details" asp-controller="course" class="image-a">
+                            <a asp-action="details" asp-controller="course" asp-route-id="@item.Id" class="image-a">
                                 <img src="~/assets/images/@item.FilePath" alt="" />
                                 <div class="course-hover">
                                     <i class="fa-solid fa-link"></i>
@@ -54,18 +54,18 @@
                             </a>
                         </div>
                         <div class="course-content">
-                            <h3><a asp-action="details" asp-controller="course">@item.CoursName</a></h3>
-                            <p>
-                                @item.CoursApply
-                            </p>
+                            <h3><a asp-action="details" asp-controller="course" asp-route-id="@item.Id">@item.CoursName</a></h3>
+                            <p>@item.CoursApply </p>
                             <a asp-action="details" asp-controller="course" class="read-more-btn">read more</a>
                         </div>
                     </div>
                 </div>
             }
-
         </div>
-        <div class="row">
+        <div class="d-flex justify-content-center">
+            <a id="loadmorecourse" class="btn btn-primary" style="color:aliceblue">Load More...</a>
+        </div>
+        @*<div class="row">
             <div class="col-12 pagination-col">
                 <div class="pagination-div">
                     <ul>
@@ -81,6 +81,6 @@
                     </ul>
                 </div>
             </div>
-        </div>
+        </div>*@
     </div>
 </div>

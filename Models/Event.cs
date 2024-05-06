@@ -16,11 +16,7 @@ namespace WebApplication2.Models
         public string? FilePath { get; set; }
         [NotMapped]
         public IFormFile? Photo { get; set; }
-
-
-
         public List<EventComment>? EventComment { get; set; }
-
         public List<EventSpeaker>? EventSpeakers { get; set; }
     }
 }

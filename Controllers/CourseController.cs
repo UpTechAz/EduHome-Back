@@ -17,17 +17,31 @@ namespace WebApplication2.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var course = await _dbContext.Courses.ToListAsync();
+            var course = await _dbContext.Courses
+                .OrderByDescending(c => c.Id)
+                .Take(3)
+                .ToListAsync();
             return View(course);
         }
-        public async Task<IActionResult> Details(Course? Course)
+        public async Task<IActionResult> LoadMore(int skipRow)
         {
+            var course = await _dbContext.Courses
+                .OrderByDescending(c => c.Id)
+                .Skip(3 * skipRow)
+                .Take(3)
+                .ToListAsync();
+            return PartialView("_CoursePartialView", course);
+        }
+        public async Task<IActionResult> Details(Course? Course, int? id)
+        {
+            if (id == null) return NotFound();
             Course = await _dbContext.Courses
                 .Include(x => x.CoursFeature)
                 .Include(x => x.Category)
                 .Include(x => x.CourseComment)
-                .FirstOrDefaultAsync();
-            Course = new Course
+                .FirstOrDefaultAsync(c => c.Id == id);
+            if (Course == null) return NotFound();  
+            var model = new Course
             {
                 FilePath = Course.FilePath,
                 CoursName = Course.CoursName,
@@ -37,10 +51,8 @@ namespace WebApplication2.Controllers
                 Certification = Course.Certification,
                 Category = Course.Category,
                 CourseComment = Course.CourseComment,
-
             };
-            return View(Course);
-
+            return View(model);
         }
     }
 }
