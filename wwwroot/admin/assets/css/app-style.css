@@ -54,23 +54,23 @@ html{
 	width: device-width
 }
 body {
-   	background-color: #000;
+/*   	background-color: #000;*/
     font-family: 'Roboto', sans-serif;
     font-size: 15px;
-    color: rgba(255,255,255,.85);
+/*    color: rgba(255,255,255,.85);*/
     letter-spacing: 0.5px;
 }
 [tabindex="-1"]:focus {
 	outline: 0!important
 }
 
-::selection {
+/*::selection {
   background: rgba(255, 255, 255, 0.2);
-}
+}*/
 
-select option {
+/*select option {
     background: #000;
-}
+}*/
 
 ::placeholder {
     color: #fff !important;

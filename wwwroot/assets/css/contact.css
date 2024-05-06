@@ -1,0 +1,88 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family:'Catamaran', serif;
+    text-decoration: none;
+  }
+  .cart-icon {
+      position: relative;
+      display: inline-block;
+    }
+    
+    .item-count {
+      position: absolute;
+      top: -15px;
+      right: -15px;
+      border-radius: 50%;
+      font-size: 12px;
+      width: 100%;
+      height: 100%;
+    }
+    
+    .header{
+      display: flex;
+      justify-content: space-between;
+    }
+    .header-right{
+      padding: 60px;
+      font-size:16px;
+    }
+  .header-left{
+    padding: 40px;
+    font-size: 30px;
+  }
+.footer{
+    display: flex;
+    justify-content: space-around;
+    padding: 100px 700px;
+  }
+  footer{
+    background-color: #000000;
+  }
+  .wp-form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+  }
+  .contact-container{
+    display: flex;
+    justify-content: space-around;
+    padding: 20px 200px;
+  }
+  .image-container {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+}
+.play-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80px; 
+  height: 80px;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.play-icon::after {
+  content: '\25B6'; 
+  font-size: 2em; 
+  color: #fff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.contact-container1 p, i, span{
+   padding: 15px 10px ;
+}
+.contact-container2 input{
+margin: 5px 0;
+}
+.contact-container2 p{
+padding: 10px 0;
+}
