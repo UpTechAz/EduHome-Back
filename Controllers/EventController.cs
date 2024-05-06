@@ -14,7 +14,6 @@ namespace WebApplication2.Controllers
         public async Task<IActionResult> Index()
         {
             var @event = await _dbContext.Events
-                .Include
                 .OrderByDescending(e => e.Id)
                 .Take(3)
                 .ToListAsync();
