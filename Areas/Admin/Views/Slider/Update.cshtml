@@ -28,6 +28,14 @@
                     <input asp-for="Photo" class="form-control">
                     <span class="text-danger" asp-validation-for="Photo"></span>
                 </div>
+                <div>
+                    <img style="width:100px;height:100px" src="~/assets/img/@Model.BackgroundImage" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="BackgroundPhoto">Background Photo</label>
+                    <input asp-for="BackgroundPhoto" class="form-control">
+                    <span class="text-danger" asp-validation-for="BackgroundPhoto"></span>
+                </div>
                 <div class="form-group">
                     <input type="submit" value="Update" class="btn btn-primary" />
                 </div>

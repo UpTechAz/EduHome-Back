@@ -37,24 +37,25 @@ namespace WebApplication2.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(Slider slider, IFormFile photo)
+        public async Task<IActionResult> Create(Slider slider)
         {
             if (ModelState.IsValid)
             {
-                if (photo != null)
+                if (slider.Photo != null && slider.BackgroundPhoto!=null)
                 {
-                    if (!_fileService.IsImage(photo))
+                    if (!_fileService.IsImage(slider.Photo) && !_fileService.IsImage(slider.BackgroundPhoto))
                     {
                         ModelState.AddModelError("Photo", "The file must be in Image format.");
                         return View(slider);
                     }
-                    int maxSize = 185;
-                    if (!_fileService.CheckSize(photo, maxSize))
+                    int maxSize = 1024;
+                    if (!_fileService.CheckSize(slider.Photo, maxSize) && !_fileService.CheckSize(slider.BackgroundPhoto, maxSize))
                     {
                         ModelState.AddModelError("Photo", $"The size of the image should not exceed {maxSize} KB");
                         return View(slider);
                     }
-                    slider.FilePath = await _fileService.UploadAsync(photo);
+                    slider.FilePath = await _fileService.UploadAsync(slider.Photo);
+                    slider.BackgroundImage = await _fileService.UploadAsync(slider.BackgroundPhoto);
                 }
 
                 await _context.Sliders.AddAsync(slider);
@@ -80,7 +81,7 @@ namespace WebApplication2.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Update(int id, Slider slider, IFormFile photo)
+        public async Task<IActionResult> Update(int id, Slider slider)
         {
             if (id != slider.Id)
             {
@@ -91,20 +92,20 @@ namespace WebApplication2.Areas.Admin.Controllers
             {
                 try
                 {
-                    if (photo != null)
+                    if (slider.Photo != null)
                     {
-                        if (!_fileService.IsImage(photo))
+                        if (!_fileService.IsImage(slider.Photo))
                         {
                             ModelState.AddModelError("Photo", "The file must be in Image format.");
                             return View(slider);
                         }
-                        int maxSize = 185;
-                        if (!_fileService.CheckSize(photo, maxSize))
+                        int maxSize = 1024;
+                        if (!_fileService.CheckSize(slider.Photo, maxSize))
                         {
                             ModelState.AddModelError("Photo", $"The size of the image should not exceed {maxSize} KB");
                             return View(slider);
                         }
-                        slider.FilePath = await _fileService.UploadAsync(photo);
+                        slider.FilePath = await _fileService.UploadAsync(slider.Photo);
                     }
 
                     _context.Update(slider);
@@ -149,7 +150,7 @@ namespace WebApplication2.Areas.Admin.Controllers
             var slider = await _context.Sliders.FindAsync(id);
             if (!string.IsNullOrEmpty(slider.FilePath))
             {
-                _fileService.Delete(Path.Combine(_webHostEnvironment.WebRootPath, "assets/img", slider.FilePath));
+                _fileService.Delete(Path.Combine(_webHostEnvironment.WebRootPath, "assets/images", slider.FilePath));
             }
             _context.Sliders.Remove(slider);
             await _context.SaveChangesAsync();

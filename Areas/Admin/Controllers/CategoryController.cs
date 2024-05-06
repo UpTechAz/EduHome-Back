@@ -82,7 +82,8 @@ namespace WebApplication2.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            bool isExist = await _appDbContext.Categories.AnyAsync(rw => rw.Title.ToLower().Trim() == category.Title.ToLower().Trim() && rw.Id != category.Id);
+            bool isExist = await _appDbContext.Categories.AnyAsync(rw => rw.Title.ToLower().Trim()
+            == category.Title.ToLower().Trim() && rw.Id != category.Id);
 
             if (isExist)
             {

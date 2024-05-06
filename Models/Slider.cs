@@ -6,6 +6,8 @@ namespace WebApplication2.Models
     {
         [NotMapped] 
         public IFormFile? Photo { get; set; }
+        [NotMapped]
+        public IFormFile? BackgroundPhoto { get; set; }
         public string? BackgroundImage { get; set; }
         public string? FilePath { get; set; }
         public string Title { get; set; }

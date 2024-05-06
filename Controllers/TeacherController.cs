@@ -17,32 +17,43 @@ namespace WebApplication2.Controllers
         {
             TeacherVM teacherVM = new TeacherVM
             {
-                Teachers = await _dbContext.Teachers.ToListAsync()
+                Teachers = await _dbContext.Teachers
+                .OrderByDescending(t => t.Id)
+                .Take(4)
+                .ToListAsync()
             };
             return View(teacherVM);
         }
-        public async Task<IActionResult> Details(Teacher teacher)
+        public async Task<IActionResult> LoadMore(int skipRow)
         {
-            teacher = await _dbContext.Teachers
-                .Include(x=>x.TeacherLinks)
-                .Include(x=>x.Skills)
-                .Include(x=>x.ContactInformation).FirstOrDefaultAsync();
-            teacher = new Teacher
+            var Teacher = await _dbContext.Teachers
+             .OrderByDescending(t => t.Id)
+             .Skip(4 * skipRow)
+             .Take(4)
+             .ToListAsync();
+            return PartialView("_TeacherPartialView", Teacher);
+        }
+        public async Task<IActionResult> Details(Teacher? Teacher,int? id)
+        {
+            if (id == null) { return NotFound(); }
+            Teacher = await _dbContext.Teachers
+                .Include(x => x.ContactInformation)
+                .Include(x => x.Skills)
+                .Include(x => x.TeacherLinks)
+               .FirstOrDefaultAsync(c => c.Id == id);
+            if (Teacher == null) return NotFound();
+            var model = new Teacher
             {
-                FullName = teacher!.FullName,
-                ScientificDegree = teacher.ScientificDegree,
-                FilePath = teacher.FilePath,
-                Photo = teacher.Photo,
-                TeacherAbout = teacher.TeacherAbout,
-                TeacherLinks = teacher.TeacherLinks,
-                ContactInformation = teacher.ContactInformation,
-                //TeacherLinks = teacher.TeacherLinks,
-                Skills = teacher.Skills,
-                Faculty = teacher.Faculty,
-                Experience = teacher.Experience,
-                Hobbies = teacher.Hobbies,
+                FullName = Teacher.FullName,
+                FilePath = Teacher.FilePath,
+                Experience = Teacher.Experience,
+                TeacherAbout = Teacher.TeacherAbout,
+                Hobbies = Teacher.Hobbies,
+                Faculty = Teacher.Faculty,
+                ScientificDegree = Teacher.ScientificDegree,
+                ContactInformation = Teacher.ContactInformation,
             };
-            return View(teacher);
+            return View(model);
         }
     }
 }

@@ -1,0 +1,41 @@
+﻿@using WebApplication2.Models;
+@model EducationTheme
+
+<div class="card">
+    <div class="card-body">
+        <div class="d-flex; justify-content-lg-between">
+            <h5 class="card-title">Education Theme</h5>
+            <a asp-action="create" asp-controller="educationTheme" asp-area="admin" class="col-2 d-sm-inline-block btn btn-outline-success"> Add Information</a>
+
+        </div>
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">İd</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Photo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>@Model?.Id</td>
+                        <td>@Model?.Title</td>
+                        <td>@Model?.Description</td>
+                        <td><img style="width:50px" src="~/assets/images/@Model?.FilePath" /></td>
+                        <th>
+                            <a asp-controller="EducationTheme" asp-action="update" asp-area="admin" asp-route-id="@Model?.Id" class="btn btn-secondary">Update</a>
+                            <form class="d-inline" method="post" asp-controller="EducationTheme" asp-action="delete" asp-area="admin" asp-route-id="@Model?.Id">
+                                <button class="btn btn-secondary" type="submit">Delete</button>
+                            </form>
+                        </th>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+

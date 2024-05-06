@@ -1,0 +1,105 @@
+﻿@using WebApplication2.ViewModels.About;
+@model AboutIndexVM
+<section class="banner">
+    <div class="banner-area">
+        <div class="banner-area-wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="banner-content-wrapper">
+                            <div class="banner-content">
+                                <h2>About</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="about-part-two">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="about-part-two-words">
+                    @Html.Raw(Model.EducationTheme?.Title).
+                  @Html.Raw(Model.EducationTheme?.Description)
+                    <a href="" class="btn">View courses</a>
+                    <!--View courses courses sehifesine getmelidir -->
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="about-part-two-imgs">
+                    <img src="~/assets/images/@Model.EducationTheme?.FilePath" alt="" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="about-meet-teachers">
+    <div class="container">
+        <div class="meet-our-teacher-img-div">
+            <img src="~/assets/images/meet-our-teachers.webp" alt="" />
+        </div>
+        <div class="meet-our-teachers-content-div">
+            <h2>MEET OUR TEACHERS</h2>
+        </div>
+    </div>
+</div>
+
+<div class="about-part-three">
+    <div class="container">
+        <div class="row">
+            @foreach(var item in Model.Teachers)
+            {
+                <div class="col-lg-3">
+                    <div class="single-teacher">
+                        <div class="single-teacher-overlay"></div>
+                        <div class="single-teacher-img">
+                            <a href="">
+                                <img src="~/assets/images/@item.FilePath" alt="" />
+                            </a>
+                        </div>
+                        <div class="single-teacher-content">
+                            <h2>
+                                <a href="">@item.FullName</a>
+                            </h2>
+                            <h4>Associate Professor</h4>
+                            <ul>
+                                <li>
+                                    <a href="">
+                                        <i class="fa-brands fa-facebook-f"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        <i class="fa-brands fa-pinterest-p"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        <i class="fa-brands fa-vimeo-v"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        <i class="fa-brands fa-twitter"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
+
+@await Component.InvokeAsync("StudentQuote")
+
+<!-- take a video tour-->
+
+@await Component.InvokeAsync("NoticeBoard")

@@ -1,0 +1,71 @@
+﻿@using WebApplication2.Models;
+@model List<Event>
+<section class="banner">
+    <div class="banner-area">
+        <div class="banner-area-wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="banner-content-wrapper">
+                            <div class="banner-content">
+                                <h2>Events</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="events-area">
+    <div class="container">
+        <div class="row">
+            @foreach(var item in Model)
+            {
+                <div class="col-lg-4 col-md-6">
+                    <div class="single-event">
+                        <div class="event-img">
+                            <a href="/eventdetails.html" class="image-a">
+                                <img src="~/assets/images/@item.FilePath" alt="" />
+                                <div class="event-hover">
+                                    <i class="fa-solid fa-link"></i>
+                                </div>
+                            </a>
+                            <div class="event-date">
+                                <h3>20 <span>jun</span></h3>
+                            </div>
+                        </div>
+                        <div class="event-content">
+                            <h4><a href="/eventdetails.html">@item.Title</a></h4>
+                            <ul>
+                                <li><span>time:</span> @item.StartTime - @item.EndTime PM</li>
+                                <li><span>Venue</span> New Yourk City</li>
+                            </ul>
+                            <a asp-action="details" asp-controller="event" class="join-now-btn">Join now</a>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+
+        <div class="row">
+            <div class="col-12 pagination-col">
+                <div class="pagination-div">
+                    <ul>
+                        <li>
+                            <a href=""><i class="fa-solid fa-chevron-left"></i></a>
+                        </li>
+                        <li class="selected-pagination"><a href="">1</a></li>
+                        <li><a href="">2</a></li>
+                        <li><a href="">3</a></li>
+                        <li>
+                            <a href=""><i class="fa-solid fa-chevron-right"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
