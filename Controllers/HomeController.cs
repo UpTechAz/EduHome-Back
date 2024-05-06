@@ -27,5 +27,6 @@ namespace WebApplication2.Controllers
 			};
 			return View(homeIndexVM);
 		}
+
 	}
 }
