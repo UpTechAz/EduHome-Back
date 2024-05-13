@@ -13,12 +13,13 @@
                     <tr>
                         <th scope="col">Id</th>
                         <th scope="col">Course Name</th>
+                        <th scope="col">Description</th>
                         <th scope="col">Cours Apply</th>
                         <th scope="col">Certification</th>
                         <th scope="col">CoursAbout</th>
                         <th scope="col">Photo</th>
                         <th scope="col">CourseFeaturedId</th>
-                        <th scope="col">CategoryId</th>
+                        <th scope="col">Category Name</th>
                         <th scope="col">CreateAt</th>
                         <th scope="col">ModifiedAt</th>
                         <th scope="col">Actions</th>
@@ -32,12 +33,13 @@
                             <tr>
                                 <th>@course?.Id</th>
                                 <td>@course?.CoursName</td>
+                                <td>@course?.Description</td>
                                 <td>@course?.CoursApply</td>
                                 <td>@course?.Certification</td>
                                 <td>@course?.CoursAbout</td>
                                 <td><img style="width:100px;" src="~/assets/images/@course.FilePath"></td>
                                 <td>@course?.CourseFeaturedId</td>
-                                <td>@course?.CategoryId</td>
+                                <td>@course?.Category?.Title</td>
                                 <td>@course?.CreatedAt</td>
                                 <td>@course?.UpdatedAt</td>
                                 <th>

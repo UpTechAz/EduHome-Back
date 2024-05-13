@@ -31,7 +31,7 @@
                 <div class="col-lg-4 col-md-6">
                     <div class="single-blog">
                         <div class="blog-img">
-                            <a href="/blogdetails.html" class="image-a">
+                            <a asp-action="details" asp-controller="blog" asp-route-id="@item.Id" class="image-a">
                                 <img src="~/assets/images/@item.FilePath" alt="" />
                                 <div class="blog-hover">
                                     <i class="fa-solid fa-link"></i>
@@ -49,9 +49,9 @@
                             </div>
                             <div class="blog-content-bottom">
                                 <h2>
-                                    <a href="">@item.Title</a>
+                                    <a asp-action="details" asp-controller="blog" asp-route-id="@item.Id">@item.Title</a>
                                 </h2>
-                                <a href="/blog/blogdetails" class="read-more-blog-btn">read more</a>
+                                <a asp-action="details" asp-controller="blog" asp-route-id="@item.Id" class="read-more-blog-btn">read more</a>
                             </div>
                         </div>
                     </div>
