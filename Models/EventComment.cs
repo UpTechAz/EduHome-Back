@@ -1,8 +1,12 @@
-﻿namespace WebApplication2.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace WebApplication2.Models
 {
     public class  EventComment: BaseEntity
     {
         public string Name { get; set; }
+        [DataType(DataType.EmailAddress)]
+        [EmailAddress]
         public string Email { get; set; } 
         public string Subject { get; set; }
         public string MessageInfo { get; set; }

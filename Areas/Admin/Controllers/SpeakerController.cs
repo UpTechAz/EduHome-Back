@@ -76,8 +76,8 @@ namespace WebApplication2.Areas.Admin.Controllers
                     return View(speaker);
                 }
             }
-
-            _context.Speakers.Add(speaker);
+            speaker.CreatedAt = DateTime.UtcNow.AddHours(4);
+            await _context.Speakers.AddAsync(speaker);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
@@ -130,7 +130,7 @@ namespace WebApplication2.Areas.Admin.Controllers
                 {
                     if (!string.IsNullOrEmpty(existingSpeaker.FilePath))
                     {
-                        _fileService.Delete(Path.Combine(_webHostEnvironment.WebRootPath, "assets/img", existingSpeaker.FilePath));
+                        _fileService.Delete(Path.Combine(_webHostEnvironment.WebRootPath, "assets/images", existingSpeaker.FilePath));
                     }
 
                     var filename = await _fileService.UploadAsync(speaker.Photo);
@@ -160,7 +160,7 @@ namespace WebApplication2.Areas.Admin.Controllers
 
             if (!string.IsNullOrEmpty(speaker.FilePath))
             {
-                _fileService.Delete(Path.Combine(_webHostEnvironment.WebRootPath, "assets/img", speaker.FilePath));
+                _fileService.Delete(Path.Combine(_webHostEnvironment.WebRootPath, "assets/images", speaker.FilePath));
             }
 
             _context.Speakers.Remove(speaker);

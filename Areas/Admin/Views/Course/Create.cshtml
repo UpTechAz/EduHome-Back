@@ -15,6 +15,11 @@
                     <span class="text-danger" asp-validation-for="CoursName"></span>
                 </div>
                 <div class="form-group">
+                    <label asp-for="Description"></label>
+                    <textarea asp-for="Description" class="form-control"></textarea>
+                    <span class="text-danger" asp-validation-for="Description"></span>
+                </div>
+                <div class="form-group">
                     <label asp-for="CoursApply">Course Apply</label>
                     <input asp-for="CoursApply" class="form-control">
                     <span class="text-danger" asp-validation-for="CoursApply"></span>
@@ -38,8 +43,14 @@
                     <span class="text-danger" asp-validation-for="Photo"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="CategoryId">CategoryId</label>
-                    <input asp-for="CategoryId" class="form-control">
+                    <label asp-for="CategoryId"></label>
+                    <select asp-for="CategoryId" class="form-control">
+                        <option value="">-- Select Category --</option>
+                        @foreach (var item in ViewBag.Categories)
+                        {
+                            <option value="@item.Id">@item.Title</option>
+                        }
+                    </select>
                     <span class="text-danger" asp-validation-for="CategoryId"></span>
                 </div>
                 <div class="form-group">
@@ -91,3 +102,25 @@
         </div>
     </div>
 </div>
+
+@section Scripts {
+
+    @* <partial name ="_ValidationFormPartial" /> *@
+
+    @Html.PartialAsync("_ValidationFormPartial")
+
+    <script src="https://cdn.ckeditor.com/ckeditor5/41.3.1/classic/ckeditor.js"></script>
+
+
+
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#Description'))
+            .then(editor => {
+                console.log(editor);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
+}

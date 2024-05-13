@@ -17,7 +17,7 @@ namespace WebApplication2.Areas.Admin.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var courseComments = await _appDbContext.BlogComments.ToListAsync();
+            var courseComments = await _appDbContext.CourseComments.ToListAsync();
             return View(courseComments);
         }
         [HttpPost]
@@ -29,14 +29,10 @@ namespace WebApplication2.Areas.Admin.Controllers
 
             courseComment.IsApproved = courseComment.IsApproved ? false : true;
             await _appDbContext.SaveChangesAsync();
-
             return RedirectToAction(nameof(Index));
         }
 
-
-
         [HttpPost]
-
         public async Task<IActionResult> Delete(int id)
         {
             var courseComment = await _appDbContext.CourseComments.FindAsync(id);

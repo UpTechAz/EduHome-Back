@@ -29,14 +29,14 @@ namespace WebApplication2.Areas.Admin.Controllers
         public async Task<IActionResult> Index()
         {
             List<Blog> blogs = await _context.Blogs
-                .Include(x=>x.BlogComment)
+                .Include(x => x.BlogComment)
                 .ToListAsync();
 
             return View(blogs);
         }
 
         [HttpGet]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
             return View();
         }
@@ -60,21 +60,12 @@ namespace WebApplication2.Areas.Admin.Controllers
                     ModelState.AddModelError("Photo", $"The size of the image should not exceed {maxSize} KB.");
                     return View(blog);
                 }
+                var filename = await _fileService.UploadAsync(blog.Photo);
+                blog.FilePath = filename;
 
-                try
-                {
-                    var filename = await _fileService.UploadAsync(blog.Photo);
-                    blog.FilePath = filename;
-                }
-                catch (Exception ex)
-                {
-                    ModelState.AddModelError("", "An error occurred while uploading the file.");
-
-                    return View(blog);
-                }
             }
-
-            _context.Blogs.Add(blog);
+            blog.CreatedAt = DateTime.UtcNow.AddHours(4);
+            await _context.Blogs.AddAsync(blog);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
@@ -100,8 +91,8 @@ namespace WebApplication2.Areas.Admin.Controllers
             existingBlog.Title = blog.Title;
             existingBlog.Description = blog.Description;
             existingBlog.Date = blog.Date;
-            existingBlog.Author=blog.Author;
-            existingBlog.CommentCount= blog.CommentCount;
+            existingBlog.Author = blog.Author;
+            existingBlog.CommentCount = blog.CommentCount;
 
 
             if (blog.Photo != null)
@@ -109,7 +100,7 @@ namespace WebApplication2.Areas.Admin.Controllers
 
                 if (!string.IsNullOrEmpty(existingBlog.FilePath))
                 {
-                    _fileService.Delete(Path.Combine(_webHostEnvironment.WebRootPath, "assets/img", existingBlog.FilePath));
+                    _fileService.Delete(Path.Combine(_webHostEnvironment.WebRootPath, "assets/images", existingBlog.FilePath));
                 }
 
 
@@ -152,7 +143,7 @@ namespace WebApplication2.Areas.Admin.Controllers
 
             if (!string.IsNullOrEmpty(blog.FilePath))
             {
-                _fileService.Delete(Path.Combine(_webHostEnvironment.WebRootPath, "assets/img", blog.FilePath));
+                _fileService.Delete(Path.Combine(_webHostEnvironment.WebRootPath, "assets/images", blog.FilePath));
             }
 
             _context.Blogs.Remove(blog);

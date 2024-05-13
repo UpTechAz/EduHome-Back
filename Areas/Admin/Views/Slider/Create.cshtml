@@ -13,8 +13,8 @@
                     <span asp-validation-for="Title" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Description">Description</label>
-                    <input asp-for="Description" class="form-control" placeholder="Enter Description" />
+                    <label asp-for="Description"></label>
+                    <textarea asp-for="Description" class="form-control" placeholder="Enter Description" ></textarea>
                     <span asp-validation-for="Description" class="text-danger"></span>
                 </div>
                 <div class="form-group">
@@ -35,3 +35,25 @@
         </div>
     </div>
 </div>
+
+@section Scripts {
+
+    @* <partial name ="_ValidationFormPartial" /> *@
+
+    @Html.PartialAsync("_ValidationFormPartial")
+
+    <script src="https://cdn.ckeditor.com/ckeditor5/41.3.1/classic/ckeditor.js"></script>
+
+
+
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#Description'))
+            .then(editor => {
+                console.log(editor);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
+}

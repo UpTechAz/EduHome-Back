@@ -1,0 +1,103 @@
+﻿@using WebApplication2.ViewModels.Contact;
+@model ContactIndexVM
+<section class="banner">
+    <div class="banner-area">
+        <div class="banner-area-wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="banner-content-wrapper">
+                            <div class="banner-content">
+                                <h2>Contact</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="contact-map-part">
+    <div class="container-fluit">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d193747.75173201886!2d-74.10980677542213!3d40.645126849586845!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24416947c2109%3A0x82765c7404007886!2sBrooklyn%2C%20NY!5e0!3m2!1sen!2sus!4v1713273800828!5m2!1sen!2sus"
+                width="600"
+                height="450"
+                style="border: 0"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                class="contact-map"></iframe>
+        <div class="overlay"></div>
+    </div>
+</div>
+
+<!--part 3--form part-->
+
+<div class="contact-form-part-main">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5 col-md-5">
+                <div class="contact-form-left">
+                    <div class="single-contact">
+                        <div class="single-contact-img-div">
+                            <img src="~/assets/images/contact1-address.webp" alt="" />
+                        </div>
+                        <div class="single-contact-content-div">
+                            <h3>address</h3>
+                            <p>135, First Lane, City Street</p>
+                            <p>New Yourk City, USA</p>
+                        </div>
+                    </div>
+                    <div class="single-contact sc-medium">
+                        <div class="single-contact-img-div">
+                            <img src="src/images/contact2-address.webp" alt="" />
+                        </div>
+                        <div class="single-contact-content-div">
+                            <h3>address</h3>
+                            <p>135, First Lane, City Street</p>
+                            <p>New Yourk City, USA</p>
+                        </div>
+                    </div>
+                    <div class="single-contact">
+                        <div class="single-contact-img-div">
+                            <img src="~/assets/images/contact3.-address-webp.webp" alt="" />
+                        </div>
+                        <div class="single-contact-content-div">
+                            <h3>address</h3>
+                            <p>135, First Lane, City Street</p>
+                            <p>New Yourk City, USA</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-7 col-md-7">
+                <div class="contact-form-right">
+                    <div class="contact-form-content-part">
+                        <h3>leave a message</h3>
+                        <p>
+                            I must explain to you how all this a mistaken idea of ncing
+                            great explorer of the rut the is lder of human happinescias
+                            unde omnis iste natus error sit volptatem
+                        </p>
+                    </div>
+                    <div class="contact-form-form-part">
+                        <form asp-action="index" asp-controller="Contact" method="post" >
+                            <p>Name</p>
+                            <input asp-for="@Model.Messages.Name" type="text"  />
+                            <p>Email</p>
+                            <input asp-for="@Model.Messages.Email" type="email"  />
+                            <p>Subject</p>
+                            <input asp-for="@Model.Messages.Subject" type="text"  />
+                            <p>Message</p>
+                            <textarea asp-for="@Model.Messages.MessageInfo" id="" cols="30" rows="10"></textarea>
+                            <button type="submit">
+                                <span>Send Message</span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

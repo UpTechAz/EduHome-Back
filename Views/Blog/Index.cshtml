@@ -1,9 +1,5 @@
-﻿@using WebApplication2.Models
-@using WebApplication2.ViewModels
-@using WebApplication2.ViewModels.Blogs
-
-@model PageNatedList<Blog>
-
+﻿@using WebApplication2.Models;
+@model List<Blog>
     <section class="banner">
         <div class="banner-area">
             <div class="banner-area-wrapper">
@@ -24,73 +20,35 @@
 
     <div class="blogs-area">
         <div class="container">
-            <div class="row">
-
+            <div id="blogs" class="row">
             @foreach (var item in Model)
             {
-                <div class="col-lg-4 col-md-6">
-                    <div class="single-blog">
-                        <div class="blog-img">
-                            <a href="/blogdetails.html" class="image-a">
-                                <img src="~/assets/images/@item.FilePath" alt="" />
-                                <div class="blog-hover">
-                                    <i class="fa-solid fa-link"></i>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="single-blog">
+                            <div class="blog-img">
+                                <a asp-action="details" asp-controller="blog" asp-route-id="@item.Id" class="image-a">
+                                    <img src="~/assets/images/@item.FilePath" alt="" />
+                                    <div class="blog-hover">
+                                        <i class="fa-solid fa-link"></i>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="blog-content">
+                                <div class="blog-content-top">
+                                    <p>@item.Author / @item.Date.ToString("dd MMM yyyy") /
+                                        <i class="fa-regular fa-comments"></i> 4 </p>
                                 </div>
-                            </a>
-                        </div>
-
-                        <div class="blog-content">
-                            <div class="blog-content-top">
-                                <p>
-                                    @item.Author / @item.Date.ToString("dd MMM yyyy") /
-                                    <i class="fa-regular fa-comments"></i>
-                                    4
-                                </p>
-                            </div>
-                            <div class="blog-content-bottom">
-                                <h2>
-                                    <a href="">@item.Title</a>
-                                </h2>
-                                <a href="/blog/blogdetails" class="read-more-blog-btn">read more</a>
+                                <div class="blog-content-bottom">
+                                    <h2><a asp-action="details" asp-controller="blog" asp-route-id="@item.Id">@item.Title</a></h2>
+                                    <a asp-action="details" asp-controller="blog" asp-route-id="@item.Id" class="read-more-blog-btn">read more</a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
             }
-
-
-                <div class="row">
-                    <div class="col-12 pagination-col">
-                        <div class="pagination-div">
-                            <ul>
-
-                            @if (Model.HasPrev)
-                            {
-                                
-                                 <li>
-                                    <a asp-controller="Blog" asp-action="index"
-                                       asp-route-pageIndex="@(Model.PageIndex - 1)"><i class="fa-solid fa-chevron-left"></i></a>
-                                </li>
-                            }
-
-                            @for (int i = Model.StartPage; i <= Model.EndPage; i++)
-                            {
-                                <li class=" @(i == Model.PageIndex ? "selected-pagination" : "")"><a  asp-controller="Blog" asp-action="index" asp-route-pageIndex="@i">@i</a></li>
-                            }
-                            @if (Model.HasNext)
-                            {
-                                <li>
-                                    <a asp-controller="Blog" asp-action="index"
-                                       asp-route-pageIndex="@(Model.PageIndex + 1)"><i class="fa-solid fa-chevron-right"></i></a>
-                                </li>
-                            }
-
-                               
-                            </ul>
-                        </div>
-                    </div>
-                </div>
             </div>
+            <div class="d-flex justify-content-center">
+            <a id="loadmoreblog" style="background-color:#ec1c23" class="btn btn-primary">Load More...</a></div>
         </div>
     </div>
 

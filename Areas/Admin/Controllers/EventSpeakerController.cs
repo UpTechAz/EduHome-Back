@@ -26,7 +26,6 @@ namespace WebApplication2.Areas.Admin.Controllers
                 .Include(es => es.Speaker)
                 .Include(es => es.Event)
                 .ToListAsync();
-
             return View(eventSpeakers);
         }
 
@@ -44,7 +43,7 @@ namespace WebApplication2.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(eventSpeaker);
+                await _context.AddAsync(eventSpeaker);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }

@@ -54,6 +54,7 @@ namespace WebApplication2.Areas.Admin.Controllers
                 var filename = await _fileService.UploadAsync(eduTheme.Photo);
                 eduTheme.FilePath = filename;
             }
+            eduTheme.CreatedAt = DateTime.UtcNow.AddHours(4);
             await _dbContext.EducationTheme.AddAsync(eduTheme);
             await _dbContext.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

@@ -1,0 +1,215 @@
+﻿@using WebApplication2.ViewModels.Blogs
+@model BlogIndexVM
+<section class="banner-area">
+    <div class="banner-area-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="banner-content-wrapper">
+                        <div class="banner-content">
+                            <h2>Blog Details</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="blogs-details-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="blogs-details">
+                    <div class="blog-detail-img">
+                        <img src="~/assets/images/@Model?.Blogs?.FilePath" alt="" />
+                    </div>
+                    <div class="blog-details-content">
+                        <h2>@Model?.Blogs?.Title</h2>
+                        <span>@Model?.Blogs?.Author / @Model?.Blogs?.Date.ToString("dd MMM, yyyy") / </span>
+                        <i class="fa-regular fa-comments"></i>
+                        <span>4</span>
+                        <p>
+                            I must explain to you how all this a mistaken idea of
+                            denouncing great explorer of the rut the is lder of human
+                            haness pcias unde omnis iste natus error sit voluptatem
+                            accusantium doloremque laudantium, totam rem aperiam, eaque sa
+                            quae ab illo inventore veritatis et quasi architecto beatae
+                            vitae dicta sunt explicabo. Nemo enim ipsam volutatem quia
+                            voluptas sit asnatur aut odit aut fugit, sed quia consequuntur
+                            magni dolores eos qui
+                        </p>
+                        <p>
+                            I must explain to you how all this a mistaken idea of
+                            denouncing great explorer of the rut the is lder of human
+                            haness pcias unde omnis iste natus error sit voluptatem
+                            accusantium doloremque laudantium, totam rem aperiam
+                        </p>
+                        <p class="blog-details-content-different-p">
+                            I must explain to you how all this a mistaken idea of
+                            denouncing great explorer of the rut the is lder of human
+                            haness pcias unde omnis iste natus error sit voluptatem
+                            accusantium doloremque la udantium, totam rem aperiam
+                        </p>
+                        <p>
+                            I must explain to you how all this a mistaken idea of
+                            denouncing great explorer of the rut the is lder of human
+                            haness pcias unde omnis iste natus error sit voluptatem
+                            accusantium doloremque laudantium, totam rem aperiam, eaque sa
+                            quae ab illo inventore veritatis et quasi architecto beatae
+                            vitae dicta sunt explicabo emo enim ipsam
+                        </p>
+                    </div>
+                </div>
+
+                <div class="blogs-reply-area">
+                    <div class="all-replies">
+                        <div class="showing-replies">
+                            @{
+                                foreach (var item in Model.Blogs.BlogComment)
+                                {
+                                    <div class="single-reply">
+                                        <h4>@item.Name</h4>
+                                        <p>@item.MessageInfo</p>
+                                        <div class="reply-button-area">
+                                            <button type="button" class="delete">
+                                                <i class="fa-solid fa-trash-can"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        </div>
+
+                       
+                    </div>
+                    <h3>leave a reply</h3>
+                    <p>
+                        I must explain to you how all this a mistaken idea of ncing
+                        great explorer of the rut
+                        <br />
+                        the is lder of human happinescias unde omnis iste natus error
+                        sit volptatem
+                    </p>
+                    <form asp-action="details" asp-controller="blog" asp-route-id="@Model.Blogs.Id" method="post">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p>name</p>
+                                <input asp-for="@Model.BlogComments.Name" type="text" id="" />
+                            </div>
+                            <div class="col-md-12">
+                                <p>Email</p>
+                                <input asp-for="@Model.BlogComments.Email" type="email" id="" />
+                            </div>
+                            <div class="col-md-12">
+                                <p>subject</p>
+                                <input asp-for="@Model.BlogComments.Subject" type="text" id="" />
+                                <p>message</p>
+                                <textarea asp-for="@Model.BlogComments.MessageInfo" type="text" id="" cols="15" rows="10"></textarea>
+                            </div>
+                        </div>
+                        <button type="submit" class="blogs-reply-button">send message</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="blogs-detail-sidebar">
+                    <div class="blogs-detail-search">
+                        <h3>search</h3>
+                        <div class="blogs-search">
+                            <form action="" id="blogs-detail-search">
+                                <input type="search"
+                                       name=""
+                                       id=""
+                                       placeholder="Search..." />
+                                <button type="submit">
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="blogs-detail-categories">
+                        <h3>categories</h3>
+                        <ul class="categories-ul">
+                            <li><a href="">CSS Engineering (10)</a></li>
+                            <li><a href="">Political Science (12)</a></li>
+                            <li><a href="">Micro Biology (08)</a></li>
+                            <li><a href="">HTML5 & CSS3 (15)</a></li>
+                            <li><a href="">Web Design (20)</a></li>
+                            <li><a href="">PHP (23)</a></li>
+                        </ul>
+                    </div>
+                    <div class="blogs-detail-side-banner">
+                        <div class="blogs-side-single-banner">
+                            <a href="blogdetail.html">
+                                <img src="~/assets/images/blog-details-right.webp" alt="" />
+                            </a>
+                            <h2>best<br />education<br />theme</h2>
+                        </div>
+                    </div>
+                    <div class="blog-detail-latest-post">
+                        <h3>latest post</h3>
+                        <div class="single-post">
+                            <a href="" class="little-image-a">
+                                <img src="~/assets/images/blog-details-right-small-1.webp"
+                                     alt="" />
+                                <div class="blogs-detail-hover">
+                                    <i class="fa-solid fa-link"></i>
+                                </div>
+                            </a>
+                            <div class="single-post-content">
+                                <h4>
+                                    <a href="">English Language blog for you</a>
+                                </h4>
+                                <p>By Alex / June 20, 2022</p>
+                            </div>
+                        </div>
+                        <div class="single-post">
+                            <a href="" class="little-image-a">
+                                <img src="~/assets/images/blog-details-right-small-2.webp"
+                                     alt="" />
+                                <div class="blogs-detail-hover">
+                                    <i class="fa-solid fa-link"></i>
+                                </div>
+                            </a>
+                            <div class="single-post-content">
+                                <h4>
+                                    <a href="">Advance Web Design and Develop</a>
+                                </h4>
+                                <p>By Alex / June 20, 2022</p>
+                            </div>
+                        </div>
+                        <div class="single-post">
+                            <a href="" class="little-image-a">
+                                <img src="~/assets/images/blog-details-right-small-3.webp"
+                                     alt="" />
+                                <div class="blogs-detail-hover">
+                                    <i class="fa-solid fa-link"></i>
+                                </div>
+                            </a>
+                            <div class="single-post-content">
+                                <h4>
+                                    <a href="">English Language blog for you</a>
+                                </h4>
+                                <p>By Alex / June 20, 2022</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="blogs-details-tags">
+                        <h3>tags</h3>
+                        <div class="blogs-single-tag">
+                            <a href="" class="mr-10 mb-10">blogs</a>
+                            <a href="" class="mr-10 mb-10">education</a>
+                            <a href="" class="mr-10 mb-10">tachers</a>
+                            <a href="" class="mr-10">learning</a>
+                            <a href="" class="mr-10">university</a>
+                            <a href="">events</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

@@ -17,7 +17,7 @@ namespace WebApplication2.Controllers
             AboutIndexVM aboutIndexVM = new AboutIndexVM
             {
                 EducationTheme = await _dbContext.EducationTheme.FirstOrDefaultAsync(),
-                Teachers = await _dbContext.Teachers.Skip(1).Take(4).ToListAsync(),
+                Teachers = await _dbContext.Teachers.Take(4).ToListAsync(),
 
             };
             return View(aboutIndexVM);

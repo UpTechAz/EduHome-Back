@@ -2,60 +2,66 @@
 @model List<CourseFeature>
 @{
     int? count = ViewBag.ContactInfo;
+    int count1 = 1;
 }
 <div class="card">
     <div class="card-body">
         <div class="d-flex; justify-content-lg-between">
             <h5 class="card-title">Course features</h5>
             <a asp-action="create" asp-controller="coursefeature" asp-area="admin" class="col-2 d-sm-inline-block btn btn-outline-success"> Add Information</a>
-
         </div>
-        <div class="table-responsive">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th scope="col">İd</th>
-                        <th scope="col">Starts</th>
-                        <th scope="col">Duration</th>
-                        <th scope="col">ClassDuration</th>
-                        <th scope="col">SkillLevel</th>
-                        <th scope="col">StudentsCount</th>
-                        <th scope="col">Assesments</th>
-                        <th scope="col">CourseFee</th>
-                        <th scope="col">CoursesId</th>
-                        <th scope="col">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var courseFeature in Model)
-                    {
-                        <tr>
-                            <td>@courseFeature?.Id</td>
-                            <td>@courseFeature?.Starts</td>
-                            <td>@courseFeature?.Duration</td>
-                            <td>@courseFeature?.ClassDuration</td>
-                            <td>@courseFeature?.SkillLevel</td>
-                            <td>@courseFeature?.StudentsCount</td> 
-                            <td>@courseFeature?.Assesments</td> 
-                            <td>@courseFeature?.CourseFee</td> 
-                            <td>@courseFeature?.CoursesId</td> 
-                            <th>
-                                @{
-                                    if (count > 0)
-                                    {
-                                        <a asp-controller="coursefeature" asp-action="update" asp-area="admin" asp-route-id="@courseFeature?.Id" class="btn btn-secondary">Update</a>
-                                        <form class="d-inline" method="post" asp-controller="ContactInfo" asp-action="delete" asp-area="admin" asp-route-id="@courseFeature?.Id">
-                                            <button class="btn btn-secondary" type="submit">Delete</button>
-                                        </form>
+        @{
+            if(Model != null)
+            {
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">N#</th>
+                                <th scope="col">Starts</th>
+                                <th scope="col">Duration</th>
+                                <th scope="col">ClassDuration</th>
+                                <th scope="col">SkillLevel</th>
+                                <th scope="col">StudentsCount</th>
+                                <th scope="col">Assesments</th>
+                                <th scope="col">CourseFee</th>
+                                <th scope="col">CoursesId</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var courseFeature in Model)
+                            {
+                                <tr>
+                                    <td>@count1</td>
+                                    <td>@courseFeature?.Starts</td>
+                                    <td>@courseFeature?.Duration</td>
+                                    <td>@courseFeature?.ClassDuration</td>
+                                    <td>@courseFeature?.SkillLevel</td>
+                                    <td>@courseFeature?.StudentsCount</td>
+                                    <td>@courseFeature?.Assesments</td>
+                                    <td>@courseFeature?.CourseFee</td>
+                                    <td>@courseFeature?.CoursesId</td>
+                                    <th>
+                                        @{
+                                            if (count > 0)
+                                            {
+                                                <a asp-controller="coursefeature" asp-action="update" asp-area="admin" asp-route-id="@courseFeature?.Id" class="btn btn-secondary">Update</a>
+                                                <form class="d-inline" method="post" asp-controller="ContactInfo" asp-action="delete" asp-area="admin" asp-route-id="@courseFeature?.Id">
+                                                    <button class="btn btn-secondary" type="submit">Delete</button>
+                                                </form>
 
-                                    }
-                                }
-                            </th>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
+                                            }
+                                        }
+                                    </th>
+                                </tr>
+                                count1++;
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        }
     </div>
 </div>
 

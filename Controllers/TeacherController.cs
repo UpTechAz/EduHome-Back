@@ -42,18 +42,7 @@ namespace WebApplication2.Controllers
                 .Include(x => x.TeacherLinks)
                .FirstOrDefaultAsync(c => c.Id == id);
             if (Teacher == null) return NotFound();
-            var model = new Teacher
-            {
-                FullName = Teacher.FullName,
-                FilePath = Teacher.FilePath,
-                Experience = Teacher.Experience,
-                TeacherAbout = Teacher.TeacherAbout,
-                Hobbies = Teacher.Hobbies,
-                Faculty = Teacher.Faculty,
-                ScientificDegree = Teacher.ScientificDegree,
-                ContactInformation = Teacher.ContactInformation,
-            };
-            return View(model);
+            return View(Teacher);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿@using WebApplication2.Models;
+@using WebApplication2.ViewModels.Course
 @model List<Course>
 <section class="banner">
     <div class="banner-area">
@@ -26,12 +27,12 @@
                     <h3>Search courses</h3>
                 </div>
                 <div class="course-form">
-                    <form action="" id="course-search">
+                    <form asp-action="index" id="course-search">
                         <div class="input-div">
-                            <input type="text"
+                            <input id="searchinp" name="sortOrder" type="text"
                                    placeholder="Search..."
                                    class="course-search-input" />
-                            <a href="" id="clear-btn" class="course-clear-btn">
+                            <a asp-action="Index" asp-controller="Course" id="clear-btn" class="course-clear-btn">
                                 <i class="fa-solid fa-xmark"></i>
                             </a>
                         </div>
@@ -56,31 +57,57 @@
                         <div class="course-content">
                             <h3><a asp-action="details" asp-controller="course" asp-route-id="@item.Id">@item.CoursName</a></h3>
                             <p>@item.CoursApply </p>
-                            <a asp-action="details" asp-controller="course" class="read-more-btn">read more</a>
+                            <a asp-action="details" asp-controller="course" asp-route-id="@item.Id" class="read-more-btn">read more</a>
                         </div>
                     </div>
                 </div>
             }
         </div>
         <div class="d-flex justify-content-center">
-            <a id="loadmorecourse" class="btn btn-primary" style="color:aliceblue">Load More...</a>
+            <a id="loadmorecourse" style="background-color:#ec1c23" class="btn btn-primary">Load More...</a>
         </div>
-        @*<div class="row">
-            <div class="col-12 pagination-col">
-                <div class="pagination-div">
-                    <ul>
-                        <li>
-                            <a href=""><i class="fa-solid fa-chevron-left"></i></a>
-                        </li>
-                        <li class="selected-pagination"><a href="">1</a></li>
-                        <li><a href="">2</a></li>
-                        <li><a href="">3</a></li>
-                        <li>
-                            <a href=""><i class="fa-solid fa-chevron-right"></i></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>*@
     </div>
 </div>
+@* <script>
+    $(function () {
+        $("#basic-text1").click(function () {
+            $("Form").submit();
+        })
+    })
+</script> *@
+<script type="text/javascript">
+
+    document.querySelector("#course-search").addEventListener("submit", function (e) {
+        e.preventDefault();
+        const jsonData = { title: document.querySelector("#searchinp").value };
+        
+        const options = {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json' 
+            },
+            body: JSON.stringify(jsonData)
+        };
+
+        fetch('Course/FilterByTitle', options)
+            .then(response => {
+                // Check if the request was successful
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                // Parse the response as JSON
+                return response.text();
+            })
+            .then(data => {
+                // Handle the JSON data
+                //partial view nu innerhtmle menimsetme
+                document.querySelector("#courses").innerHTML = data
+            })
+            .catch(error => {
+                // Handle any errors that occurred during the fetch
+                console.error('Fetch error:', error);
+            });
+    })
+    
+</script>

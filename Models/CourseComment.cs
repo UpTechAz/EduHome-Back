@@ -1,8 +1,11 @@
-﻿namespace WebApplication2.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace WebApplication2.Models
 {
     public class CourseComment : BaseEntity
     {
         public string Name { get; set; }
+        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
         public string Subject { get; set; }
         public string MessageInfo { get; set; }

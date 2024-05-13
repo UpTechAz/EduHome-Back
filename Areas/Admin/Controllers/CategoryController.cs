@@ -44,7 +44,7 @@ namespace WebApplication2.Areas.Admin.Controllers
                 ModelState.AddModelError("Title", "Bu adda Category movcuddur");
                 return View(category);
             }
-            category.CreatedAt = DateTime.Now;
+            category.CreatedAt = DateTime.UtcNow.AddHours(4);
             await _appDbContext.Categories.AddAsync(category);
             await _appDbContext.SaveChangesAsync();
 

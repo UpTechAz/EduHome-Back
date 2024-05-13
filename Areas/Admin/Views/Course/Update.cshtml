@@ -3,7 +3,7 @@
 <div class="col-lg-6">
     <div class="card">
         <div class="card-body">
-            <div class="card-title">Update Course</div>
+            <div class="card-title">Update</div>
             <hr>
             <form method="post" enctype="multipart/form-data" asp-action="update" asp-controller="course" asp-area="admin">
                 <input type="hidden" asp-for="FilePath" /> 
@@ -12,6 +12,11 @@
                     <label asp-for="CoursName">Course Name</label>
                     <input asp-for="CoursName" class="form-control" placeholder="Enter Your Name">
                     <span class="text-danger" asp-validation-for="CoursName"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Description"></label>
+                    <input asp-for="Description" class="form-control">
+                    <span class="text-danger" asp-validation-for="Description"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="CoursApply">Course Apply</label>
@@ -42,49 +47,44 @@
                     <span class="text-danger" asp-validation-for="CategoryId"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="CoursFeature.Starts">Course Feature Start</label>
-                    <input asp-for="CoursFeature.Starts" class="form-control">
-                    <span class="text-danger" asp-validation-for="CoursFeature.Starts"></span>
+                    <label asp-for="CoursFeature!.Starts">Course Feature Start</label>
+                    <input asp-for="CoursFeature!.Starts" class="form-control">
+                    <span class="text-danger" asp-validation-for="CoursFeature!.Starts"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="CoursFeature.Duration">Course Feature Duration </label>
-                    <input asp-for="CoursFeature.Duration" class="form-control">
-                    <span class="text-danger" asp-validation-for="CoursFeature.Duration"></span>
+                    <label asp-for="CoursFeature!.Duration">Course Feature Duration </label>
+                    <input asp-for="CoursFeature!.Duration" class="form-control">
+                    <span class="text-danger" asp-validation-for="CoursFeature!.Duration"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="CoursFeature.Duration">Course Feature Duration </label>
-                    <input asp-for="CoursFeature.Duration" class="form-control">
-                    <span class="text-danger" asp-validation-for="CoursFeature.Duration"></span>
+                    <label asp-for="CoursFeature!.ClassDuration">Course Feature ClassDuration </label>
+                    <input asp-for="CoursFeature!.ClassDuration" class="form-control">
+                    <span class="text-danger" asp-validation-for="CoursFeature!.ClassDuration"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="CoursFeature.ClassDuration">Course Feature ClassDuration </label>
-                    <input asp-for="CoursFeature.ClassDuration" class="form-control">
-                    <span class="text-danger" asp-validation-for="CoursFeature.ClassDuration"></span>
+                    <label asp-for="CoursFeature!.SkillLevel">Course Feature SkillLevel </label>
+                    <input asp-for="CoursFeature!.SkillLevel" class="form-control">
+                    <span class="text-danger" asp-validation-for="CoursFeature!.SkillLevel"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="CoursFeature.SkillLevel">Course Feature SkillLevel </label>
-                    <input asp-for="CoursFeature.SkillLevel" class="form-control">
-                    <span class="text-danger" asp-validation-for="CoursFeature.SkillLevel"></span>
+                    <label asp-for="CoursFeature!.Language">Course Feature Language </label>
+                    <input asp-for="CoursFeature!.Language" class="form-control">
+                    <span class="text-danger" asp-validation-for="CoursFeature!.Language"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="CoursFeature.Language">Course Feature Language </label>
-                    <input asp-for="CoursFeature.Language" class="form-control">
-                    <span class="text-danger" asp-validation-for="CoursFeature.Language"></span>
+                    <label asp-for="CoursFeature!.StudentsCount">Course Feature Students Count </label>
+                    <input asp-for="CoursFeature!.StudentsCount" class="form-control">
+                    <span class="text-danger" asp-validation-for="CoursFeature!.StudentsCount"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="CoursFeature.StudentsCount">Course Feature Students Count </label>
-                    <input asp-for="CoursFeature.StudentsCount" class="form-control">
-                    <span class="text-danger" asp-validation-for="CoursFeature.StudentsCount"></span>
+                    <label asp-for="CoursFeature!.Assesments">Course Feature Assesments </label>
+                    <input asp-for="CoursFeature!.Assesments" class="form-control">
+                    <span class="text-danger" asp-validation-for="CoursFeature!.Assesments"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="CoursFeature.Assesments">Course Feature Assesments </label>
-                    <input asp-for="CoursFeature.Assesments" class="form-control">
-                    <span class="text-danger" asp-validation-for="CoursFeature.Assesments"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="CoursFeature.CourseFee">Course Feature Course Fee </label>
-                    <input asp-for="CoursFeature.CourseFee" class="form-control">
-                    <span class="text-danger" asp-validation-for="CoursFeature.CourseFee"></span>
+                    <label asp-for="CoursFeature!.CourseFee">Course Feature Course Fee </label>
+                    <input asp-for="CoursFeature!.CourseFee" class="form-control">
+                    <span class="text-danger" asp-validation-for="CoursFeature!.CourseFee"></span>
                 </div>
                 
                 <div class="form-group">

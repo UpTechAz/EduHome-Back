@@ -1,57 +1,68 @@
 ﻿@using WebApplication2.Models;
 @using WebApplication2.ViewModels;
 @model PageNatedList<Course>
+@{
+    int count = 1;
+}
 <div class="card">
     <div class="card-body">
         <div class="d-flex; justify-content-lg-between">
             <h5 class="card-title">Courses</h5>
             <a asp-action="create" asp-controller="course" asp-area="admin" class="col-2 d-sm-inline-block btn btn-outline-success"> Add new course</a>
         </div>
-        <div class="table-responsive">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th scope="col">Id</th>
-                        <th scope="col">Course Name</th>
-                        <th scope="col">Cours Apply</th>
-                        <th scope="col">Certification</th>
-                        <th scope="col">CoursAbout</th>
-                        <th scope="col">Photo</th>
-                        <th scope="col">CourseFeaturedId</th>
-                        <th scope="col">CategoryId</th>
-                        <th scope="col">CreateAt</th>
-                        <th scope="col">ModifiedAt</th>
-                        <th scope="col">Actions</th>
-
-                    </tr>
-                </thead>
-                <tbody>
-                    @{
-                        foreach (var course in Model)
-                        {
+        @{
+            if(Model != null)
+            {
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
                             <tr>
-                                <th>@course?.Id</th>
-                                <td>@course?.CoursName</td>
-                                <td>@course?.CoursApply</td>
-                                <td>@course?.Certification</td>
-                                <td>@course?.CoursAbout</td>
-                                <td><img style="width:100px;" src="~/assets/images/@course.FilePath"></td>
-                                <td>@course?.CourseFeaturedId</td>
-                                <td>@course?.CategoryId</td>
-                                <td>@course?.CreatedAt</td>
-                                <td>@course?.UpdatedAt</td>
-                                <th>
-                                    <a asp-controller="course" asp-action="update" asp-area="admin" asp-route-id="@course.Id" class="btn btn-secondary">Update</a>
-                                    <form class="d-inline" method="post" asp-controller="course" asp-action="delete" asp-area="admin" asp-route-id="@course.Id">
-                                        <button class="btn btn-secondary" type="submit">Delete</button>
-                                    </form>
-                                </th>
+                                <th scope="col">N#</th>
+                                <th scope="col">Course Name</th>
+                                <th scope="col">Photo</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Cours Apply</th>
+                                <th scope="col">Certification</th>
+                                <th scope="col">CoursAbout</th>
+                                <th scope="col">CourseFeaturedId</th>
+                                <th scope="col">Category</th>
+                                <th scope="col">CreateAt</th>
+                                <th scope="col">ModifiedAt</th>
+                                <th scope="col">Actions</th>
+
                             </tr>
-                        }
-                    }
-                </tbody>
-            </table>
-        </div>
+                        </thead>
+                        <tbody>
+                            @{
+                                foreach (var course in Model)
+                                {
+                                    <tr>
+                                        <th>@count</th>
+                                        <td>@course?.CoursName</td>
+                                        <td><img style="width:100px;" src="~/assets/images/@course.FilePath"></td>
+                                        <td>@course?.Description</td>
+                                        <td>@course?.CoursApply</td>
+                                        <td>@course?.Certification</td>
+                                        <td>@course?.CoursAbout</td>
+                                        <td>@course?.CourseFeaturedId</td>
+                                        <td>@course?.Category?.Title</td>
+                                        <td>@course?.CreatedAt</td>
+                                        <td>@course?.UpdatedAt</td>
+                                        <th>
+                                            <a asp-controller="course" asp-action="update" asp-area="admin" asp-route-id="@course.Id" class="btn btn-secondary">Update</a>
+                                            <form class="d-inline" method="post" asp-controller="course" asp-action="delete" asp-area="admin" asp-route-id="@course.Id">
+                                                <button class="btn btn-secondary" type="submit">Delete</button>
+                                            </form>
+                                        </th>
+                                    </tr>
+                                    count++;
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        }
     </div>
 </div>
 <div class="col-lg-12">

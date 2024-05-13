@@ -57,21 +57,11 @@ namespace WebApplication2.Areas.Admin.Controllers
                     ModelState.AddModelError("Photo", $"The size of the image should not exceed {maxSize} KB.");
                     return View(@event);
                 }
-
-                try
-                {
-                    var filename = await _fileService.UploadAsync(@event.Photo);
-                    @event.FilePath = filename;
-                }
-                catch (Exception ex)
-                {
-                    ModelState.AddModelError("", "An error occurred while uploading the file.");
-                 
-                    return View(@event);
-                }
+                var filename = await _fileService.UploadAsync(@event.Photo);
+                @event.FilePath = filename;
             }
-
-            _context.Events.Add(@event);
+            @event.CreatedAt = DateTime.UtcNow.AddHours(4);
+            await _context.Events.AddAsync(@event);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
@@ -89,11 +79,11 @@ namespace WebApplication2.Areas.Admin.Controllers
         {
             if (!ModelState.IsValid) return View(@event);
 
-     
+
             var existingEvent = await _context.Events.FindAsync(@event.Id);
             if (existingEvent == null) return NotFound();
 
-         
+
             existingEvent.Title = @event.Title;
             existingEvent.Description = @event.Description;
             existingEvent.Date = @event.Date;
@@ -101,17 +91,17 @@ namespace WebApplication2.Areas.Admin.Controllers
             existingEvent.EndTime = @event.EndTime;
             existingEvent.Venue = @event.Venue;
 
-          
+
             if (@event.Photo != null)
             {
-             
+
                 if (!string.IsNullOrEmpty(existingEvent.FilePath))
                 {
                     _fileService.Delete(Path.Combine(_webHostEnvironment.WebRootPath, "assets/img", existingEvent.FilePath));
                 }
 
-        
-                int maxSize = 180; 
+
+                int maxSize = 180;
                 if (!_fileService.IsImage(@event.Photo))
                 {
                     ModelState.AddModelError("Photo", "The file must be in Image format.");
@@ -131,12 +121,12 @@ namespace WebApplication2.Areas.Admin.Controllers
                 catch (Exception ex)
                 {
                     ModelState.AddModelError("", "An error occurred while uploading the file.");
-              
+
                     return View(@event);
                 }
             }
 
-      
+
             await _context.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));

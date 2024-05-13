@@ -46,7 +46,7 @@ namespace WebApplication2.Areas.Admin.Controllers
                 return View(tag);
             }
 
-            tag.CreatedAt = DateTime.Now;
+            tag.CreatedAt = DateTime.UtcNow.AddHours(4);
             await _appDbContext.Tags.AddAsync(tag);
             await _appDbContext.SaveChangesAsync();
 

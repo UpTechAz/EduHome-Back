@@ -1,5 +1,5 @@
-﻿@using WebApplication2.Models;
-@model Course
+﻿@using WebApplication2.ViewModels.Course
+@model CourseVM
 <section class="banner">
     <div class="banner-area">
         <div class="banner-area-wrapper">
@@ -24,56 +24,105 @@
             <div class="col-lg-8">
                 <div class="courses-details">
                     <div class="course-detail-img">
-                        <img src="~/assets/images/@Model.FilePath" alt="" />
+                        <img src="~/assets/images/@Model.Course.FilePath" alt="" />
                     </div>
                     <div class="courses-details-content">
-                        <h2>@Model.CoursName</h2>
-                        <p>
-                            I must explain to you how all this a mistaken idea of
-                            denouncing great explorer of the rut the is lder of human
-                            happiness pcias unde omnis iste natus error sit voluptatem
-                            accusantium doloremque laudantium, totam rem aperiam, eaque
-                            ipsa quae ab illo inventore veritatis et quasi architecto
-                            beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem
-                            quia voluptas sit asnatur aut odit aut fugit, sed quia
-                            consequuntur magni dolores eos qui
-                        </p>
+                        <h2>@Model.Course.CoursName</h2>
+                        <p>@Model.Course.Description</p>
                         <div class="mid-content">
                             <div class="mid-content-left">
                                 <div class="single-course-detail-left">
                                     <h3>ABOUT COURSE</h3>
-                                    <p>@Model.CoursAbout</p>
+                                    <p>@Model.Course.CoursAbout</p>
                                 </div>
                                 <div class="single-course-detail-left">
                                     <h3>HOW TO APPLY</h3>
-                                    <p>@Model.CoursApply </p>
+                                    <p>@Model.Course.CoursApply</p>
                                 </div>
                                 <div class="single-course-detail-left">
                                     <h3>CERTIFICATION</h3>
-                                    <p class="p-with-margin"> </p>
-                                    <p>
-                                        I must explain to you how all this a mistaken idea of
-                                        ncing great explorer of the rut the is lder of human
-                                    </p>
+                                    <p class="p-with-margin">@Model.Course.Certification </p>
                                 </div>
                             </div>
                             <div class="mid-content-right">
                                 <h3>course fetaures</h3>
                                 <ul class="mid-content-ul">
-                                    <li>starts <span>@Model.CoursFeature.Starts.ToString("dd MMM yyyy")</span></li>
-                                    <li>duration <span>@Model.CoursFeature.Duration</span></li>
-                                    <li>class duration <span>@Model.CoursFeature.ClassDuration</span></li>
-                                    <li>skill level <span>@Model.CoursFeature.SkillLevel</span></li>
-                                    <li>language <span>@Model.CoursFeature.Language</span></li>
-                                    <li>students <span>@Model.CoursFeature.StudentsCount</span></li>
-                                    <li>assesments <span>@Model.CoursFeature.Assesments</span></li>
+                                    <li>starts <span>@Model.Course.CoursFeature.Starts.ToString("dd MMM, yyyy")</span></li>
+                                    <li>duration <span>@Model.Course.CoursFeature.Duration</span></li>
+                                    <li>class duration <span>@Model.Course.CoursFeature.ClassDuration</span></li>
+                                    <li>skill level <span>@Model.Course.CoursFeature.SkillLevel</span></li>
+                                    <li>language <span>@Model.Course.CoursFeature.Language</span></li>
+                                    <li>students <span>@Model.Course.CoursFeature.StudentsCount</span></li>
+                                    <li>assesments <span>@Model.Course.CoursFeature.Assesments</span></li>
                                 </ul>
-                                <h3 class="red-h3">COURSE FEE $@Model.CoursFeature.CourseFee</h3>
+                                <h3 class="red-h3">COURSE FEE $ @Model.Course.CoursFeature.CourseFee</h3>
                             </div>
                         </div>
                     </div>
                 </div>
-               
+                <div class="courses-reply-area">
+                    <div class="all-replies">
+                        <h2>recent reviews</h2>
+                        <div class="showing-replies">
+                            @* if(Model.Course.CourseComment is not null) *@
+                            @{
+                                foreach(var item in Model.Course.CourseComment)
+                                {
+                                    <div class="single-reply">
+                                        <h4>@item.Name</h4>
+                                        <p>@item.MessageInfo</p>
+                                        <div class="reply-button-area">
+                                            <button type="button" class="delete">
+                                                <i class="fa-solid fa-trash-can"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        </div>
+@* 
+                        <div class="reply-pagination">
+                            <ul class="reply-pagination-ul">
+                                <li>
+                                    <a href=""><i class="fa-solid fa-chevron-left"></i></a>
+                                </li>
+                                <li class="selected-page"><a href="">1</a></li>
+                                <li><a href="">2</a></li>
+                                <li><a href="">3</a></li>
+                                <li>
+                                    <a href=""><i class="fa-solid fa-chevron-right"></i></a>
+                                </li>
+                            </ul>
+                        </div> *@
+                    </div>
+                    <h3>leave a reply</h3>
+                    <p>
+                        I must explain to you how all this a mistaken idea of ncing
+                        great explorer of the rut
+                        <br />
+                        the is lder of human happinescias unde omnis iste natus error
+                        sit volptatem
+                    </p>
+                    <form asp-controller="Course" asp-action="Details" asp-route-id="@Model.Course.Id" method="post">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p>name</p>
+                                <input asp-for="Comment.Name" type="text"/>
+                            </div>
+                            <div class="col-md-12">
+                                <p>Email</p>
+                                <input asp-for="Comment.Email" type="text"/>
+                            </div>
+                            <div class="col-md-12">
+                                <p>subject</p>
+                                <input asp-for="Comment.Subject" type="text"/>
+                                <p>message</p>
+                                <textarea asp-for="Comment.MessageInfo" cols="15" rows="10"></textarea>
+                            </div>
+                        </div>
+                        <button type="submit" class="courses-reply-button">send message</button>
+                    </form>
+                </div>
             </div>
             <div class="col-lg-4">
                 <div class="courses-detail-sidebar">
@@ -158,16 +207,17 @@
                     <div class="courses-details-tags">
                         <h3>tags</h3>
                         <div class="courses-single-tag">
-                            <a asp-action="index" asp-controller="course" class="mr-10 mb-10">courses</a>
+                            <a href="" class="mr-10 mb-10">courses</a>
                             <a href="" class="mr-10 mb-10">education</a>
-                            <a asp-action="index" asp-controller="teacher" class="mr-10 mb-10">tachers</a>
+                            <a href="" class="mr-10 mb-10">tachers</a>
                             <a href="" class="mr-10">learning</a>
                             <a href="" class="mr-10">university</a>
-                            <a asp-action="index" asp-controller="events">events</a>
+                            <a href="">events</a>
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 </div>

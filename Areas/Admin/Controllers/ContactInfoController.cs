@@ -38,6 +38,7 @@ namespace WebApplication2.Areas.Admin.Controllers
         public async Task<IActionResult> Create(ContactInformation contactInfo)
         {
             if (!ModelState.IsValid) return View(contactInfo);
+            contactInfo.CreatedAt = DateTime.UtcNow.AddHours(4);
             await _dbContext.ContactInformation.AddAsync(contactInfo);
             await _dbContext.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

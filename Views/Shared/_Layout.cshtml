@@ -77,9 +77,9 @@
                                             <li class="dropdown-ul-li">
                                                 <a asp-action="index" asp-controller="course">Courses</a>
                                             </li>
-                                            <li class="dropdown-ul-li">
+                                           @* <li class="dropdown-ul-li">
                                                 <a asp-action="details" asp-controller="course">Course Details</a>
-                                            </li>
+                                            </li>*@
                                         </ul>
                                     </li>
                                     <li class="main-nav-li">
@@ -88,9 +88,9 @@
                                             <li class="dropdown-ul-li">
                                                 <a asp-action="index" asp-controller="event">Event</a>
                                             </li>
-                                            <li class="dropdown-ul-li">
+                                            @*<li class="dropdown-ul-li">
                                                 <a asp-action="details" asp-controller="Event">Event Details</a>
-                                            </li>
+                                            </li>*@
                                         </ul>
                                     </li>
                                     <li class="main-nav-li">
@@ -99,9 +99,9 @@
                                             <li class="dropdown-ul-li">
                                                 <a asp-action="index" asp-controller="teacher">Teacher</a>
                                             </li>
-                                            <li class="dropdown-ul-li">
+                                            @*<li class="dropdown-ul-li">
                                                 <a asp-action="details" asp-controller="teacher">Teacher Details</a>
-                                            </li>
+                                            </li>*@
                                         </ul>
                                     </li>
                                     <li class="main-nav-li">
@@ -110,9 +110,9 @@
                                             <li class="dropdown-ul-li">
                                                 <a asp-action="index" asp-controller="blog">Blog</a>
                                             </li>
-                                            <li class="dropdown-ul-li">
+                                           @* <li class="dropdown-ul-li">
                                                 <a asp-action="details" asp-controller="blog">Blog Details</a>
-                                            </li>
+                                            </li>*@
                                         </ul>
                                     </li>
                                     <li class="main-nav-li">
@@ -177,10 +177,10 @@
                                             <li class="mob-nav-toggle-li">
                                                 <a asp-action="index" asp-controller="course" class="mob-nav-toggle-a">Courses</a>
                                             </li>
-                                            <li class="mob-nav-toggle-li">
+                                           @* <li class="mob-nav-toggle-li">
                                                 <a asp-action="Details" asp-controller="course"
                                                    class="mob-nav-toggle-a">Course Details</a>
-                                            </li>
+                                            </li>*@
                                         </ul>
                                     </li>
                                     <li class="main-mob-nav-li">
@@ -190,9 +190,9 @@
                                             <li class="mob-nav-toggle-li">
                                                 <a asp-action="index" asp-controller="event" class="mob-nav-toggle-a">Event</a>
                                             </li>
-                                            <li class="mob-nav-toggle-li">
+                                           @* <li class="mob-nav-toggle-li">
                                                 <a asp-action="Details" asp-controller="event" class="mob-nav-toggle-a">Event Details</a>
-                                            </li>
+                                            </li>*@
                                         </ul>
                                     </li>
                                     <li class="main-mob-nav-li">
@@ -202,10 +202,10 @@
                                             <li class="mob-nav-toggle-li">
                                                 <a asp-action="index" asp-controller="teacher" class="mob-nav-toggle-a">Teachers</a>
                                             </li>
-                                            <li class="mob-nav-toggle-li">
+                                           @* <li class="mob-nav-toggle-li">
                                                 <a asp-action="Details" asp-controller="teacher"
                                                    class="mob-nav-toggle-a">Teacher Details</a>
-                                            </li>
+                                            </li>*@
                                         </ul>
                                     </li>
                                     <li class="main-mob-nav-li">
@@ -215,9 +215,9 @@
                                             <li class="mob-nav-toggle-li">
                                                 <a asp-action="index" asp-controller="blog" class="mob-nav-toggle-a">Blog</a>
                                             </li>
-                                            <li class="mob-nav-toggle-li">
+                                            @*<li class="mob-nav-toggle-li">
                                                 <a asp-action="Details" asp-controller="blog" class="mob-nav-toggle-a">Blog Details</a>
-                                            </li>
+                                            </li>*@
                                         </ul>
                                     </li>
                                     <li class="main-mob-nav-li">
@@ -375,6 +375,6 @@
 
 <script src="~/assets/js/main.js"></script>
 <script src="~/assets/js/loadmore.js"></script>
-
+@RenderSection("Scripts", false)
 </html>
 

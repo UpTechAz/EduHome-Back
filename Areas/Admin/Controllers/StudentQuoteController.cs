@@ -56,7 +56,7 @@ namespace WebApplication2.Areas.Admin.Controllers
                 var filename = await _fileService.UploadAsync(studentQuote.Photo);
                 studentQuote.FilePath = filename;
             }
-
+            studentQuote.CreatedAt = DateTime.UtcNow.AddHours(4);
             await _context.StudentQuote.AddAsync(studentQuote);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

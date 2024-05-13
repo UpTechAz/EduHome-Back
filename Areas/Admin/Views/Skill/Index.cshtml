@@ -1,58 +1,58 @@
 ﻿@using WebApplication2.Models;
 @model List<Skill>
 @{
-    int? count = ViewBag.Skillcount;
+    
+    int count = 1;
 }
 <div class="card">
     <div class="card-body">
         <div class="d-flex; justify-content-lg-between">
             <h5 class="card-title">Skills</h5>
             <a asp-action="create" asp-controller="Skill" asp-area="admin" class="col-2 d-sm-inline-block btn btn-outline-success"> Add Information</a>
-
         </div>
-        <div class="table-responsive">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th scope="col">İd</th>
-                        <th scope="col">Teacher</th>
-                        <th scope="col">Language</th>
-                        <th scope="col">TeamLeader</th>
-                        <th scope="col">Development</th>
-                        <th scope="col">Design</th>
-                        <th scope="col">Innovation</th>
-                        <th scope="col">Communication</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td>@item?.Id</td>
-                            <td>@item?.Teacher?.FullName</td>
-                            <td>@item?.Language</td>
-                            <td>@item?.TeamLeader</td>
-                            <td>@item?.Development</td>
-                            <td>@item?.Design</td>
-                            <td>@item?.Innovation</td>
-                            <td>@item?.Communication</td>
-                            <th>
-                                @{
-                                    if (count > 0)
-                                    {
+        @{
+            if (Model != null)
+            {
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">N#</th>
+                                <th scope="col">Teacher</th>
+                                <th scope="col">Language</th>
+                                <th scope="col">TeamLeader</th>
+                                <th scope="col">Development</th>
+                                <th scope="col">Design</th>
+                                <th scope="col">Innovation</th>
+                                <th scope="col">Communication</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@count</td>
+                                    <td>@item?.Teacher?.FullName</td>
+                                    <td>@item?.Language</td>
+                                    <td>@item?.TeamLeader</td>
+                                    <td>@item?.Development</td>
+                                    <td>@item?.Design</td>
+                                    <td>@item?.Innovation</td>
+                                    <td>@item?.Communication</td>
+                                    <th>
                                         <a asp-controller="Skill" asp-action="update" asp-area="admin" asp-route-id="@item?.Id" class="btn btn-secondary">Update</a>
                                         <form class="d-inline" method="post" asp-controller="skill" asp-action="delete" asp-area="admin" asp-route-id="@item?.Id">
                                             <button class="btn btn-secondary" type="submit">Delete</button>
                                         </form>
-
-                                    }
-                                }
-                            </th>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
+                                    </th>
+                                </tr>
+                                count++;
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        }
     </div>
 </div>
 

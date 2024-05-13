@@ -1,41 +1,51 @@
 ﻿@using WebApplication2.Models
 @model List<Slider>
-
+@{
+    int count = 1;
+}
 <div class="card">
     <div class="card-body">
         <div class="d-flex; justify-content-lg-between">
             <h5 class="card-title">Sliders</h5>
             <a asp-action="Create" asp-controller="Slider" asp-area="admin" class="col-2 d-sm-inline-block btn btn-outline-success">Add New Slider</a>
         </div>
-        <div class="table-responsive">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th scope="col">Photo</th>
-                        <th scope="col">Photo2</th>
-                        <th scope="col">Title</th>
-                        <th scope="col">Description</th>
-                        <th scope="col">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var slider in Model)
-                    {
-                        <tr>
-                            <td><img style="width:100px" src="~/assets/images/@slider.FilePath" /></td>
-                            <td><img style="width:100px" src="~/assets/images/@slider.BackgroundImage" /></td>                       
-                            <td>@slider.Title</td>
-                            <td>@slider.Description</td>
-                            <th>
-                            <a asp-controller="Slider" asp-action="update" asp-area="admin" asp-route-id="@slider.Id" class="btn btn-secondary">Update</a>
-                            <form class="d-inline" method="post" asp-controller="Slider" asp-action="delete" asp-area="admin" asp-route-id="@slider.Id">
-                                <button class="btn btn-secondary" type="submit">Delete</button>
-                            </form>
-                            </th>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
+        @{
+            if(Model != null)
+            {
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">N#</th>
+                                <th scope="col">Photo</th>
+                                <th scope="col">Photo2</th>
+                                <th scope="col">Title</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var slider in Model)
+                            {
+                                <tr>
+                                    <td>@count</td>
+                                    <td><img style="width:100px" src="~/assets/images/@slider.FilePath" /></td>
+                                    <td><img style="width:100px" src="~/assets/images/@slider.BackgroundImage" /></td>
+                                    <td>@slider.Title</td>
+                                    <td>@slider.Description</td>
+                                    <th>
+                                        <a asp-controller="Slider" asp-action="update" asp-area="admin" asp-route-id="@slider.Id" class="btn btn-secondary">Update</a>
+                                        <form class="d-inline" method="post" asp-controller="Slider" asp-action="delete" asp-area="admin" asp-route-id="@slider.Id">
+                                            <button class="btn btn-secondary" type="submit">Delete</button>
+                                        </form>
+                                    </th>
+                                </tr>
+                                count++;
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        }
     </div>
 </div>

@@ -5,6 +5,7 @@ namespace WebApplication2.Models
     public class Course : BaseEntity
     {
         public string CoursName { get; set; }
+        public string Description { get; set; }
         public string CoursApply { get; set; }
         public string Certification { get; set; }
         public string CoursAbout { get; set; }

@@ -49,7 +49,7 @@ namespace WebApplication2.Areas.Admin.Controllers
                     ModelState.AddModelError("Photo", "The file must be in Image format.");
                     return View(links);
                 }
-                int maxSize = 30;
+                int maxSize = 1024;
                 if (!_fileService.CheckSize(links.Photo, maxSize))
                 {
                     ModelState.AddModelError("Photo", $"The size of the image should not exceed {maxSize} KB.");
@@ -58,6 +58,7 @@ namespace WebApplication2.Areas.Admin.Controllers
                 var filename = await _fileService.UploadAsync(links.Photo);
                 links.Icon = filename;
             }
+            links.CreatedAt = DateTime.UtcNow.AddHours(4);
             await _dbContext.Links.AddAsync(links);
             await _dbContext.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
@@ -69,7 +70,6 @@ namespace WebApplication2.Areas.Admin.Controllers
             if (link == null) return BadRequest();
             var model = new Link
             {
-                Id = id,
                 Name = link.Name,
                 Icon = link.Icon,
             };
@@ -94,10 +94,7 @@ namespace WebApplication2.Areas.Admin.Controllers
             var dblink = await _dbContext.Links.FindAsync(id);
             if(dblink == null) return BadRequest();
             var path = Path.Combine(_webHostEnvironment.WebRootPath, "assets/images", dblink.Icon);
-            if (System.IO.File.Exists(path))
-            {
-                System.IO.File.Delete(path);
-            }
+            _fileService.Delete(path);
             _dbContext.Links.Remove(dblink);
             await _dbContext.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

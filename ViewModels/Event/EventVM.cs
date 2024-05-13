@@ -4,8 +4,8 @@ namespace WebApplication2.ViewModels.Event
 {
     public class EventVM
     {
-        public List<Models.Event> Events { get; set;}
-        public List<EventComment> EventComments { get; set;}
-        public List<EventSpeaker> EventSpeaker { get; set;}
+        public Models.Event? Events { get; set;}
+        public EventComment? EventComments { get; set;}
+        public List<EventSpeaker>? EventSpeaker { get; set;}
     }
 }

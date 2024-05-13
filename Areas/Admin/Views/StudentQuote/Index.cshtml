@@ -1,48 +1,52 @@
 ﻿@using WebApplication2.Models
-
 @model List<StudentQuote>
+@{
+    int count = 1;
+}
 <div class="card">
     <div class="card-body">
         <div class="d-flex; justify-content-lg-between">
             <h5 class="card-title">StudentQuote</h5>
             <a asp-action="create" asp-controller="StudentQuote" asp-area="admin" class="col-2 d-sm-inline-block btn btn-outline-success">Add new StudentQuote</a>
         </div>
-        <div class="table-responsive">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                 
-                        <th scope="col">Id</th>
-                        <th scope="col">Photo</th>
-                        <th scope="col">FullName</th>
-                        <th scope="col">Description</th>          
-                        <th scope="col">Position</th>
-                 
-
-                    </tr>
-                </thead>
-                <tbody>
-                    @{
-                        foreach (var studentQuote in Model)
-                        {
+        @{
+            if(Model != null)
+            {
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
                             <tr>
-
-                                <th>@studentQuote.Id</th>
-                                <td><img style="width:100px" src="~/assets/images/@studentQuote.FilePath"></td>
-                                <td>@studentQuote.FullName</td>
-                                <td>@studentQuote.Description</td>
-                                <td>@studentQuote.Position</td>            
-                                <th>
-                                    <a asp-controller="StudentQuote" asp-action="update" asp-area="admin" asp-route-id="@studentQuote.Id" class="btn btn-secondary">Update</a>
-                                    <form class="d-inline" method="post" asp-controller="StudentQuote" asp-action="delete" asp-area="admin" asp-route-id="@studentQuote.Id">
-                                        <button class="btn btn-secondary" type="submit">Delete</button>
-                                    </form>
-                                </th>
+                                <th scope="col">N#</th>
+                                <th scope="col">Photo</th>
+                                <th scope="col">FullName</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Position</th>
                             </tr>
-                        }
-                    }
-                </tbody>
-            </table>
-        </div>
+                        </thead>
+                        <tbody>
+                            @{
+                                foreach (var studentQuote in Model)
+                                {
+                                    <tr>
+                                        <th>@count</th>
+                                        <td><img style="width:100px" src="~/assets/images/@studentQuote.FilePath"></td>
+                                        <td>@studentQuote.FullName</td>
+                                        <td>@studentQuote.Description</td>
+                                        <td>@studentQuote.Position</td>
+                                        <th>
+                                            <a asp-controller="StudentQuote" asp-action="update" asp-area="admin" asp-route-id="@studentQuote.Id" class="btn btn-secondary">Update</a>
+                                            <form class="d-inline" method="post" asp-controller="StudentQuote" asp-action="delete" asp-area="admin" asp-route-id="@studentQuote.Id">
+                                                <button class="btn btn-secondary" type="submit">Delete</button>
+                                            </form>
+                                        </th>
+                                    </tr>
+                                    count++;
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        }
     </div>
 </div>

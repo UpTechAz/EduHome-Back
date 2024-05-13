@@ -23,9 +23,9 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="about-part-two-words">
-                    @Html.Raw(Model.EducationTheme?.Title).
+                    <h2>Welcome to <span>eduhome</span></h2>
                   @Html.Raw(Model.EducationTheme?.Description)
-                    <a href="" class="btn">View courses</a>
+                    <a asp-action="index" asp-controller="course" class="btn">View courses</a>
                     <!--View courses courses sehifesine getmelidir -->
                 </div>
             </div>
@@ -64,7 +64,7 @@
                         </div>
                         <div class="single-teacher-content">
                             <h2>
-                                <a href="">@item.FullName</a>
+                                <a asp-action="details" asp-controller="teacher" asp-route-id="@item.Id">@item.FullName</a>
                             </h2>
                             <h4>Associate Professor</h4>
                             <ul>

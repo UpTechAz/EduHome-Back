@@ -60,7 +60,7 @@
                     <div class="col-lg-4 col-md-6">
                         <div class="single-course">
                             <div class="course-img">
-                                <a asp-action="index" asp-controller="courseDetails">
+                                <a asp-action="details" asp-controller="course" asp-route-id="@item.Id">
                                     <img src="~/assets/images/@item.FilePath" alt="course" />
                                     <div class="course-hover">
                                         <i class="fa fa-link"></i>
@@ -68,9 +68,9 @@
                                 </a>
                             </div>
                             <div class="course-content">
-                                <h3><a asp-action="index" asp-controller="courseDetails">@item.CoursName</a></h3>
+                                <h3><a asp-action="details" asp-controller="course" asp-route-id="@item.Id">@item.CoursName</a></h3>
                                 <p>@item.CoursApply</p>
-                                <a class="default-btn" asp-action="index" asp-controller="courseDetails">read more</a>
+                                <a class="default-btn" asp-action="details" asp-controller="course" asp-route-id="@item.Id">read more</a>
                             </div>
                         </div>
                     </div>
@@ -79,72 +79,7 @@
         </div>
     </div>
 </section>
-
-@*<section class="notice">
-    <section class="pt-140 pb-100">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="notice_left mb-25 pb-25">
-                        <h3>TAKE A VIDEO TOUR</h3>
-                        <div class="notice_video">
-                            <div class="video_icon">
-                                <a href="" class="video-popup-btn">
-                                    <i class="fa-regular fa-circle-play"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="notice_right">
-                        <h3>notice board</h3>
-                        <div class="notice_down" tabindex="1">
-                            @foreach(var item in Model.NoticeBoards)
-                            {
-                                <div class="single_notice_right mb-23 pb-20">
-                                    <h4>@item.DateTime.ToString("d MMM yyyy")</h4>
-                                    <p>@item.Description </p>
-                                </div>
-                            }
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-</section>*@
 @await Component.InvokeAsync("NoticeBoard")
-@*<section class="best_education">
-    <div class="pb-135 pt-130 bg-light">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="about-content">
-                        <h2><span>EDUHOME</span> the best education theme for you</h2>
-                        <p>
-                            I must explain to you how all this mistaken idea of denouncing
-                            pleure and prsing pain was born and I will give you a complete
-                            account of the system, and expound the actual teachings the
-                            master-builder of humanit happiness
-                        </p>
-                        <p>
-                            I must explain to you how all this mistaken idea of denouncing
-                            pleure and prsing pain was born and I will give you a complete
-                            account of the system
-                        </p>
-                        <a class="default-btn" href="/about.html">buy now</a>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="about-img">
-                        <img src="~/assets/images/about.webp" alt="about" />
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>*@
 <section class="best_education">
     <div class="pb-135 pt-130 bg-light">
         <div class="container">
@@ -182,7 +117,7 @@
                     <div class="col-lg-4 col-md-6">
                         <div class="single_event mb-35">
                             <div class="event_img">
-                                <a asp-action="index" asp-controller="eventDetails">
+                                <a asp-action="details" asp-controller="event" asp-route-id="@item.Id">
                                     <img src="~/assets/images/@item.FilePath" alt="event" />
                                     <div class="course_hover">
                                         <i class="fa fa-link"></i>
@@ -193,72 +128,18 @@
                                 </div>
                             </div>
                             <div class="event_content text-start">
-                                <h4><a asp-action="index" asp-controller="eventDetails">@item.Title</a></h4>
+                                <h4><a asp-action="details" asp-controller="event" asp-route-id="@item.Id">@item.Title</a></h4>
                                 <ul>
                                     <li><span>time: </span> @item.StartTime.ToString("H:mm tt") - @item.EndTime.ToString("H:mm tt") </li>
                                     <li><span>venue </span>@item.Venue</li>
                                 </ul>
                                 <div class="event_content_right">
-                                    <a class="default-btn" asp-action="index" asp-controller="eventDetails">join now</a>
+                                    <a class="default-btn" asp-action="details" asp-controller="event" asp-route-id="@item.Id">join now</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 }
-                @* <div class="col-lg-4 col-md-6">
-                    <div class="single_event mb-35">
-                        <div class="event_img">
-                            <a asp-action="index" asp-controller="eventDetails">
-                                <img src="~/assets/images/event6.webp" alt="event" />
-                                <div class="course_hover">
-                                    <i class="fa fa-link"></i>
-                                </div>
-                            </a>
-                            <div class="event_date">
-                                <h3>18 <span>jun</span></h3>
-                            </div>
-                        </div>
-                        <div class="event_content text-start">
-                            <h4>
-                                <a asp-action="index" asp-controller="eventDetails">learning english history</a>
-                            </h4>
-                            <ul>
-                                <li><span>time:</span> 9.00 AM - 4.45 PM</li>
-                                <li><span>venue</span> New Yourk City</li>
-                            </ul>
-                            <div class="event_content_right">
-                                <a class="default-btn" asp-action="index" asp-controller="eventDetails">join now</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="single_event">
-                        <div class="event_img">
-                            <a asp-action="index" asp-controller="eventDetails">
-                                <img src="~/assets/images/event7.webp" alt="event" />
-                                <div class="course_hover">
-                                    <i class="fa fa-link"></i>
-                                </div>
-                            </a>
-                            <div class="event_date">
-                                <h3>16 <span>jun</span></h3>
-                            </div>
-                        </div>
-                        <div class="event_content text-start">
-                            <h4>
-                                <a asp-action="index" asp-controller="eventDetails">UI & UX DESIGNER MEETUP</a>
-                            </h4>
-                            <ul>
-                                <li><span>time:</span> 9.00 AM - 4.45 PM</li>
-                                <li><span>venue</span> New Yourk City</li>
-                            </ul>
-                            <div class="event_content_right">
-                                <a class="default-btn" asp-action="index" asp-controller="eventDetails">join now</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>*@
             </div>
         </div>
     </div>
@@ -278,90 +159,33 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-4 col-md-6">
-                    <div class="single_blog">
-                        <div class="blog_img">
-                            <a asp-action="index" asp-controller="blogDetails">
-                                <img src="~/assets/images/blog1.webp" alt="blog" />
-                            </a>
-                            <div class="blog_hover">
-                                <a asp-action="index" asp-controller="blogDetails"><i class="fa fa-link"></i></a>
-                            </div>
-                        </div>
-                        <div class="blog_content">
-                            <div class="blog_up">
-                                <p>
-                                    By Alex / June 20, 2022 /
-                                    <i class="fa-regular fa-comment"></i> 4
-                                </p>
-                            </div>
-                            <div class="blog_bottom">
-                                <h2>
-                                    <a href="blog-details.html">
-                                        I must explain to you how all this a mistaken idea
+                @{
+                    foreach(var item in Model.Blogs)
+                    {
+                        <div class="col-lg-4 col-md-6">
+                            <div class="single_blog">
+                                <div class="blog_img">
+                                    <a asp-action="details" asp-controller="blog" asp-route-id="@item.Id">
+                                        <img src="~/assets/images/@item.FilePath" alt="blog" />
                                     </a>
-                                </h2>
-                                <a asp-action="index" asp-controller="blogDetails">read more</a>
+                                    <div class="blog_hover">
+                                        <a asp-action="details" asp-controller="blog" asp-route-id="@item.Id"><i class="fa fa-link"></i></a>
+                                    </div>
+                                </div>
+                                <div class="blog_content">
+                                    <div class="blog_up">
+                                        <p>@item.Author/ @item.Date.ToString("MMM dd yyyy")/
+                                            <i class="fa-regular fa-comment"></i> 4</p>
+                                    </div>
+                                    <div class="blog_bottom">
+                                        <h2><a asp-action="details" asp-controller="blog" asp-route-id="@item.Id">@item.Title</a></h2>
+                                        <a asp-action="details" asp-controller="blog" asp-route-id="@item.Id">read more</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="single_blog">
-                        <div class="blog_img">
-                            <a href="blog-details.html">
-                                <img src="~/assets/images/blog2.webp" alt="blog" />
-                            </a>
-                            <div class="blog_hover">
-                                <a asp-action="index" asp-controller="blogDetails"><i class="fa fa-link"></i></a>
-                            </div>
-                        </div>
-                        <div class="blog_content">
-                            <div class="blog_up">
-                                <p>
-                                    By Alex / June 20, 2022 /
-                                    <i class="fa-regular fa-comment"></i> 4
-                                </p>
-                            </div>
-                            <div class="blog_bottom">
-                                <h2>
-                                    <a asp-action="index" asp-controller="blogDetails">
-                                        I must explain to you how all this a mistaken idea
-                                    </a>
-                                </h2>
-                                <a asp-action="index" asp-controller="blogDetails">read more</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="single_blog mb-0">
-                        <div class="blog_img">
-                            <a asp-action="index" asp-controller="blogDetails">
-                                <img src="~/assets/images/blog3.webp" alt="blog" />
-                            </a>
-                            <div class="blog_hover">
-                                <a asp-action="index" asp-controller="blogDetails"><i class="fa fa-link"></i></a>
-                            </div>
-                        </div>
-                        <div class="blog_content">
-                            <div class="blog_up">
-                                <p>
-                                    By Alex / June 20, 2022 /
-                                    <i class="fa-regular fa-comment"></i> 4
-                                </p>
-                            </div>
-                            <div class="blog_bottom">
-                                <h2>
-                                    <a asp-action="index" asp-controller="blogDetails">
-                                        I must explain to you how all this a mistaken idea
-                                    </a>
-                                </h2>
-                                <a asp-action="index" asp-controller="blogDetails">read more</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    }
+                }
             </div>
         </div>
     </div>

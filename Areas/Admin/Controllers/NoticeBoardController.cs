@@ -32,7 +32,7 @@ namespace WebApplication2.Areas.Admin.Controllers
         public async Task<IActionResult> Create(NoticeBoard noticeBoard)
         {
             if (!ModelState.IsValid) return View(noticeBoard);
-            noticeBoard.CreatedAt = DateTime.Now;
+            noticeBoard.CreatedAt = DateTime.UtcNow.AddHours(4);
             await _appDbContext.NoticesBoards.AddAsync(noticeBoard);
             await _appDbContext.SaveChangesAsync();
 

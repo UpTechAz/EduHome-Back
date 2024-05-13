@@ -7,6 +7,7 @@ using WebApplication2.Interfaces;
 using WebApplication2.Migrations;
 using WebApplication2.Models;
 using WebApplication2.ViewModels;
+using WebApplication2.ViewModels.Teachers;
 
 namespace WebApplication2.Areas.Admin.Controllers
 {
@@ -31,9 +32,7 @@ namespace WebApplication2.Areas.Admin.Controllers
 
             return View(PageNatedList<Course>.Create(queries, pageIndex, 6, 5));
 
-
         }
-   
 
         [HttpGet]
         public async Task<IActionResult> Create()
@@ -66,8 +65,7 @@ namespace WebApplication2.Areas.Admin.Controllers
             }
 
             course.CoursFeature.CoursesId = course.Id;
-            
-
+            course.CreatedAt = DateTime.UtcNow.AddHours(4);
             await _appDbContext.Courses.AddAsync(course);
             await _appDbContext.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
@@ -88,6 +86,7 @@ namespace WebApplication2.Areas.Admin.Controllers
                 CoursAbout = Course.CoursAbout,
                 CategoryId = Course.CategoryId,
                 CoursFeature = Course.CoursFeature,
+                Description = Course.Description,
 
             };
             return View(model);
@@ -100,14 +99,15 @@ namespace WebApplication2.Areas.Admin.Controllers
 
             if (!ModelState.IsValid) return View(course);
             Course? dbCourse = await _appDbContext.Courses.FindAsync(id);
-            dbCourse.CoursName = course.CoursName;
+            dbCourse!.CoursName = course.CoursName;
             dbCourse.CoursApply = course.CoursApply;
             dbCourse.Certification = course.Certification;
             dbCourse.CoursAbout = course.CoursAbout;
             dbCourse.CategoryId = course.CategoryId;
+            dbCourse.Description = course.Description;
 
             var dbCourseFeature = await _appDbContext.CourseFeature.FirstOrDefaultAsync(cf=>cf.CoursesId == id);
-            dbCourseFeature.Starts = course.CoursFeature.Starts;
+            dbCourseFeature!.Starts = course.CoursFeature.Starts;
             dbCourseFeature.Duration = course.CoursFeature.Duration;
             dbCourseFeature.ClassDuration = course.CoursFeature.ClassDuration;
             dbCourseFeature.SkillLevel = course.CoursFeature.SkillLevel;

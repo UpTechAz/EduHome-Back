@@ -1,5 +1,8 @@
 ﻿@using WebApplication2.Models
 @model List<StaticFile>
+@{
+    int count = 1;
+}
 <div class="card">
     <div class="card-body">
         <div class="d-flex; justify-content-lg-between">
@@ -10,7 +13,7 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th scope="col">Id</th>
+                        <th scope="col">N#</th>
                         <th scope="col">HeaderLogo</th>
                     </tr>
                 </thead>
@@ -19,7 +22,7 @@
                         foreach (var image in Model)
                         {
                             <tr>
-                                <th>@image.Id</th>
+                                <th>@count</th>
                                 <td><img style="width:100px;height:100px;" src="~/assets/img/@image.HeaderLogo"></td>                                
                                 <th>
                                     <a asp-controller="staticfile" asp-action="update" asp-area="admin" asp-route-id="@image.Id" class="btn btn-secondary">Update</a>
@@ -28,6 +31,7 @@
                                     </form>
                                 </th>
                             </tr>
+                            count++;
                         }
                     }
                 </tbody>

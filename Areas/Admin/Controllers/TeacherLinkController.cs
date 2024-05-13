@@ -37,6 +37,7 @@ namespace WebApplication2.Areas.Admin.Controllers
         public async Task<IActionResult> Create(TeacherLink teacherLink)
         {
             if (!ModelState.IsValid) return View(teacherLink);
+            teacherLink.CreatedAt = DateTime.UtcNow.AddHours(4);
             await _dbContext.TeachersLink.AddAsync(teacherLink);
             await _dbContext.SaveChangesAsync();
             ViewBag.Links = await _dbContext.Links.ToListAsync();

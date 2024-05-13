@@ -2,6 +2,7 @@
 @model List<Link>
 @{
     int? count = ViewBag.LinkInfo;
+    int? count1 = 1;
 }
 <div class="card">
     <div class="card-body">
@@ -10,43 +11,44 @@
             <a asp-action="create" asp-controller="Link" asp-area="admin" class="col-2 d-sm-inline-block btn btn-outline-success"> Add SocialMedia</a>
 
         </div>
-        <div class="table-responsive">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th scope="col">İd</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Icon</th>
-                    </tr>
-                </thead>
-                <tbody>
-                  @*  @if (Model != null && Model.Count() > 0)
-                    {
-                        
-                    }*@
-                    @foreach (var item in Model)
-                    {
+        @if (Model != null)
+        {
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
                         <tr>
-                            <td>@item?.Id</td>
-                            <td>@item?.Name</td>
-                            <td><img style="width:50px" src="~/assets/img/@item?.Icon" /></td>
-                            <th>
-                                @{
-                                    if (count > 0)
-                                    {
-                                        <a asp-controller="link" asp-action="update" asp-area="admin" asp-route-id="@item?.Id" class="btn btn-secondary">Update</a>
-                                        <form class="d-inline" method="post" asp-controller="link" asp-action="delete" asp-area="admin" asp-route-id="@item?.Id">
-                                            <button class="btn btn-secondary" type="submit">Delete</button>
-                                        </form>
-
-                                    }
-                                }
-                            </th>
+                            <th scope="col">N#</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Icon</th>
                         </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@count1</td>
+                                <td>@item?.Name</td>
+                                <td><img style="width:50px" src="~/assets/images/@item?.Icon" /></td>
+                                <th>
+                                    @{
+                                        if (count > 0)
+                                        {
+                                            <a asp-controller="link" asp-action="update" asp-area="admin" asp-route-id="@item?.Id" class="btn btn-secondary">Update</a>
+                                            <form class="d-inline" method="post" asp-controller="link" asp-action="delete" asp-area="admin" asp-route-id="@item?.Id">
+                                                <button class="btn btn-secondary" type="submit">Delete</button>
+                                            </form>
+
+                                        }
+                                    }
+                                </th>
+                            </tr>
+                            count1++;
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
     </div>
 </div>
 

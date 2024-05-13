@@ -1,54 +1,61 @@
 ﻿@using WebApplication2.Models;
 @using WebApplication2.ViewModels;
 @model PageNatedList<Teacher>
+@{
+    int count = 1;
+}
 <div class="card">
     <div class="card-body">
         <div class="d-flex; justify-content-lg-between">
             <h5 class="card-title">Teachers</h5>
             <a asp-action="create" asp-controller="teacher" asp-area="admin" class="col-2 d-sm-inline-block btn btn-outline-success"> Add new Teacher</a>
         </div>
-        <div class="table-responsive">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th scope="col">Id</th>
-                        <th scope="col">FullName</th>
-                        <th scope="col">Photo</th>
-                        <th scope="col">Degree</th>
-                        <th scope="col">Faculty</th>
-                        <th scope="col">Experience</th>
-                        <th scope="col">Hobbies</th>
-                        <th scope="col">About</th>
-                       @* <th scope="col">Link</th>*@
-
-                    </tr>
-                </thead>
-                <tbody>
-                    @{
-                        foreach (var teacher in Model)
-                        {
+        @{
+            if(Model != null)
+            {
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
                             <tr>
-                                <th>@teacher.Id</th>
-                                <td>@teacher.FullName</td>
-                                <td><img style="width:100px;" src="~/assets/images/@teacher.FilePath"></td>
-                                <td>@teacher.ScientificDegree</td>
-                                <td>@teacher.Faculty</td>
-                                <td>@teacher.Experience</td>
-                                <td>@teacher.Hobbies</td>
-                                <td>@teacher.TeacherAbout</td>
-                                <td>@teacher.TeacherLinks</td>
-                                <th>
-                                    <a asp-controller="teacher" asp-action="update" asp-area="admin" asp-route-id="@teacher.Id" class="btn btn-secondary">Update</a>
-                                    <form class="d-inline" method="post" asp-controller="teacher" asp-action="delete" asp-area="admin" asp-route-id="@teacher.Id">
-                                        <button class="btn btn-secondary" type="submit">Delete</button>
-                                    </form>
-                                </th>
+                                <th scope="col">N#</th>
+                                <th scope="col">FullName</th>
+                                <th scope="col">Photo</th>
+                                <th scope="col">Degree</th>
+                                <th scope="col">Faculty</th>
+                                <th scope="col">Experience</th>
+                                <th scope="col">Hobbies</th>
+                                <th scope="col">About</th>
                             </tr>
-                        }
-                    }
-                </tbody>
-            </table>
-        </div>
+                        </thead>
+                        <tbody>
+                            @{
+                                foreach (var teacher in Model)
+                                {
+                                    <tr>
+                                        <th>@count</th>
+                                        <td>@teacher.FullName</td>
+                                        <td><img style="width:100px;" src="~/assets/images/@teacher.FilePath"></td>
+                                        <td>@teacher.ScientificDegree</td>
+                                        <td>@teacher.Faculty</td>
+                                        <td>@teacher.Experience</td>
+                                        <td>@teacher.Hobbies</td>
+                                        <td>@teacher.TeacherAbout</td>
+                                        <td>@teacher.TeacherLinks</td>
+                                        <th>
+                                            <a asp-controller="teacher" asp-action="update" asp-area="admin" asp-route-id="@teacher.Id" class="btn btn-secondary">Update</a>
+                                            <form class="d-inline" method="post" asp-controller="teacher" asp-action="delete" asp-area="admin" asp-route-id="@teacher.Id">
+                                                <button class="btn btn-secondary" type="submit">Delete</button>
+                                            </form>
+                                        </th>
+                                    </tr>
+                                    count++;
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        }
     </div>
 </div>
 <div class="col-lg-12">
@@ -75,4 +82,24 @@
         </ul>
     </nav>
 </div>
+
+@section Scripts {
+
+
+    @Html.PartialAsync("_ValidationFormPartial")
+    @* <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> *@
+
+    <script src="https://cdn.ckeditor.com/ckeditor5/41.3.1/classic/ckeditor.js"></script>
+
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#TeacherAbout'))
+            .then(editor => {
+                console.log(editor);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
+}
 

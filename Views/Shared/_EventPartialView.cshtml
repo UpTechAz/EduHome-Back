@@ -1,5 +1,28 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@using WebApplication2.Models;
+@model List<Event>
+@foreach (var item in Model)
+{
+    <div class="col-lg-4 col-md-6">
+        <div class="single-event">
+            <div class="event-img">
+                <a asp-action="details" asp-controller="event" asp-route-id="@item?.Id" class="image-a">
+                    <img src="~/assets/images/@item?.FilePath" alt="" />
+                    <div class="event-hover">
+                        <i class="fa-solid fa-link"></i>
+                    </div>
+                </a>
+                <div class="event-date">
+                    <h3>20 <span>jun</span></h3>
+                </div>
+            </div>
+            <div class="event-content">
+                <h4><a href="/eventdetails.html">@item?.Title</a></h4>
+                <ul>
+                    <li><span>time:</span> @item?.StartTime - @item?.EndTime PM</li>
+                    <li><span>Venue: </span>@item?.Venue</li>
+                </ul>
+                <a asp-action="details" asp-controller="event" asp-route-id="@item?.Id" class="join-now-btn">Join now</a>
+            </div>
+        </div>
+    </div>
 }

@@ -18,10 +18,10 @@ namespace WebApplication2.Controllers
 			HomeIndexVM homeIndexVM = new HomeIndexVM
 			{
 				Sliders = await _dbContext.Sliders.ToListAsync(),
-				Events = await _dbContext.Events.ToListAsync(),
-				Blogs = await _dbContext.Blogs.ToListAsync(),
+				Events = await _dbContext.Events.Take(3).ToListAsync(),
+				Blogs = await _dbContext.Blogs.Take(3).ToListAsync(),
 				NoticeBoards = await _dbContext.NoticesBoards.ToListAsync(),
-				Courses = await _dbContext.Courses.Skip(2).Take(3).ToListAsync(),
+				Courses = await _dbContext.Courses.Take(3).ToListAsync(),
 				EducationTheme = await _dbContext.EducationTheme.FirstOrDefaultAsync(),
 				StudentQuote = await _dbContext.StudentQuote.FirstOrDefaultAsync(),
 			};

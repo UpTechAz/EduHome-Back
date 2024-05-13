@@ -40,7 +40,7 @@ namespace WebApplication2.Areas.Admin.Controllers
             if (!ModelState.IsValid) return NotFound();
 
             ViewBag.Teacher = await _dbContext.Teachers.ToListAsync();
-
+            skill.CreatedAt = DateTime.UtcNow.AddHours(4);
             await _dbContext.Skills.AddAsync(skill);
             await _dbContext.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

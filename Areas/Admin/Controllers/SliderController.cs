@@ -57,7 +57,7 @@ namespace WebApplication2.Areas.Admin.Controllers
                     slider.FilePath = await _fileService.UploadAsync(slider.Photo);
                     slider.BackgroundImage = await _fileService.UploadAsync(slider.BackgroundPhoto);
                 }
-
+                slider.CreatedAt = DateTime.UtcNow.AddHours(4);
                 await _context.Sliders.AddAsync(slider);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

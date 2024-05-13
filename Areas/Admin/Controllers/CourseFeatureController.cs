@@ -33,6 +33,7 @@ namespace WebApplication2.Areas.Admin.Controllers
         public async Task<IActionResult> Create(CourseFeature courseFeature)
         {
             if (!ModelState.IsValid) return View(courseFeature);
+            courseFeature.CreatedAt = DateTime.UtcNow.AddHours(4);
             await _appDbContext.CourseFeature.AddAsync(courseFeature);
             await _appDbContext.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

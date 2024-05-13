@@ -17,7 +17,7 @@
                 </div>
                 <div class="form-group">
                     <label asp-for="Description">Description</label>
-                    <input asp-for="Description" class="form-control" placeholder="Add Description">
+                    <textarea asp-for="Description" class="form-control" placeholder="Add Description"></textarea>
                     <span class="text-danger" asp-validation-for="Description"></span>
                 </div>
                 <div class="form-group">
@@ -42,3 +42,25 @@
             </form>
         </div>
     </div>
+
+    @section Scripts {
+
+        @* <partial name ="_ValidationFormPartial" /> *@
+
+        @Html.PartialAsync("_ValidationFormPartial")
+
+        <script src="https://cdn.ckeditor.com/ckeditor5/41.3.1/classic/ckeditor.js"></script>
+
+
+
+        <script>
+            ClassicEditor
+                .create(document.querySelector('#Description'))
+                .then(editor => {
+                    console.log(editor);
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        </script>
+    }
