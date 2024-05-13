@@ -28,9 +28,10 @@ namespace WebApplication2.Areas.Admin.Controllers
         public async Task<IActionResult> Index(int pageIndex = 1)
         {
             IQueryable<Course> queries = _appDbContext.Courses
-                .Include(p => p.CoursFeature);
+                .Include(p => p.CoursFeature)
+                .Include(p=>p.Category);
 
-            return View(PageNatedList<Course>.Create(queries, pageIndex, 6, 5));
+            return View(PageNatedList<Course>.Create(queries, pageIndex, 6, 6));
 
         }
 
@@ -99,15 +100,15 @@ namespace WebApplication2.Areas.Admin.Controllers
 
             if (!ModelState.IsValid) return View(course);
             Course? dbCourse = await _appDbContext.Courses.FindAsync(id);
-            dbCourse!.CoursName = course.CoursName;
+            dbCourse.CoursName = course.CoursName;
+            dbCourse.Description = course.Description;
             dbCourse.CoursApply = course.CoursApply;
             dbCourse.Certification = course.Certification;
             dbCourse.CoursAbout = course.CoursAbout;
             dbCourse.CategoryId = course.CategoryId;
-            dbCourse.Description = course.Description;
 
             var dbCourseFeature = await _appDbContext.CourseFeature.FirstOrDefaultAsync(cf=>cf.CoursesId == id);
-            dbCourseFeature!.Starts = course.CoursFeature.Starts;
+            dbCourseFeature.Starts = course.CoursFeature.Starts;
             dbCourseFeature.Duration = course.CoursFeature.Duration;
             dbCourseFeature.ClassDuration = course.CoursFeature.ClassDuration;
             dbCourseFeature.SkillLevel = course.CoursFeature.SkillLevel;

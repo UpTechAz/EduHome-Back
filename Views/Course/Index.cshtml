@@ -1,6 +1,6 @@
-﻿@using WebApplication2.Models;
-@using WebApplication2.ViewModels.Course
-@model List<Course>
+﻿@using WebApplication2.Models
+@using WebApplication2.ViewModels
+@model PageNatedList<Course>
 <section class="banner">
     <div class="banner-area">
         <div class="banner-area-wrapper">
@@ -42,7 +42,7 @@
             </div>
         </div>
         <div id="courses" class="row">
-            @foreach(var item in Model)
+            @foreach (var item in Model)
             {
                 <div class="col-lg-4 col-md-6">
                     <div class="single-course">
@@ -55,7 +55,7 @@
                             </a>
                         </div>
                         <div class="course-content">
-                            <h3><a asp-action="details" asp-controller="course" asp-route-id="@item.Id">@item.CoursName</a></h3>
+                            <h3><a asp-action="details" asp-controller="course"  asp-route-id="@item.Id">@item.CoursName</a></h3>
                             <p>@item.CoursApply </p>
                             <a asp-action="details" asp-controller="course" asp-route-id="@item.Id" class="read-more-btn">read more</a>
                         </div>
@@ -75,17 +75,70 @@
         })
     })
 </script> *@
+
+        @* <div class="d-flex justify-content-center">
+            <a id="loadmorecourse" class="btn btn-primary" style="color:aliceblue">Load More...</a>
+        </div> *@
+        <div class="row">
+            <div class="col-12 pagination-col">
+                <div class="pagination-div">
+                    <ul>
+
+                        @if (Model.HasPrev)
+                        {
+
+                            <li>
+                                <a asp-controller="Course" asp-action="index"
+                                   asp-route-pageIndex="@(Model.PageIndex - 1)"><i class="fa-solid fa-chevron-left"></i></a>
+                            </li>
+                        }
+
+                        @for (int i = Model.StartPage; i <= Model.EndPage; i++)
+                        {
+                            <li class=" @(i == Model.PageIndex ? "selected-pagination" : "")"><a asp-controller="Course" asp-action="index" asp-route-pageIndex="@i">@i</a></li>
+                        }
+                        @if (Model.HasNext)
+                        {
+                            <li>
+                                <a asp-controller="Course" asp-action="index"
+                                   asp-route-pageIndex="@(Model.PageIndex + 1)"><i class="fa-solid fa-chevron-right"></i></a>
+                            </li>
+                        }
+
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+        @*<div class="row">
+        <div class="col-12 pagination-col">
+        <div class="pagination-div">
+        <ul>
+        <li>
+        <a href=""><i class="fa-solid fa-chevron-left"></i></a>
+        </li>
+        <li class="selected-pagination"><a href="">1</a></li>
+        <li><a href="">2</a></li>
+        <li><a href="">3</a></li>
+        <li>
+        <a href=""><i class="fa-solid fa-chevron-right"></i></a>
+        </li>
+        </ul>
+        </div>
+        </div>
+        </div>*@
+   
 <script type="text/javascript">
 
     document.querySelector("#course-search").addEventListener("submit", function (e) {
         e.preventDefault();
         const jsonData = { title: document.querySelector("#searchinp").value };
-        
+
         const options = {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json' 
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify(jsonData)
         };
@@ -109,5 +162,6 @@
                 console.error('Fetch error:', error);
             });
     })
-    
+
 </script>
+

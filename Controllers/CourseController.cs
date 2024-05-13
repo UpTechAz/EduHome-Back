@@ -6,6 +6,7 @@ using System.Configuration;
 using System.Net;
 using WebApplication2.DAL;
 using WebApplication2.Models;
+using WebApplication2.ViewModels;
 using WebApplication2.ViewModels.Course;
 
 namespace WebApplication2.Controllers
@@ -19,46 +20,31 @@ namespace WebApplication2.Controllers
             _dbContext = dbContext;
 
         }
-        public async Task<IActionResult> Index(string sortOrder)
+        public async Task<IActionResult> Index(int? id, string sortOrder, int pageIndex = 1 )
         {
             //ViewData["NameSortParm"] = !String.IsNullOrEmpty(sortOrder) ? sortOrder : "";
-            var course = await _dbContext.Courses
-                 .OrderByDescending(c => c.Id)
-                 .Take(3)
-                 .ToListAsync();
-            if (!String.IsNullOrWhiteSpace(sortOrder))
-            {
-                course.Any(x => x.CoursName.Contains(sortOrder));
-            }
+            //var course = await _dbContext.Courses
+            //     .OrderByDescending(c => c.Id)
+            //     .Take(3)
+            //     .ToListAsync();
+            //if (!String.IsNullOrWhiteSpace(sortOrder))
+            //{
+            //    course.Any(x => x.CoursName.Contains(sortOrder));
+            //}
 
-            //var model = FilterByTitle(course.CourseName)
-            return View(course);
-            //if (String.IsNullOrEmpty(sortOrder))
-            //{
-            //    var dataContext = _dbContext.Courses
-            //        .OrderByDescending(c => c.Id)
-            //        .Take(3)
-            //        .ToListAsync();
-            //    return View(dataContext);
-            //}
-            //else
-            //{
-            //    var searchItems = await _dbContext.Courses
-            //        .OrderByDescending(c => c.Id)
-            //        .Take(3)
-            //        .Where(c=>c.CoursName.Contains(sortOrder))
-            //        .ToListAsync();
-            //    return View(searchItems);
-            //}
-        }
-        public async Task<IActionResult> LoadMore(int skipRow)
-        {
-            var course = await _dbContext.Courses
-                .OrderByDescending(c => c.Id)
-                .Skip(3 * skipRow)
-                .Take(3)
-                .ToListAsync();
-            return PartialView("_CoursePartialView", course);
+            ////var model = FilterByTitle(course.CourseName)
+            //return View(course);
+            if (id is not null)
+            {
+                IQueryable<Course> cateCourse = _dbContext.Courses
+                                        .Where(x => x.CategoryId == id)
+                                        .OrderByDescending(x => x.Id);
+                return View(PageNatedList<Course>.Create(cateCourse, pageIndex, 6, 6));
+            }
+            IQueryable<Course> queries = _dbContext.Courses
+;
+            return View(PageNatedList<Course>.Create(queries, pageIndex, 6, 6));
+
         }
         public async Task<IActionResult> Details( int? id)
         {
@@ -93,15 +79,6 @@ namespace WebApplication2.Controllers
             CourseComment comment = courseVM.Comment;
             comment.CourseID = id;
             comment.CreatedAt = DateTime.UtcNow.AddHours(4);
-            //var comment = new CourseComment
-            //{
-            //    Name = courseVM.Comment.Name,
-            //    Email = courseVM.Comment.Email,
-            //    Subject = courseVM.Comment.Subject,
-            //    MessageInfo = courseVM.Comment.MessageInfo,
-            //    CourseID = id,
-            //    CreatedAt = DateTime.UtcNow.AddHours(4),
-            //};
             await _dbContext.CourseComments.AddAsync(comment);
             await _dbContext.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

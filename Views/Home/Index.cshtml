@@ -86,14 +86,14 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="about-content">
-                        @Html.Raw(Model.EducationTheme.Title).
-                        @Html.Raw(Model.EducationTheme.Description)
+                        @Html.Raw(Model.EducationTheme?.Title).
+                        @Html.Raw(Model.EducationTheme?.Description)
                         <a class="default-btn" href="/about.html">buy now</a>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="about-img">
-                        <img src="~/assets/images/@Model.EducationTheme.FilePath" alt="about" />
+                        <img src="~/assets/images/@Model.EducationTheme?.FilePath" alt="about" />
                     </div>
                 </div>
             </div>

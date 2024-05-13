@@ -1,7 +1,7 @@
 ﻿$(document).ready(() => {
     let skipRow = 1;
     $('#loadMore').click(() => {
-       /* console.log('work')*/
+        /* console.log('work')*/
         $.ajax({
             method: "GET",
             url: "/teacher/loadMore",
@@ -20,7 +20,7 @@ $(document).ready(() => {
     $('#loadmorecourse').click(() => {
         $.ajax({
             method: "GET",
-            url: "/course/loadMore",
+            url: "/course/loadMore/",
             data: {
                 skipRow: skipRow
             },
@@ -81,6 +81,5 @@ function loadDataFromAPI() {
 $(document).ready(function () {
     checkDataEnded();
 });
-
 
 

@@ -17,13 +17,12 @@ namespace WebApplication2.Controllers
         {
             _dbContext = appDbContext;
         }
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int pageIndex=1)
         {
-            List<Blog> blogs = await _dbContext.Blogs
-                .OrderByDescending(b => b.Id)
-                .Take(3)
-                .ToListAsync();
-            return View(blogs);
+            IQueryable<Blog> queries = _dbContext.Blogs
+;
+            return View(PageNatedList<Blog>.Create(queries, pageIndex, 6, 6));
+
         }
         public async Task<IActionResult> LoadMore(int skipRow)
         {
@@ -44,21 +43,25 @@ namespace WebApplication2.Controllers
                 .Include(x => x.BlogComment.Where(x => x.IsApproved))
                 .FirstOrDefaultAsync(c => c.Id == id)
             };
-
+;
             if (model is null) return NotFound();
 
             return View(model);
         }
         [HttpPost]
-        public async Task<IActionResult> Details(BlogIndexVM blogVM, int id)
+        public async Task<IActionResult> Details(int id,BlogIndexVM? blogVM)
         {
             if(blogVM == null ) return NotFound();
+            blogVM = new();
+            if (id == null) { return NotFound(); }
+
             blogVM = new()
             {
                 Blogs = await _dbContext.Blogs
                 .Include(x => x.BlogComment)
                 .FirstOrDefaultAsync(c => c.Id == id),
-                BlogComments = blogVM.BlogComments
+                BlogComments = blogVM.BlogComments,
+                
             };
             blogVM.BlogComments.BlogId = id;
             if (!ModelState.IsValid) return View(blogVM);
