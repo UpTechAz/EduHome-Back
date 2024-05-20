@@ -15,11 +15,8 @@ namespace WebApplication2.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            ContactIndexVM contactVM = new ContactIndexVM
-            {
-                Messages = await _dbcontext.Messages.FirstOrDefaultAsync(),
-            };
-            return View(contactVM);
+            
+            return View();
         }
         [HttpPost]
         public async Task<IActionResult> Index(ContactIndexVM model)
@@ -30,7 +27,7 @@ namespace WebApplication2.Controllers
             {
                Messages = model.Messages,
             };
-            
+            model.Messages.CreatedAt = DateTime.UtcNow.AddHours(4);
             await _dbcontext.Messages.AddAsync(model.Messages);
             await _dbcontext.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

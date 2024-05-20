@@ -5,9 +5,10 @@ namespace WebApplication2.ViewModels.Course
     public class CourseVM
     {
         public Models.Course? Course { get; set; }
+        public List<CourseComment>? Comments { get; set; }
         public CourseComment? Comment { get; set; }
         public List<Category>? Categories { get; set; }
-        public List<Tag>? Tags { get; set; } 
-        
+        public List<Tag>? Tags { get; set; }
+
     }
 }

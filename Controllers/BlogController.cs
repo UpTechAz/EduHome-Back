@@ -17,58 +17,50 @@ namespace WebApplication2.Controllers
         {
             _dbContext = appDbContext;
         }
-        public async Task<IActionResult> Index(int pageIndex=1)
+        public IActionResult Index(int pageIndex=1)
         {
-            IQueryable<Blog> queries = _dbContext.Blogs
-;
+            IQueryable<Blog> queries = _dbContext.Blogs;
             return View(PageNatedList<Blog>.Create(queries, pageIndex, 6, 6));
 
         }
-        public async Task<IActionResult> LoadMore(int skipRow)
-        {
-            var blog = await _dbContext.Blogs
-             .OrderByDescending(b => b.Id)
-             .Skip(3 * skipRow)
-             .Take(3)
-             .ToListAsync();
-            return PartialView("_BlogPartialView", blog);
-        }
+        //public async Task<IActionResult> LoadMore(int skipRow)
+        //{
+        //    var blog = await _dbContext.Blogs
+        //     .OrderByDescending(b => b.Id)
+        //     .Skip(3 * skipRow)
+        //     .Take(3)
+        //     .ToListAsync();
+        //    return PartialView("_BlogPartialView", blog);
+        //}
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null) return NotFound();
-
-            BlogIndexVM model = new()
+            BlogVM model = new()
             {
                 Blogs = await _dbContext.Blogs
                 .Include(x => x.BlogComment.Where(x => x.IsApproved))
                 .FirstOrDefaultAsync(c => c.Id == id)
             };
-;
             if (model is null) return NotFound();
-
             return View(model);
         }
         [HttpPost]
-        public async Task<IActionResult> Details(int id,BlogIndexVM? blogVM)
+        public async Task<IActionResult> Details(int id, BlogVM? blogVM)
         {
             if(blogVM == null ) return NotFound();
-            blogVM = new();
-            if (id == null) { return NotFound(); }
-
+            if (!ModelState.IsValid) return View(nameof(Index));
             blogVM = new()
             {
                 Blogs = await _dbContext.Blogs
-                .Include(x => x.BlogComment)
+                .Include(x => x.BlogComment.Where(x => x.BlogId == id && x.IsApproved))
                 .FirstOrDefaultAsync(c => c.Id == id),
                 BlogComments = blogVM.BlogComments,
-                
             };
             blogVM.BlogComments.BlogId = id;
-            if (!ModelState.IsValid) return View(blogVM);
+            blogVM.BlogComments.CreatedAt = DateTime.UtcNow.AddHours(4);
             await _dbContext.BlogComments.AddAsync(blogVM.BlogComments);
             await _dbContext.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
-
         }
     }
 }

@@ -51,7 +51,7 @@
                     </div>
                     <div class="single-contact sc-medium">
                         <div class="single-contact-img-div">
-                            <img src="src/images/contact2-address.webp" alt="" />
+                            <img src="~/assets/images/contact2-address.webp" alt="" />
                         </div>
                         <div class="single-contact-content-div">
                             <h3>address</h3>
@@ -84,13 +84,13 @@
                     <div class="contact-form-form-part">
                         <form asp-action="index" asp-controller="Contact" method="post" >
                             <p>Name</p>
-                            <input asp-for="@Model.Messages.Name" type="text"  />
+                            <input asp-for="Messages.Name" type="text" id="" />
                             <p>Email</p>
-                            <input asp-for="@Model.Messages.Email" type="email"  />
+                            <input asp-for="Messages.Email" type="email" id="" />
                             <p>Subject</p>
-                            <input asp-for="@Model.Messages.Subject" type="text"  />
+                            <input asp-for="Messages.Subject" type="text" id=""  />
                             <p>Message</p>
-                            <textarea asp-for="@Model.Messages.MessageInfo" id="" cols="30" rows="10"></textarea>
+                            <textarea asp-for="Messages.MessageInfo" id="" cols="30" rows="10"></textarea>
                             <button type="submit">
                                 <span>Send Message</span>
                             </button>

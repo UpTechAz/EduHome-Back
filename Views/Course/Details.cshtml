@@ -64,23 +64,19 @@
                     <div class="all-replies">
                         <h2>recent reviews</h2>
                         <div class="showing-replies">
-                            @* if(Model.Course.CourseComment is not null) *@
                             @{
-                                foreach(var item in Model.Course.CourseComment)
-                                {
-                                    <div class="single-reply">
-                                        <h4>@item.Name</h4>
-                                        <p>@item.MessageInfo</p>
-                                        <div class="reply-button-area">
-                                            <button type="button" class="delete">
-                                                <i class="fa-solid fa-trash-can"></i>
-                                            </button>
-                                        </div>
-                                    </div>
+                                if (Model.Course.CourseComment is not null && Model.Course.CourseComment.Count>0)
+                                    {
+                                        foreach (var item in Model.Course.CourseComment)
+                                        {
+                                            <div class="single-reply">
+                                                <h4>@item.Name</h4>
+                                                <p>@item.MessageInfo</p>
+                                            </div>
+                                        }
                                 }
                             }
                         </div>
-@* 
                         <div class="reply-pagination">
                             <ul class="reply-pagination-ul">
                                 <li>
@@ -93,7 +89,7 @@
                                     <a href=""><i class="fa-solid fa-chevron-right"></i></a>
                                 </li>
                             </ul>
-                        </div> *@
+                        </div> 
                     </div>
                     <h3>leave a reply</h3>
                     <p>
@@ -107,17 +103,17 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <p>name</p>
-                                <input asp-for="Comment.Name" type="text"/>
+                                <input asp-for="@Model.Comment.Name" type="text" />
                             </div>
                             <div class="col-md-12">
                                 <p>Email</p>
-                                <input asp-for="Comment.Email" type="text"/>
+                                <input asp-for="@Model.Comment.Email" type="email" />
                             </div>
                             <div class="col-md-12">
                                 <p>subject</p>
-                                <input asp-for="Comment.Subject" type="text"/>
+                                <input asp-for="@Model.Comment.Subject" type="text" />
                                 <p>message</p>
-                                <textarea asp-for="Comment.MessageInfo" cols="15" rows="10"></textarea>
+                                <textarea asp-for="@Model.Comment.MessageInfo" cols="15" rows="10"></textarea>
                             </div>
                         </div>
                         <button type="submit" class="courses-reply-button">send message</button>
@@ -217,7 +213,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>

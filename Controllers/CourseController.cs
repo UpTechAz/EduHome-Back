@@ -20,7 +20,7 @@ namespace WebApplication2.Controllers
             _dbContext = dbContext;
 
         }
-        public async Task<IActionResult> Index(int? id, string sortOrder, int pageIndex = 1 )
+        public async Task<IActionResult> Index(int? id, int pageIndex = 1 )
         {
             //ViewData["NameSortParm"] = !String.IsNullOrEmpty(sortOrder) ? sortOrder : "";
             //var course = await _dbContext.Courses
@@ -46,16 +46,18 @@ namespace WebApplication2.Controllers
             return View(PageNatedList<Course>.Create(queries, pageIndex, 6, 6));
 
         }
-        public async Task<IActionResult> Details( int? id)
+        [HttpGet]
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null) return NotFound();
+
             CourseVM model = new()
             {
                 Course = await _dbContext.Courses
                 .Include(x => x.CoursFeature)
                 .Include(x => x.Category)
-                .Include(x => x.CourseComment.Where(x => x.IsApproved))
-                .FirstOrDefaultAsync(c => c.Id == id)
+                .FirstOrDefaultAsync(c => c.Id == id),
+                Comments = await _dbContext.CourseComments.Where(x => x.CourseID == id && x.IsApproved).ToListAsync(),
             };
 
             if (model is null) return NotFound();
@@ -63,23 +65,25 @@ namespace WebApplication2.Controllers
             return View(model);
         }
         [HttpPost]
-        public async Task<IActionResult> Details(CourseVM courseVM, int id)
+        public async Task<IActionResult> Details(CourseVM model, int id)
         {
-            if (courseVM.Comment is null) return BadRequest();
+            if (model is null) return BadRequest();
             if (!ModelState.IsValid)
             {
-                return View("Index", courseVM);
+                return View("Index", model);
             }
-
-            courseVM = new()
+            model = new()
             {
-                Comment = courseVM.Comment
+                Course = await _dbContext.Courses
+                .Include(x => x.CoursFeature)
+                .Include(x => x.Category)
+                .Include(x => x.CourseComment.Where(x => x.IsApproved))
+                .FirstOrDefaultAsync(c => c.Id == id),
+                Comment = model.Comment
             };
-
-            CourseComment comment = courseVM.Comment;
-            comment.CourseID = id;
-            comment.CreatedAt = DateTime.UtcNow.AddHours(4);
-            await _dbContext.CourseComments.AddAsync(comment);
+            model.Comment.CourseID = id;
+            model.Comment.CreatedAt = DateTime.UtcNow.AddHours(4);
+            await _dbContext.CourseComments.AddAsync(model.Comment);
             await _dbContext.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

@@ -57,6 +57,7 @@ namespace WebApplication2.Controllers
                 EventComments = @event.EventComments,
             };
             @event.EventComments.EventId = id;
+            @event.EventComments.CreatedAt = DateTime.UtcNow.AddHours(4);
             if (!ModelState.IsValid) return View(@event);
             await _dbContext.EventComments.AddAsync(@event.EventComments);
             await _dbContext.SaveChangesAsync();

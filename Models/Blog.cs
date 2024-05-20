@@ -15,8 +15,6 @@ namespace WebApplication2.Models
         //TODO:Bura duzelecek
         public int CommentCount { get; set; }
 
-
-        
         public List<BlogComment>? BlogComment { get; set; }
 
 

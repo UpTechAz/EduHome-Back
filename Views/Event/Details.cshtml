@@ -65,21 +65,15 @@
                     <div class="all-replies">
                         <h2>recent reviews</h2>
                         <div class="showing-replies">
-                          @*   @{
+                            @{
                                 foreach(var item in Model.Events.EventComment)
                                 {
                                     <div class="single-reply">
                                         <h4>@item.Name</h4>
-                                        <h6>Course Fee</h6>
                                         <p>@item.MessageInfo</p>
-                                        <div class="reply-button-area">
-                                            <button type="button" class="delete">
-                                                <i class="fa-solid fa-trash-can"></i>
-                                            </button>
-                                        </div>
                                     </div>
                                 }
-                            } *@
+                            }
 
                         </div>
                         <div class="reply-pagination">
@@ -104,8 +98,7 @@
                         the is lder of human happinescias unde omnis iste natus error
                         sit volptatem
                     </p>
-                    <form asp-action="details" asp-controller="event" asp-route-id="@Model.Events.Id" method="post">
-                        
+                    <form asp-controller="event" asp-action="details" asp-route-id="@Model.Events.Id" method="post">                       
                         <div class="row">
                             <div class="col-md-12">
                                 <p>name</p>
